@@ -1,0 +1,47 @@
+.monster {
+  float: left;
+}
+  .monster-image {
+    width: 15em;
+  }
+  .monster-details {
+    margin-bottom: 2.1em;
+  }
+    .identifier {
+      margin: 0.5em;
+    }
+    .health-modifier-button {
+      padding: 0.5em;
+      border: 1px solid #aaaaaa;
+      background-color: #dddddd;
+    }
+      .health-modifier-button:hover {
+        background-color: #bbbbbb;
+        cursor: pointer;
+      }
+    .health {
+      padding: 1em;
+      border: 1px solid #aa0000;
+      border-radius: 2em;
+      background-color: #ee5555;
+    }
+  .remove-creature {
+    margin-left: 0.5em;
+    padding: 0.5em;
+    border: 1px solid #aa0000;
+    background-color: #ee9999;
+  }
+    .remove-creature:hover {
+      background-color: #eebbbb;
+      cursor: pointer;
+    }
+  .add-creature {
+    width: 1em;
+    padding: 0.5em;
+    border: 1px solid #00aa00;
+    background-color: #99ee99;
+  }
+    .add-creature:hover {
+      background-color: #bbeebb;
+      cursor: pointer;
+    }
