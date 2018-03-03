@@ -14,7 +14,7 @@ class App extends Component {
       searchText: '',
   		monstersAdded: new Map(),
       creatures: new Map(),
-      nextCreatureKey: 5,
+      nextCreatureKey: 1,
   	};
   }
 
@@ -31,17 +31,29 @@ class App extends Component {
 
   addMonster = (index) => {
     this.setState((previousState, currentProps) => {
-      var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(mm.monster[index].name, {
+      var monster = {
         key: mm.monster[index].name,
         defaultHealth: this.parseMonsterHealth(mm.monster[index]),
-        instances: [],
-      });
+        instances: [previousState.nextCreatureKey],
+      };
+      var monstersAdded = new Map(previousState.monstersAdded);
+      monstersAdded.set(mm.monster[index].name, monster);
 			return {
-        monstersAdded: monstersAdded,
         searchText: '',
+        monstersAdded: monstersAdded,
+				creatures: this.addToCreatureList(monster, previousState.nextCreatureKey, previousState.creatures),
+        nextCreatureKey: previousState.nextCreatureKey + 1,
 			};
     });
+  }
+
+  addToCreatureList = (monster, key, creatures) => {
+    var newCreatures = new Map(creatures);
+    newCreatures.set(key, Object.assign({}, {
+      key: key,
+      health: monster.defaultHealth,
+    }));
+    return newCreatures;
   }
 
   addCreature = (monster) => {
@@ -52,14 +64,9 @@ class App extends Component {
           ...previousState.monstersAdded.get(monster.key).instances,
           previousState.nextCreatureKey],
       }));
-      var creatures = new Map(previousState.creatures);
-      creatures.set(previousState.nextCreatureKey, Object.assign({}, {
-        key: previousState.nextCreatureKey,
-        health: monster.defaultHealth,
-      }));
 			return {
         monstersAdded: monstersAdded,
-				creatures: creatures,
+				creatures: this.addToCreatureList(monster, previousState.nextCreatureKey, previousState.creatures),
         nextCreatureKey: previousState.nextCreatureKey + 1,
 			};
     });
