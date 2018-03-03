@@ -5,7 +5,7 @@ class Monster extends Component {
     return (
       <div className="monster">
         <h5>{this.props.children.key}</h5>
-        <img className="monster-image" src="https://static.5etools.com/img/MM/Goblin.png?ver=1.19.0" />
+        <img className="monster-image" src="https://static.5etools.com/img/MM/Goblin.png?ver=1.19.0" alt={this.props.children.key + ' image'} />
         {this.props.children.instances.map(key => {
           return <div key={key} className="monster-details">
             <span className="identifier">{key}</span>

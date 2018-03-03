@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Monster from './Monster';
+import MonsterSearch from './MonsterSearch';
+
+import mm from './data/bestiary/bestiary-mm.json';
 
 class App extends Component {
 
@@ -41,10 +44,18 @@ class App extends Component {
       ],
     });
     this.state = {
+      monsterNames: mm.monster.map(monster => monster.name),
+      searchText: '',
   		monsters: monsters,
       creatures: creatures,
       nextCreatureKey: 5,
   	};
+  }
+
+  updateSearchText = (event) => {
+    this.setState({
+      searchText: event.target.value,
+		});
   }
 
   addCreature = (monster) => {
@@ -98,6 +109,7 @@ class App extends Component {
   render = () => {
     return (
       <div>
+        <MonsterSearch monsterNames={this.state.monsterNames} searchText={this.state.searchText} updateSearchText={this.updateSearchText} />
         {Array.from(this.state.monsters).map(([key, monster]) => {
           return <Monster key={key} creatures={this.state.creatures} addCreature={this.addCreature} removeCreature={this.removeCreature} setCreatureHealth={this.setCreatureHealth}>{monster}</Monster>
         })}
