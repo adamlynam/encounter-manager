@@ -26,7 +26,7 @@ class App extends Component {
 
   parseMonsterHealth = (monster) => {
     var exp = new RegExp('([0-9]*).*');
-    return monster.hp.match(exp)[1];
+    return parseInt(monster.hp.match(exp)[1]);
   }
 
   addMonster = (index) => {
