@@ -1,3 +1,19 @@
+.monster-name-results {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+  .monster-name {
+    padding: 0.5em;
+    border: 1px solid #aaaaaa;
+    background-color: #dddddd;
+  }
+    .monster-name:hover {
+      background-color: #bbbbbb;
+      cursor: pointer;
+    }
+
 .monster {
   float: left;
 }
