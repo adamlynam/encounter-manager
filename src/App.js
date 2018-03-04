@@ -47,6 +47,21 @@ class App extends Component {
     });
   }
 
+  removeMonster = (monster) => {
+    this.setState((previousState, currentProps) => {
+      var monstersAdded = new Map(previousState.monstersAdded);
+      monstersAdded.delete(monster.key);
+      var creatures = new Map(previousState.creatures);
+      monster.instances.forEach(instance => {
+        creatures.delete(instance);
+      });
+			return {
+        monstersAdded: monstersAdded,
+        creatures: creatures,
+			};
+    });
+  }
+
   addToCreatureList = (monster, key, creatures) => {
     var newCreatures = new Map(creatures);
     newCreatures.set(key, Object.assign({}, {
@@ -104,7 +119,7 @@ class App extends Component {
       <div>
         <MonsterSearch monsters={this.state.monsters} searchText={this.state.searchText} updateSearchText={this.updateSearchText} addMonster={this.addMonster} />
         {Array.from(this.state.monstersAdded).map(([key, monster]) => {
-          return <Monster key={key} creatures={this.state.creatures} addCreature={this.addCreature} removeCreature={this.removeCreature} setCreatureHealth={this.setCreatureHealth}>{monster}</Monster>
+          return <Monster key={key} creatures={this.state.creatures} removeMonster={this.removeMonster} addCreature={this.addCreature} removeCreature={this.removeCreature} setCreatureHealth={this.setCreatureHealth}>{monster}</Monster>
         })}
       </div>
     );

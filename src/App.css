@@ -14,9 +14,25 @@
       cursor: pointer;
     }
 
+.remove-button {
+  padding: 0.5em;
+  border: 1px solid #aa0000;
+  background-color: #ee9999;
+}
+  .remove-button:hover {
+    background-color: #eebbbb;
+    cursor: pointer;
+  }
+
 .monster {
+  position: relative;
   float: left;
 }
+  .remove-monster {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
   .monster-image {
     width: 15em;
   }
@@ -43,14 +59,7 @@
     }
   .remove-creature {
     margin-left: 0.5em;
-    padding: 0.5em;
-    border: 1px solid #aa0000;
-    background-color: #ee9999;
   }
-    .remove-creature:hover {
-      background-color: #eebbbb;
-      cursor: pointer;
-    }
   .add-creature {
     width: 1em;
     padding: 0.5em;
