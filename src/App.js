@@ -4,13 +4,17 @@ import Monster from './Monster';
 import MonsterSearch from './MonsterSearch';
 
 import mm from './data/bestiary/bestiary-mm.json';
+import vgm from './data/bestiary/bestiary-vgm.json';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      monsters: mm.monster,
+      monsters: [
+        ...mm.monster,
+        ...vgm.monster
+      ],
       searchText: '',
   		monstersAdded: new Map(),
       creatures: new Map(),
@@ -32,12 +36,12 @@ class App extends Component {
   addMonster = (index) => {
     this.setState((previousState, currentProps) => {
       var monster = {
-        key: mm.monster[index].name,
-        defaultHealth: this.parseMonsterHealth(mm.monster[index]),
+        key: previousState.monsters[index].name,
+        defaultHealth: this.parseMonsterHealth(previousState.monsters[index]),
         instances: [previousState.nextCreatureKey],
       };
       var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(mm.monster[index].name, monster);
+      monstersAdded.set(previousState.monsters[index].name, monster);
 			return {
         searchText: '',
         monstersAdded: monstersAdded,
