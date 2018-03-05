@@ -25,9 +25,20 @@
     cursor: pointer;
   }
 
+.list {
+  margin-left: 0.5em;
+}
+  .list .item {
+
+  }
+    .list .item .item-name {
+      font-weight: bold;
+    }
+
 .monster {
   position: relative;
   float: left;
+  width: 20em;
 }
   .remove-monster {
     position: absolute;
@@ -35,9 +46,9 @@
     right: 0;
   }
   .monster-image {
-    width: 15em;
+    width: 100%;
   }
-  .stats-toggle {
+  .toggle {
     cursor: pointer;
   }
   .stats::after {
@@ -65,6 +76,15 @@
         float: left;
         width: 15%;
         text-align: right;
+      }
+  .actions {
+
+  }
+    .action {
+      padding: 0.5em 1em;
+    }
+      .action .action-name {
+        font-weight: bold;
       }
   .creature-details {
     margin: 2.1em 0;
