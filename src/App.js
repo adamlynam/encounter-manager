@@ -35,17 +35,24 @@ class App extends Component {
 
   addMonster = (index) => {
     this.setState((previousState, currentProps) => {
-      var monster = {
-        key: previousState.monsters[index].name,
-        defaultHealth: this.parseMonsterHealth(previousState.monsters[index]),
-        instances: [previousState.nextCreatureKey],
-      };
       var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(previousState.monsters[index].name, monster);
+      monstersAdded.set(
+        previousState.monsters[index].name,
+        Object.assign(
+          previousState.monsters[index],
+          {
+            statsShown: false,
+            instances: [previousState.nextCreatureKey],
+          }
+        )
+      );
 			return {
         searchText: '',
         monstersAdded: monstersAdded,
-				creatures: this.addToCreatureList(monster, previousState.nextCreatureKey, previousState.creatures),
+				creatures: this.addToCreatureList(
+          previousState.creatures,
+          previousState.monsters[index],
+          previousState.nextCreatureKey),
         nextCreatureKey: previousState.nextCreatureKey + 1,
 			};
     });
@@ -54,7 +61,7 @@ class App extends Component {
   removeMonster = (monster) => {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.delete(monster.key);
+      monstersAdded.delete(monster.name);
       var creatures = new Map(previousState.creatures);
       monster.instances.forEach(instance => {
         creatures.delete(instance);
@@ -66,11 +73,29 @@ class App extends Component {
     });
   }
 
-  addToCreatureList = (monster, key, creatures) => {
+  toggleStatsShown = (monster) => {
+    this.setState((previousState, currentProps) => {
+      var monstersAdded = new Map(previousState.monstersAdded);
+      monstersAdded.set(
+        monster.name,
+        Object.assign(
+          monster,
+          {
+            statsShown: !monster.statsShown,
+          }
+        )
+      );
+			return {
+        monstersAdded: monstersAdded,
+			};
+    });
+  }
+
+  addToCreatureList = (creatures, monster, key) => {
     var newCreatures = new Map(creatures);
     newCreatures.set(key, Object.assign({}, {
       key: key,
-      health: monster.defaultHealth,
+      health: this.parseMonsterHealth(monster),
     }));
     return newCreatures;
   }
@@ -78,14 +103,17 @@ class App extends Component {
   addCreature = (monster) => {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(monster.key, Object.assign(previousState.monstersAdded.get(monster.key), {
+      monstersAdded.set(monster.name, Object.assign(previousState.monstersAdded.get(monster.name), {
         instances: [
-          ...previousState.monstersAdded.get(monster.key).instances,
+          ...previousState.monstersAdded.get(monster.name).instances,
           previousState.nextCreatureKey],
       }));
 			return {
         monstersAdded: monstersAdded,
-				creatures: this.addToCreatureList(monster, previousState.nextCreatureKey, previousState.creatures),
+				creatures: this.addToCreatureList(
+          previousState.creatures,
+          monster,
+          previousState.nextCreatureKey),
         nextCreatureKey: previousState.nextCreatureKey + 1,
 			};
     });
@@ -94,8 +122,8 @@ class App extends Component {
   removeCreature = (monster, key) => {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(monster.key, Object.assign(previousState.monstersAdded.get(monster.key), {
-        instances: previousState.monstersAdded.get(monster.key).instances.filter(item => item !== key),
+      monstersAdded.set(monster.name, Object.assign(previousState.monstersAdded.get(monster.name), {
+        instances: previousState.monstersAdded.get(monster.name).instances.filter(item => item !== key),
       }));
       var creatures = new Map(previousState.creatures);
       creatures.delete(key);
@@ -123,7 +151,16 @@ class App extends Component {
       <div>
         <MonsterSearch monsters={this.state.monsters} searchText={this.state.searchText} updateSearchText={this.updateSearchText} addMonster={this.addMonster} />
         {Array.from(this.state.monstersAdded).map(([key, monster]) => {
-          return <Monster key={key} creatures={this.state.creatures} removeMonster={this.removeMonster} addCreature={this.addCreature} removeCreature={this.removeCreature} setCreatureHealth={this.setCreatureHealth}>{monster}</Monster>
+          return <Monster
+            key={key}
+            creatures={this.state.creatures}
+            removeMonster={this.removeMonster}
+            toggleStatsShown={this.toggleStatsShown}
+            addCreature={this.addCreature}
+            removeCreature={this.removeCreature}
+            setCreatureHealth={this.setCreatureHealth}>
+              {monster}
+          </Monster>
         })}
       </div>
     );
