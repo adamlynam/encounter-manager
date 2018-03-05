@@ -45,8 +45,22 @@
     top: 0;
     right: 0;
   }
+  .monster-ac {
+    position: absolute;
+    top: 2em;
+    right: 0;
+    height: 3.3em;
+    width: 3em;
+    background-image: url('/img/ac.png');
+    background-size: cover;
+    line-height: 3.3em;
+    text-align: center;
+    font-size: 1.5em;
+  }
   .monster-image {
-    width: 100%;
+    display: block;
+    width: 50%;
+    margin: auto;
   }
   .toggle {
     cursor: pointer;

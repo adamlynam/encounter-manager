@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
 class Monster extends Component {
+
+  parseMonsterAc = monster => {
+    var exp = new RegExp('([0-9]*).*');
+    return parseInt(monster.ac.match(exp)[1]);
+  }
+
   calculateModifier = value => {
     return Math.floor((value - 10) / 2);
   }
@@ -10,7 +16,8 @@ class Monster extends Component {
       <div className="monster">
         <h4>{this.props.children.name}</h4>
         <div className="remove-monster remove-button" onClick={() => this.props.removeMonster(this.props.children)}>-</div>
-        <img className="monster-image" src={'/img/' + this.props.children.name + '.png'} alt={this.props.children.name + ' image'} />
+        <div className="monster-ac">{this.parseMonsterAc(this.props.children)}</div>
+        <img className="monster-image" src={'/img/monsters/' + this.props.children.name + '.png'} alt={this.props.children.name + ' image'} />
         <h5 className="toggle" onClick={() => this.props.toggleStatsShown(this.props.children)}>Stats {this.props.children.statsShown ? '▲' : '▼'}</h5>
         {this.props.children.statsShown &&
         <div className="stats">
