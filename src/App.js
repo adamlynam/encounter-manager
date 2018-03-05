@@ -41,8 +41,8 @@ class App extends Component {
         Object.assign(
           previousState.monsters[index],
           {
-            statsShown: true,
-            actionsShown: true,
+            statsShown: false,
+            actionsShown: false,
             instances: [previousState.nextCreatureKey],
           }
         )
