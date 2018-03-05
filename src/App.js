@@ -3,8 +3,21 @@ import './App.css';
 import Monster from './Monster';
 import MonsterSearch from './MonsterSearch';
 
+import cos from './data/bestiary/bestiary-cos.json';
+import dmg from './data/bestiary/bestiary-dmg.json';
+import hotdq from './data/bestiary/bestiary-hotdq.json';
+import lmop from './data/bestiary/bestiary-lmop.json';
 import mm from './data/bestiary/bestiary-mm.json';
+import oota from './data/bestiary/bestiary-oota.json';
+import phb from './data/bestiary/bestiary-phb.json';
+import pota from './data/bestiary/bestiary-pota.json';
+import rot from './data/bestiary/bestiary-rot.json';
+import skt from './data/bestiary/bestiary-skt.json';
+import tftyp from './data/bestiary/bestiary-tftyp.json';
+import toa from './data/bestiary/bestiary-toa.json';
+import ttp from './data/bestiary/bestiary-ttp.json';
 import vgm from './data/bestiary/bestiary-vgm.json';
+import xge from './data/bestiary/bestiary-xge.json';
 
 class App extends Component {
 
@@ -12,8 +25,21 @@ class App extends Component {
     super(props);
     this.state = {
       monsters: [
+        ...cos.monster,
+        ...dmg.monster,
+        ...hotdq.monster,
+        ...lmop.monster,
         ...mm.monster,
-        ...vgm.monster
+        ...oota.monster,
+        ...phb.monster,
+        ...pota.monster,
+        ...rot.monster,
+        ...skt.monster,
+        ...tftyp.monster,
+        ...toa.monster,
+        ...ttp.monster,
+        ...vgm.monster,
+        ...xge.monster,
       ],
       searchText: '',
   		monstersAdded: new Map(),
