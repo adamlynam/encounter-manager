@@ -52,11 +52,47 @@
     height: 3.3em;
     width: 3em;
     background-image: url('/img/ac.png');
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     line-height: 3.3em;
     text-align: center;
     font-size: 1.5em;
   }
+  .monster-speed {
+    position: absolute;
+    top: 7em;
+    right: 0;
+    height: 1.2em;
+    width: 3em;
+    line-height: 1.2em;
+    text-align: right;
+    font-size: 1.2em;
+  }
+    .monster-speed .ground-speed {
+      background-image: url('/img/ground.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .monster-speed .fly-speed {
+      background-image: url('/img/fly.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .monster-speed .swim-speed {
+      background-image: url('/img/swim.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .monster-speed .climb-speed {
+      background-image: url('/img/climb.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .monster-speed .burrow-speed {
+      background-image: url('/img/burrow.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
   .monster-image {
     display: block;
     width: 50%;

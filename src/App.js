@@ -46,6 +46,17 @@ class App extends Component {
       creatures: new Map(),
       nextCreatureKey: 1,
   	};
+    console.log(this.state.monsters.map(monster => {
+      return monster.speed
+        .replace(new RegExp('[0-9]', 'g'), '')
+        .replace(new RegExp('ft.', 'g'), '')
+        .replace(new RegExp(',', 'g'), '')
+        .replace(new RegExp('fly', 'g'), '')
+        .replace(new RegExp('swim', 'g'), '')
+        .replace(new RegExp('climb', 'g'), '')
+        .replace(new RegExp('burrow', 'g'), '')
+        .replace(new RegExp('[(]hover[)]', 'g'), '');
+    }).join(''));
   }
 
   updateSearchText = (event) => {

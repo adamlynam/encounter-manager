@@ -1,10 +1,55 @@
 import React, { Component } from 'react';
+const longestNumberRegex = new RegExp('[0-9]+');
 
 class Monster extends Component {
 
+
   parseMonsterAc = monster => {
-    var exp = new RegExp('([0-9]*).*');
-    return parseInt(monster.ac.match(exp)[1]);
+    return parseInt(monster.ac.match(longestNumberRegex));
+  }
+
+  parseMonsterSpeeds = monster => {
+    return {
+      groundSpeed: this.parseGroundSpeed(monster),
+      burrowSpeed: this.parseBurrowSpeed(monster),
+      climbSpeed: this.parseClimbSpeed(monster),
+      flySpeed: this.parseFlySpeed(monster),
+      swimSpeed: this.parseSwimSpeed(monster),
+    };
+  }
+
+  parseGroundSpeed = monster => {
+    var speeds = monster.speed.split(',');
+    var groundSpeed = speeds[0];
+    return groundSpeed === undefined ? undefined : parseInt(
+      longestNumberRegex.exec(groundSpeed)[0]);
+  }
+
+  parseSpeedWithText = (monster, text) => {
+    var speeds = monster.speed.split(',');
+    var flySpeed = speeds
+      .find(speed => {
+        return speed.includes(text);
+      });
+      console.log(flySpeed);
+    return flySpeed === undefined ? undefined : parseInt(
+      longestNumberRegex.exec(flySpeed)[0]);
+  }
+
+  parseFlySpeed = monster => {
+    return this.parseSpeedWithText(monster, 'fly');
+  }
+
+  parseSwimSpeed = monster => {
+    return this.parseSpeedWithText(monster, 'swim');
+  }
+
+  parseClimbSpeed = monster => {
+    return this.parseSpeedWithText(monster, 'climb');
+  }
+
+  parseBurrowSpeed = monster => {
+    return this.parseSpeedWithText(monster, 'burrow');
   }
 
   calculateModifier = value => {
@@ -12,11 +57,19 @@ class Monster extends Component {
   }
 
   render() {
+    var monsterSpeeds = this.parseMonsterSpeeds(this.props.children);
     return (
       <div className="monster">
         <h4>{this.props.children.name}</h4>
         <div className="remove-monster remove-button" onClick={() => this.props.removeMonster(this.props.children)}>-</div>
         <div className="monster-ac">{this.parseMonsterAc(this.props.children)}</div>
+        <div className="monster-speed">
+          {monsterSpeeds.groundSpeed && <div className="ground-speed">{monsterSpeeds.groundSpeed}</div>}
+          {monsterSpeeds.burrowSpeed && <div className="burrow-speed">{monsterSpeeds.burrowSpeed}</div>}
+          {monsterSpeeds.climbSpeed && <div className="climb-speed">{monsterSpeeds.climbSpeed}</div>}
+          {monsterSpeeds.flySpeed && <div className="fly-speed">{monsterSpeeds.flySpeed}</div>}
+          {monsterSpeeds.swimSpeed && <div className="swim-speed">{monsterSpeeds.swimSpeed}</div>}
+        </div>
         <img className="monster-image" src={'/img/monsters/' + this.props.children.name + '.png'} alt={this.props.children.name + ' image'} />
         <h5 className="toggle" onClick={() => this.props.toggleStatsShown(this.props.children)}>Stats {this.props.children.statsShown ? '▲' : '▼'}</h5>
         {this.props.children.statsShown &&
