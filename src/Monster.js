@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import SmartEntryText from './SmartEntryText';
+
 const longestNumberRegex = new RegExp('[0-9]+');
 
 class Monster extends Component {
@@ -26,14 +28,12 @@ class Monster extends Component {
   }
 
   parseSpeedWithText = (monster, text) => {
-    var speeds = monster.speed.split(',');
-    var flySpeed = speeds
+    var speed = monster.speed.split(',')
       .find(speed => {
         return speed.includes(text);
       });
-      console.log(flySpeed);
-    return flySpeed === undefined ? undefined : parseInt(
-      longestNumberRegex.exec(flySpeed)[0]);
+    return speed === undefined ? undefined : parseInt(
+      longestNumberRegex.exec(speed)[0]);
   }
 
   parseFlySpeed = monster => {
@@ -74,12 +74,12 @@ class Monster extends Component {
         <h5 className="toggle" onClick={() => this.props.toggleStatsShown(this.props.children)}>Stats {this.props.children.statsShown ? '▲' : '▼'}</h5>
         {this.props.children.statsShown &&
         <div className="stats">
-          <div className="stat"><span className="stat-name">Str</span><span className="stat-value">{this.props.children.str}</span><span className="stat-modifier">({this.calculateModifier(this.props.children.str)})</span></div>
-          <div className="stat"><span className="stat-name">Dex</span><span className="stat-value">{this.props.children.dex}</span><span className="stat-modifier">({this.calculateModifier(this.props.children.dex)})</span></div>
-          <div className="stat"><span className="stat-name">Con</span><span className="stat-value">{this.props.children.con}</span><span className="stat-modifier">({this.calculateModifier(this.props.children.con)})</span></div>
-          <div className="stat"><span className="stat-name">Int</span><span className="stat-value">{this.props.children.int}</span><span className="stat-modifier">({this.calculateModifier(this.props.children.int)})</span></div>
-          <div className="stat"><span className="stat-name">Wis</span><span className="stat-value">{this.props.children.wis}</span><span className="stat-modifier">({this.calculateModifier(this.props.children.wis)})</span></div>
-          <div className="stat"><span className="stat-name">Cha</span><span className="stat-value">{this.props.children.cha}</span><span className="stat-modifier">({this.calculateModifier(this.props.children.cha)})</span></div>
+          {this.renderStat('Str', this.props.children.str)}
+          {this.renderStat('Dex', this.props.children.dex)}
+          {this.renderStat('Con', this.props.children.con)}
+          {this.renderStat('Int', this.props.children.int)}
+          {this.renderStat('Wis', this.props.children.wis)}
+          {this.renderStat('Cha', this.props.children.cha)}
         </div>}
         <h5 className="toggle" onClick={() => this.props.toggleActionsShown(this.props.children)}>Attacks {this.props.children.actionsShown ? '▲' : '▼'}</h5>
         {this.props.children.actionsShown && this.renderActions(this.props.children.action)}
@@ -99,6 +99,15 @@ class Monster extends Component {
     );
   }
 
+  renderStat = (statName, statValue) => {
+    var statMod = this.calculateModifier(statValue);
+    return <div className="stat roll" onClick={() => this.props.roller(1, 20, statMod)}>
+      <span className="stat-name">{statName}</span>
+      <span className="stat-value">{statValue}</span>
+      <span className="stat-modifier">({statMod})</span>
+    </div>
+  }
+
   renderActions = (actions) => {
     return <div className="actions">
       {actions.map(action => {
@@ -114,7 +123,7 @@ class Monster extends Component {
     return <div className="entries">
       {entries.map(entry => {
         if (typeof entry === 'string' || entry instanceof String) {
-          return <div className="entry-name">{entry}</div>;
+          return <SmartEntryText roller={this.props.roller}>{entry}</SmartEntryText>;
         }
         else {
           return this.renderList(entry.items);
@@ -128,7 +137,7 @@ class Monster extends Component {
       {items.map(item => {
         return <div key={item.name} className="list-item">
           <div className="item-name">{item.name}</div>
-          <div className="item-entry">{item.entry}</div>
+          <SmartEntryText roller={this.props.roller}>{item.entry}</SmartEntryText>
         </div>;
       })}
     </div>;

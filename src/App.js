@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Monster from './Monster';
 import MonsterSearch from './MonsterSearch';
+import Rolls from './Rolls';
 
 import cos from './data/bestiary/bestiary-cos.json';
 import dmg from './data/bestiary/bestiary-dmg.json';
@@ -45,18 +46,8 @@ class App extends Component {
   		monstersAdded: new Map(),
       creatures: new Map(),
       nextCreatureKey: 1,
+      rolls: [],
   	};
-    console.log(this.state.monsters.map(monster => {
-      return monster.speed
-        .replace(new RegExp('[0-9]', 'g'), '')
-        .replace(new RegExp('ft.', 'g'), '')
-        .replace(new RegExp(',', 'g'), '')
-        .replace(new RegExp('fly', 'g'), '')
-        .replace(new RegExp('swim', 'g'), '')
-        .replace(new RegExp('climb', 'g'), '')
-        .replace(new RegExp('burrow', 'g'), '')
-        .replace(new RegExp('[(]hover[)]', 'g'), '');
-    }).join(''));
   }
 
   updateSearchText = (event) => {
@@ -202,6 +193,30 @@ class App extends Component {
     });
   }
 
+  saveRoll = (total, rolls, modifier) => {
+    this.setState((previousState, currentProps) => {
+			return {
+				rolls: [
+          ...previousState.rolls,
+          {
+            total: total,
+            rolls: rolls,
+            modifier: modifier,
+          }
+        ],
+			};
+    });
+  }
+
+  roller = (number, sides, modifier) => {
+    var rolls = [];
+    for (var i = 0; i < number; i++) {
+      rolls.push(Math.floor(Math.random() * sides) + 1);
+    }
+    var total = rolls.reduce((a, b) => a + b, 0) + (modifier ? modifier : 0);
+    this.saveRoll(total, rolls, (modifier ? modifier : 0));
+  }
+
   render = () => {
     return (
       <div>
@@ -215,10 +230,12 @@ class App extends Component {
             toggleActionsShown={this.toggleActionsShown}
             addCreature={this.addCreature}
             removeCreature={this.removeCreature}
-            setCreatureHealth={this.setCreatureHealth}>
+            setCreatureHealth={this.setCreatureHealth}
+            roller={this.roller}>
               {monster}
           </Monster>
         })}
+        <Rolls>{this.state.rolls}</Rolls>
       </div>
     );
   }

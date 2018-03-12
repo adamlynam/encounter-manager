@@ -28,12 +28,19 @@
 .list {
   margin-left: 0.5em;
 }
-  .list .item {
+  .list .list-item {
 
   }
-    .list .item .item-name {
+    .list .list-item .item-name {
       font-weight: bold;
     }
+
+.roll {
+  cursor: pointer;
+}
+.roll:hover {
+  background-color: #dddddd;
+}
 
 .monster {
   position: relative;
@@ -107,24 +114,26 @@
     clear: both;
   }
     .stat {
-      padding: 0 5%;
+      float: left;
+      width: 40%;
+      padding: 0.2em 5%;
     }
       .stat .stat-name {
         display: block;
         float: left;
-        width: 15%;
+        width: 30%;
         font-weight: bold;
       }
       .stat .stat-value {
         display: block;
         float: left;
-        width: 15%;
+        width: 30%;
         text-align: right;
       }
       .stat .stat-modifier {
         display: block;
         float: left;
-        width: 15%;
+        width: 30%;
         text-align: right;
       }
   .actions {
@@ -169,4 +178,22 @@
     .add-creature:hover {
       background-color: #bbeebb;
       cursor: pointer;
+    }
+
+.dice-rolls {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 0.5em;
+  z-index: 1;
+}
+  .dice-rolls .dice-roll {
+    width: 10em;
+    padding: 0.5em;
+    border: 1px solid;
+    overflow-wrap: break-word;
+  }
+    .dice-rolls .dice-roll .roll-total {
+      font-weight: bold;
+      font-size: 1.5em;
     }
