@@ -193,12 +193,13 @@ class App extends Component {
     });
   }
 
-  saveRoll = (total, rolls, modifier) => {
+  saveRoll = (name, total, rolls, modifier) => {
     this.setState((previousState, currentProps) => {
 			return {
 				rolls: [
           ...previousState.rolls,
           {
+            name: name,
             total: total,
             rolls: rolls,
             modifier: modifier,
@@ -208,13 +209,13 @@ class App extends Component {
     });
   }
 
-  roller = (number, sides, modifier) => {
+  roller = (name, number, sides, modifier) => {
     var rolls = [];
     for (var i = 0; i < number; i++) {
       rolls.push(Math.floor(Math.random() * sides) + 1);
     }
     var total = rolls.reduce((a, b) => a + b, 0) + (modifier ? modifier : 0);
-    this.saveRoll(total, rolls, (modifier ? modifier : 0));
+    this.saveRoll(name, total, rolls, (modifier ? modifier : 0));
   }
 
   render = () => {

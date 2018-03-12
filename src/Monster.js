@@ -101,7 +101,7 @@ class Monster extends Component {
 
   renderStat = (statName, statValue) => {
     var statMod = this.calculateModifier(statValue);
-    return <div className="stat roll" onClick={() => this.props.roller(1, 20, statMod)}>
+    return <div className="stat roll" onClick={() => this.props.roller(statName + ' Check', 1, 20, statMod)}>
       <span className="stat-name">{statName}</span>
       <span className="stat-value">{statValue}</span>
       <span className="stat-modifier">({statMod})</span>
@@ -113,17 +113,17 @@ class Monster extends Component {
       {actions.map(action => {
         return <div key={action.name} className="action">
           <div className="action-name">{action.name}</div>
-          {this.renderEntries(action.entries)}
+          {this.renderEntries(action.name, action.entries)}
         </div>;
       })}
     </div>;
   }
 
-  renderEntries = (entries) => {
+  renderEntries = (entryName, entries) => {
     return <div className="entries">
       {entries.map(entry => {
         if (typeof entry === 'string' || entry instanceof String) {
-          return <SmartEntryText roller={this.props.roller}>{entry}</SmartEntryText>;
+          return <SmartEntryText entryName={entryName} roller={this.props.roller}>{entry}</SmartEntryText>;
         }
         else {
           return this.renderList(entry.items);
@@ -137,7 +137,7 @@ class Monster extends Component {
       {items.map(item => {
         return <div key={item.name} className="list-item">
           <div className="item-name">{item.name}</div>
-          <SmartEntryText roller={this.props.roller}>{item.entry}</SmartEntryText>
+          <SmartEntryText entryName={item.name} roller={this.props.roller}>{item.entry}</SmartEntryText>
         </div>;
       })}
     </div>;

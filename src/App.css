@@ -193,6 +193,9 @@
     border: 1px solid;
     overflow-wrap: break-word;
   }
+    .dice-rolls .dice-roll .roll-name {
+      display: block;
+    }
     .dice-rolls .dice-roll .roll-total {
       font-weight: bold;
       font-size: 1.5em;

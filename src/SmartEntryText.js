@@ -9,11 +9,11 @@ class SmartEntryText extends Component {
   }
 
   renderD20Roll = modifier => {
-    return <span className="d20-roll roll" onClick={() => this.props.roller(1, 20, modifier)}>+{modifier} </span>;
+    return <span className="d20-roll roll" onClick={() => this.props.roller(this.props.entryName, 1, 20, modifier)}>+{modifier} </span>;
   }
 
   renderPolyRoll = (number, sides, modifier) => {
-    return <span className="poly-roll roll" onClick={() => this.props.roller(number, sides, modifier)}>({number}d{sides}{modifier ? '+' + modifier : ''}) </span>;
+    return <span className="poly-roll roll" onClick={() => this.props.roller(this.props.entryName, number, sides, modifier)}>({number}d{sides}{modifier ? '+' + modifier : ''}) </span>;
   }
 
   renderRolls = text => {
