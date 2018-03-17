@@ -1,73 +1,19 @@
 import React, { Component } from 'react';
+import MonsterTools from './MonsterTools';
 import SmartEntryText from './SmartEntryText';
 
-const longestNumberRegex = new RegExp('[0-9]+');
-
 class Monster extends Component {
-
-
-  parseMonsterAc = monster => {
-    return parseInt(monster.ac.match(longestNumberRegex));
-  }
-
-  parseMonsterHealth = (monster) => {
-    var exp = new RegExp('([0-9]*).*');
-    return parseInt(monster.hp.match(exp)[1]);
-  }
-
-  parseMonsterSpeeds = monster => {
-    return {
-      groundSpeed: this.parseGroundSpeed(monster),
-      burrowSpeed: this.parseBurrowSpeed(monster),
-      climbSpeed: this.parseClimbSpeed(monster),
-      flySpeed: this.parseFlySpeed(monster),
-      swimSpeed: this.parseSwimSpeed(monster),
-    };
-  }
-
-  parseGroundSpeed = monster => {
-    var speeds = monster.speed.split(',');
-    var groundSpeed = speeds[0];
-    return groundSpeed === undefined ? undefined : parseInt(
-      longestNumberRegex.exec(groundSpeed)[0]);
-  }
-
-  parseSpeedWithText = (monster, text) => {
-    var speed = monster.speed.split(',')
-      .find(speed => {
-        return speed.includes(text);
-      });
-    return speed === undefined ? undefined : parseInt(
-      longestNumberRegex.exec(speed)[0]);
-  }
-
-  parseFlySpeed = monster => {
-    return this.parseSpeedWithText(monster, 'fly');
-  }
-
-  parseSwimSpeed = monster => {
-    return this.parseSpeedWithText(monster, 'swim');
-  }
-
-  parseClimbSpeed = monster => {
-    return this.parseSpeedWithText(monster, 'climb');
-  }
-
-  parseBurrowSpeed = monster => {
-    return this.parseSpeedWithText(monster, 'burrow');
-  }
-
   calculateModifier = value => {
     return Math.floor((value - 10) / 2);
   }
 
   render() {
-    var monsterSpeeds = this.parseMonsterSpeeds(this.props.children);
+    var monsterSpeeds = MonsterTools.parseMonsterSpeeds(this.props.children);
     return (
       <div className="monster">
         <h4>{this.props.children.name}</h4>
         <div className="remove-monster remove-button" onClick={() => this.props.removeMonster(this.props.children)}>-</div>
-        <div className="monster-ac">{this.parseMonsterAc(this.props.children)}</div>
+        <div className="monster-ac">{MonsterTools.parseMonsterAc(this.props.children)}</div>
         <div className="monster-speed">
           {monsterSpeeds.groundSpeed && <div className="ground-speed">{monsterSpeeds.groundSpeed}</div>}
           {monsterSpeeds.burrowSpeed && <div className="burrow-speed">{monsterSpeeds.burrowSpeed}</div>}
@@ -153,7 +99,7 @@ class Monster extends Component {
 
   healthRemainingCss = (monster, creature) => {
     return {
-      height: Math.min(100, Math.max(0, creature.health / this.parseMonsterHealth(monster) * 100)) + '%',
+      height: Math.min(100, Math.max(0, creature.health / MonsterTools.parseMonsterHealth(monster) * 100)) + '%',
     }
   }
 }

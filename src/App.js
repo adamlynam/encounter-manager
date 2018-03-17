@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import MonsterTools from './MonsterTools';
 import Monster from './Monster';
 import MonsterSearch from './MonsterSearch';
 import Rolls from './Rolls';
@@ -23,6 +24,7 @@ import xge from './data/bestiary/bestiary-xge.json';
 class App extends Component {
 
   constructor(props) {
+    console.log(MonsterTools.parseMonsterHealth);
     super(props);
     this.state = {
       monsters: [
@@ -54,11 +56,6 @@ class App extends Component {
     this.setState({
       searchText: event.target.value,
 		});
-  }
-
-  parseMonsterHealth = (monster) => {
-    var exp = new RegExp('([0-9]*).*');
-    return parseInt(monster.hp.match(exp)[1]);
   }
 
   addMonster = (index) => {
@@ -142,7 +139,7 @@ class App extends Component {
     var newCreatures = new Map(creatures);
     newCreatures.set(key, Object.assign({}, {
       key: key,
-      health: this.parseMonsterHealth(monster),
+      health: MonsterTools.parseMonsterHealth(monster),
     }));
     return newCreatures;
   }
