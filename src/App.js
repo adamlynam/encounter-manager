@@ -222,7 +222,7 @@ class App extends Component {
     return (
       <div>
         <MonsterSearch monsters={this.state.monsters} searchText={this.state.searchText} updateSearchText={this.updateSearchText} addMonster={this.addMonster} />
-        {Array.from(this.state.monstersAdded).map(([key, monster]) => {
+        {Array.from(this.state.monstersAdded).reverse().map(([key, monster]) => {
           return <Monster
             key={key}
             creatures={this.state.creatures}
