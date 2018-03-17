@@ -32,8 +32,10 @@ class Monster extends Component {
           {this.renderStat('Wis', this.props.children.wis)}
           {this.renderStat('Cha', this.props.children.cha)}
         </div>}
-        <h5 className="toggle" onClick={() => this.props.toggleActionsShown(this.props.children)}>Attacks {this.props.children.actionsShown ? '▲' : '▼'}</h5>
-        {this.props.children.actionsShown && this.renderActions(this.props.children.action)}
+        {this.props.children.trait && <h5 className="toggle" onClick={() => this.props.toggleTraitsShown(this.props.children)}>Traits {this.props.children.traitsShown ? '▲' : '▼'}</h5>}
+        {this.props.children.trait && this.props.children.traitsShown && this.renderAbilities(this.props.children.trait)}
+        {this.props.children.action && <h5 className="toggle" onClick={() => this.props.toggleActionsShown(this.props.children)}>Attacks {this.props.children.actionsShown ? '▲' : '▼'}</h5>}
+        {this.props.children.action && this.props.children.actionsShown && this.renderAbilities(this.props.children.action)}
         {this.props.children.instances.map(key => {
           return <div key={key} className="creature-details">
             <span className="identifier">{key}</span>
@@ -62,12 +64,12 @@ class Monster extends Component {
     </div>
   }
 
-  renderActions = (actions) => {
-    return <div className="actions">
-      {actions.map(action => {
-        return <div key={action.name} className="action">
-          <div className="action-name">{action.name}</div>
-          {this.renderEntries(action.name, action.entries)}
+  renderAbilities = (abilities) => {
+    return <div className="abilities">
+      {abilities.map(ability => {
+        return <div key={ability.name} className="ability">
+          <div className="ability-name">{ability.name}</div>
+          {this.renderEntries(ability.name, ability.entries)}
         </div>;
       })}
     </div>;

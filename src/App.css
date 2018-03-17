@@ -136,15 +136,12 @@
         width: 30%;
         text-align: right;
       }
-  .actions {
-
+  .ability {
+    padding: 0.5em 1em;
   }
-    .action {
-      padding: 0.5em 1em;
+    .ability .ability-name {
+      font-weight: bold;
     }
-      .action .action-name {
-        font-weight: bold;
-      }
   .creature-details {
     margin: 2.1em 0;
   }

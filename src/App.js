@@ -67,6 +67,7 @@ class App extends Component {
           previousState.monsters[index],
           {
             statsShown: false,
+            traitsShown: false,
             actionsShown: false,
             instances: [previousState.nextCreatureKey],
           }
@@ -108,6 +109,24 @@ class App extends Component {
           monster,
           {
             statsShown: !monster.statsShown,
+          }
+        )
+      );
+			return {
+        monstersAdded: monstersAdded,
+			};
+    });
+  }
+
+  toggleTraitsShown = (monster) => {
+    this.setState((previousState, currentProps) => {
+      var monstersAdded = new Map(previousState.monstersAdded);
+      monstersAdded.set(
+        monster.name,
+        Object.assign(
+          monster,
+          {
+            traitsShown: !monster.traitsShown,
           }
         )
       );
@@ -225,6 +244,7 @@ class App extends Component {
             creatures={this.state.creatures}
             removeMonster={this.removeMonster}
             toggleStatsShown={this.toggleStatsShown}
+            toggleTraitsShown={this.toggleTraitsShown}
             toggleActionsShown={this.toggleActionsShown}
             addCreature={this.addCreature}
             removeCreature={this.removeCreature}
