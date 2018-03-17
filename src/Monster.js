@@ -10,6 +10,11 @@ class Monster extends Component {
     return parseInt(monster.ac.match(longestNumberRegex));
   }
 
+  parseMonsterHealth = (monster) => {
+    var exp = new RegExp('([0-9]*).*');
+    return parseInt(monster.hp.match(exp)[1]);
+  }
+
   parseMonsterSpeeds = monster => {
     return {
       groundSpeed: this.parseGroundSpeed(monster),
@@ -88,7 +93,10 @@ class Monster extends Component {
             <span className="identifier">{key}</span>
             <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health - 10)}>-10</span>
             <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health - 1)}>-1</span>
-            <span className="health">{this.props.creatures.get(key).health}</span>
+            <span className="health">
+              <span className="health-remaining" style={this.healthRemainingCss(this.props.children, this.props.creatures.get(key))} />
+              {this.props.creatures.get(key).health}
+            </span>
             <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health + 1)}>+1</span>
             <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health + 10)}>+10</span>
             <span className="remove-creature remove-button" onClick={() => this.props.removeCreature(this.props.children, key)}>-</span>
@@ -141,6 +149,12 @@ class Monster extends Component {
         </div>;
       })}
     </div>;
+  }
+
+  healthRemainingCss = (monster, creature) => {
+    return {
+      height: Math.min(100, Math.max(0, creature.health / this.parseMonsterHealth(monster) * 100)) + '%',
+    }
   }
 }
 
