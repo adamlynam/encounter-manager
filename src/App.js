@@ -24,7 +24,6 @@ import xge from './data/bestiary/bestiary-xge.json';
 class App extends Component {
 
   constructor(props) {
-    console.log(MonsterTools.parseMonsterHealth);
     super(props);
     this.state = {
       monsters: [
@@ -101,75 +100,49 @@ class App extends Component {
     });
   }
 
-  toggleStatsShown = (monster) => {
+  toggleMonsterSection = (monster, newProperties) => {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
       monstersAdded.set(
         monster.name,
         Object.assign(
           monster,
-          {
-            statsShown: !monster.statsShown,
-          }
+          newProperties
         )
       );
 			return {
         monstersAdded: monstersAdded,
 			};
+    });
+  }
+
+  toggleStatsShown = (monster) => {
+    this.toggleMonsterSection(monster, {
+      statsShown: !monster.statsShown,
+    });
+  }
+
+  toggleSavesShown = (monster) => {
+    this.toggleMonsterSection(monster, {
+      savesShown: !monster.savesShown,
     });
   }
 
   toggleResistancesShown = (monster) => {
-    this.setState((previousState, currentProps) => {
-      var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(
-        monster.name,
-        Object.assign(
-          monster,
-          {
-            resistancesShown: !monster.resistancesShown,
-          }
-        )
-      );
-			return {
-        monstersAdded: monstersAdded,
-			};
+    this.toggleMonsterSection(monster, {
+      resistancesShown: !monster.resistancesShown,
     });
   }
 
   toggleTraitsShown = (monster) => {
-    this.setState((previousState, currentProps) => {
-      var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(
-        monster.name,
-        Object.assign(
-          monster,
-          {
-            traitsShown: !monster.traitsShown,
-          }
-        )
-      );
-			return {
-        monstersAdded: monstersAdded,
-			};
+    this.toggleMonsterSection(monster, {
+      traitsShown: !monster.traitsShown,
     });
   }
 
   toggleActionsShown = (monster) => {
-    this.setState((previousState, currentProps) => {
-      var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(
-        monster.name,
-        Object.assign(
-          monster,
-          {
-            actionsShown: !monster.actionsShown,
-          }
-        )
-      );
-			return {
-        monstersAdded: monstersAdded,
-			};
+    this.toggleMonsterSection(monster, {
+      actionsShown: !monster.actionsShown,
     });
   }
 
@@ -263,6 +236,7 @@ class App extends Component {
             creatures={this.state.creatures}
             removeMonster={this.removeMonster}
             toggleStatsShown={this.toggleStatsShown}
+            toggleSavesShown={this.toggleSavesShown}
             toggleResistancesShown={this.toggleResistancesShown}
             toggleTraitsShown={this.toggleTraitsShown}
             toggleActionsShown={this.toggleActionsShown}

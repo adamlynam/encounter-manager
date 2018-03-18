@@ -1,22 +1,15 @@
 const longestNumberRegex = new RegExp('[0-9]+');
 
-export function parseMonsterAc(monster) {
-  return parseInt(monster.ac.match(longestNumberRegex));
-}
-
-export function parseMonsterHealth(monster) {
-  var exp = new RegExp('([0-9]*).*');
-  return parseInt(monster.hp.match(exp)[1]);
-}
-
-export function parseMonsterSpeeds(monster) {
-  return {
-    groundSpeed: parseGroundSpeed(monster),
-    burrowSpeed: parseBurrowSpeed(monster),
-    climbSpeed: parseClimbSpeed(monster),
-    flySpeed: parseFlySpeed(monster),
-    swimSpeed: parseSwimSpeed(monster),
-  };
+function parseNumberFromListWithMatchingText(list, text) {
+  if (list === undefined) {
+    return undefined;
+  }
+  var match = list.split(',')
+    .find(item => {
+      return item.includes(text);
+    });
+  return match === undefined ? undefined : parseInt(
+    longestNumberRegex.exec(match)[0]);
 }
 
 function parseGroundSpeed(monster) {
@@ -26,33 +19,44 @@ function parseGroundSpeed(monster) {
     longestNumberRegex.exec(groundSpeed)[0]);
 }
 
-function parseSpeedWithText(monster, text) {
-  var speed = monster.speed.split(',')
-    .find(speed => {
-      return speed.includes(text);
-    });
-  return speed === undefined ? undefined : parseInt(
-    longestNumberRegex.exec(speed)[0]);
+export function calculateModifier(value) {
+  return Math.floor((value - 10) / 2);
 }
 
-function parseFlySpeed(monster) {
-  return parseSpeedWithText(monster, 'fly');
+export function parseMonsterAc(monster) {
+  return parseInt(monster.ac.match(longestNumberRegex));
 }
 
-function parseSwimSpeed(monster) {
-  return parseSpeedWithText(monster, 'swim');
+export function parseMonsterHealth(monster) {
+  var exp = new RegExp('([0-9]*).*');
+  return parseInt(monster.hp.match(exp)[1]);
 }
 
-function parseClimbSpeed(monster) {
-  return parseSpeedWithText(monster, 'climb');
+export function parseMonsterSaves(monster) {
+  return {
+    str: parseNumberFromListWithMatchingText(monster.save, 'Str'),
+    dex: parseNumberFromListWithMatchingText(monster.save, 'Dex'),
+    con: parseNumberFromListWithMatchingText(monster.save, 'Con'),
+    int: parseNumberFromListWithMatchingText(monster.save, 'Int'),
+    wis: parseNumberFromListWithMatchingText(monster.save, 'Wis'),
+    cha: parseNumberFromListWithMatchingText(monster.save, 'Cha'),
+  }
 }
 
-function parseBurrowSpeed(monster) {
-  return parseSpeedWithText(monster, 'burrow');
+export function parseMonsterSpeeds(monster) {
+  return {
+    groundSpeed: parseGroundSpeed(monster),
+    burrowSpeed: parseNumberFromListWithMatchingText(monster.speed, 'burrow'),
+    climbSpeed: parseNumberFromListWithMatchingText(monster.speed, 'climb'),
+    flySpeed: parseNumberFromListWithMatchingText(monster.speed, 'fly'),
+    swimSpeed: parseNumberFromListWithMatchingText(monster.speed, 'swim'),
+  };
 }
 
 export default {
+  calculateModifier,
   parseMonsterAc,
   parseMonsterHealth,
+  parseMonsterSaves,
   parseMonsterSpeeds,
 }

@@ -3,10 +3,6 @@ import MonsterTools from './MonsterTools';
 import SmartEntryText from './SmartEntryText';
 
 class Monster extends Component {
-  calculateModifier = value => {
-    return Math.floor((value - 10) / 2);
-  }
-
   render() {
     var monsterSpeeds = MonsterTools.parseMonsterSpeeds(this.props.children);
     return (
@@ -23,15 +19,9 @@ class Monster extends Component {
         </div>
         <img className="monster-image" src={'/img/monsters/' + this.props.children.name + '.png'} alt={this.props.children.name + ' image'} />
         <h5 className="toggle" onClick={() => this.props.toggleStatsShown(this.props.children)}>Stats {this.props.children.statsShown ? '▲' : '▼'}</h5>
-        {this.props.children.statsShown &&
-        <div className="stats">
-          {this.renderStat('Str', this.props.children.str)}
-          {this.renderStat('Dex', this.props.children.dex)}
-          {this.renderStat('Con', this.props.children.con)}
-          {this.renderStat('Int', this.props.children.int)}
-          {this.renderStat('Wis', this.props.children.wis)}
-          {this.renderStat('Cha', this.props.children.cha)}
-        </div>}
+        {this.props.children.statsShown && this.renderStats(this.props.children)}
+        <h5 className="toggle" onClick={() => this.props.toggleSavesShown(this.props.children)}>Saving Throws {this.props.children.savesShown ? '▲' : '▼'}</h5>
+        {this.props.children.savesShown && this.renderSaves(this.props.children)}
         {(this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && <h5 className="toggle" onClick={() => this.props.toggleResistancesShown(this.props.children)}>Resistances {this.props.children.resistancesShown ? '▲' : '▼'}</h5>}
         {(this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && this.props.children.resistancesShown && this.renderResistances(this.props.children)}
         {this.props.children.trait && <h5 className="toggle" onClick={() => this.props.toggleTraitsShown(this.props.children)}>Traits {this.props.children.traitsShown ? '▲' : '▼'}</h5>}
@@ -58,11 +48,60 @@ class Monster extends Component {
   }
 
   renderStat = (statName, statValue) => {
-    var statMod = this.calculateModifier(statValue);
+    var statMod = MonsterTools.calculateModifier(statValue);
     return <div className="stat roll" onClick={() => this.props.roller(statName + ' Check', 1, 20, statMod)}>
       <span className="stat-name">{statName}</span>
       <span className="stat-value">{statValue}</span>
       <span className="stat-modifier">({statMod})</span>
+    </div>
+  }
+
+  renderSave = (statName, statMod, proficient) => {
+    return <div className="stat roll" onClick={() => this.props.roller(statName + ' Saving Throw', 1, 20, statMod)}>
+      <span className="stat-proficient">{proficient ? '*' : '\u00a0'}</span>
+      <span className="stat-name">{statName}</span>
+      <span className="stat-modifier">({statMod})</span>
+    </div>
+  }
+
+  renderStats = (monster) => {
+    return <div className="stats">
+      {this.renderStat('Str', this.props.children.str)}
+      {this.renderStat('Dex', this.props.children.dex)}
+      {this.renderStat('Con', this.props.children.con)}
+      {this.renderStat('Int', this.props.children.int)}
+      {this.renderStat('Wis', this.props.children.wis)}
+      {this.renderStat('Cha', this.props.children.cha)}
+    </div>
+  }
+
+  renderSaves = (monster) => {
+    var saves = MonsterTools.parseMonsterSaves(monster);
+    return <div className="stats">
+      {this.renderSave(
+        'Str',
+        saves.str ? saves.str : MonsterTools.calculateModifier(monster.str),
+        saves.str ? true : false)}
+      {this.renderSave(
+        'Dex',
+        saves.dex ? saves.dex : MonsterTools.calculateModifier(monster.dex),
+        saves.dex ? true : false)}
+      {this.renderSave(
+        'Con',
+        saves.con ? saves.con : MonsterTools.calculateModifier(monster.con),
+        saves.con ? true : false)}
+      {this.renderSave(
+        'Int',
+        saves.int ? saves.int : MonsterTools.calculateModifier(monster.int),
+        saves.int ? true : false)}
+      {this.renderSave(
+        'Wis',
+        saves.wis ? saves.wis : MonsterTools.calculateModifier(monster.wis),
+        saves.wis ? true : false)}
+      {this.renderSave(
+        'Cha',
+        saves.cha ? saves.cha : MonsterTools.calculateModifier(monster.cha),
+        saves.cha ? true : false)}
     </div>
   }
 

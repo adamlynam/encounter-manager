@@ -118,6 +118,13 @@
       width: 40%;
       padding: 0.2em 5%;
     }
+      .stat .stat-proficient {
+        display: block;
+        float: left;
+        width: 10%;
+        text-align: right;
+        font-weight: bold;
+      }
       .stat .stat-name {
         display: block;
         float: left;
