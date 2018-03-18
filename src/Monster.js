@@ -32,6 +32,8 @@ class Monster extends Component {
           {this.renderStat('Wis', this.props.children.wis)}
           {this.renderStat('Cha', this.props.children.cha)}
         </div>}
+        {(this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && <h5 className="toggle" onClick={() => this.props.toggleResistancesShown(this.props.children)}>Resistances {this.props.children.resistancesShown ? '▲' : '▼'}</h5>}
+        {(this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && this.props.children.resistancesShown && this.renderResistances(this.props.children)}
         {this.props.children.trait && <h5 className="toggle" onClick={() => this.props.toggleTraitsShown(this.props.children)}>Traits {this.props.children.traitsShown ? '▲' : '▼'}</h5>}
         {this.props.children.trait && this.props.children.traitsShown && this.renderAbilities(this.props.children.trait)}
         {this.props.children.action && <h5 className="toggle" onClick={() => this.props.toggleActionsShown(this.props.children)}>Attacks {this.props.children.actionsShown ? '▲' : '▼'}</h5>}
@@ -62,6 +64,14 @@ class Monster extends Component {
       <span className="stat-value">{statValue}</span>
       <span className="stat-modifier">({statMod})</span>
     </div>
+  }
+
+  renderResistances = (monster) => {
+    return <div className="resistances">
+      {monster.resist && <div className="ability"><strong>Resistant</strong> to damage from {monster.resist}</div>}
+      {monster.immune && <div className="ability"><strong>Immune</strong> to damage from {monster.immune}</div>}
+      {monster.conditionImmune && <div className="ability"><strong>Immune</strong> to conditions {monster.conditionImmune}</div>}
+    </div>;
   }
 
   renderAbilities = (abilities) => {
