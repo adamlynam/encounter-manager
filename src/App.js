@@ -151,6 +151,7 @@ class App extends Component {
     newCreatures.set(key, Object.assign({}, {
       key: key,
       health: MonsterTools.parseMonsterHealth(monster),
+      uniqueDescription: MonsterTools.generateMonsterDescription(monster),
     }));
     return newCreatures;
   }

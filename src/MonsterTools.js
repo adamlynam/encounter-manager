@@ -1,3 +1,5 @@
+import monsterDescriptions from './data/descriptions/monster-descriptions.json';
+
 const longestNumberRegex = new RegExp('[0-9]+');
 
 function parseNumberFromListWithMatchingText(list, text) {
@@ -53,10 +55,15 @@ export function parseMonsterSpeeds(monster) {
   };
 }
 
+export function generateMonsterDescription(monster) {
+  return monsterDescriptions.descriptions[Math.floor(Math.random() * monsterDescriptions.descriptions.length)]
+}
+
 export default {
   calculateModifier,
   parseMonsterAc,
   parseMonsterHealth,
   parseMonsterSaves,
   parseMonsterSpeeds,
+  generateMonsterDescription,
 }

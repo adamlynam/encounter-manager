@@ -150,10 +150,12 @@
       font-weight: bold;
     }
   .creature-details {
-    margin: 2.1em 0;
+    margin: 1.1em 0;
   }
     .identifier {
-      margin: 0.5em;
+      display: block;
+      margin: 1.5em;
+      font-size: 0.8em;
     }
     .health-modifier-button {
       padding: 0.5em;

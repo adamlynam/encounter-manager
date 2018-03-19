@@ -30,7 +30,7 @@ class Monster extends Component {
         {this.props.children.action && this.props.children.actionsShown && this.renderAbilities(this.props.children.action)}
         {this.props.children.instances.map(key => {
           return <div key={key} className="creature-details">
-            <span className="identifier">{key}</span>
+            <span className="identifier">{this.props.creatures.get(key).uniqueDescription}</span>
             <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health - 10)}>-10</span>
             <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health - 1)}>-1</span>
             <span className="health">
