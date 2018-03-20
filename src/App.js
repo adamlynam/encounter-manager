@@ -21,6 +21,10 @@ import ttp from './data/bestiary/bestiary-ttp.json';
 import vgm from './data/bestiary/bestiary-vgm.json';
 import xge from './data/bestiary/bestiary-xge.json';
 
+const ENTER_KEY = 13;
+const ARROW_KEY_UP = 38;
+const ARROW_KEY_DOWN = 40;
+
 class App extends Component {
 
   constructor(props) {
@@ -44,6 +48,8 @@ class App extends Component {
         ...xge.monster,
       ],
       searchText: '',
+      searchSelected: undefined,
+      searchResults: new Map(),
   		monstersAdded: new Map(),
       creatures: new Map(),
       nextCreatureKey: 1,
@@ -52,9 +58,41 @@ class App extends Component {
   }
 
   updateSearchText = (event) => {
+    var searchResults = new Map();
+    if (event.target.value) {
+      this.state.monsters.forEach((monster, index) => {
+        if (monster.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1) {
+          searchResults.set(index, monster);
+        }
+      });
+    }
     this.setState({
       searchText: event.target.value,
+      searchSelected: undefined,
+      searchResults: searchResults,
 		});
+  }
+
+  captureKeyDownSearch = (event) => {
+    switch (event.keyCode) {
+      case ARROW_KEY_UP:
+        this.setState((previousState, currentProps) => {
+          return {
+            searchSelected: previousState.searchSelected !== undefined ? Math.max(previousState.searchSelected - 1, 0) : previousState.searchResults.size - 1,
+          }
+    		});
+        break;
+      case ARROW_KEY_DOWN:
+        this.setState((previousState, currentProps) => {
+          return {
+            searchSelected: previousState.searchSelected !== undefined ? Math.min(previousState.searchSelected + 1, previousState.searchResults.size - 1) : 0,
+          }
+    		});
+        break;
+      case ENTER_KEY:
+        this.addMonster(Array.from(this.state.searchResults)[this.state.searchSelected][0])
+        break;
+    }
   }
 
   addMonster = (index) => {
@@ -75,6 +113,8 @@ class App extends Component {
       );
 			return {
         searchText: '',
+        searchSelected: undefined,
+        searchResults: [],
         monstersAdded: monstersAdded,
 				creatures: this.addToCreatureList(
           previousState.creatures,
@@ -230,7 +270,14 @@ class App extends Component {
   render = () => {
     return (
       <div>
-        <MonsterSearch monsters={this.state.monsters} searchText={this.state.searchText} updateSearchText={this.updateSearchText} addMonster={this.addMonster} />
+        <MonsterSearch
+          monsters={this.state.monsters}
+          searchText={this.state.searchText}
+          searchSelected={this.state.searchSelected}
+          searchResults={this.state.searchResults}
+          updateSearchText={this.updateSearchText}
+          captureKeyDownSearch={this.captureKeyDownSearch}
+          addMonster={this.addMonster} />
         {Array.from(this.state.monstersAdded).reverse().map(([key, monster]) => {
           return <Monster
             key={key}

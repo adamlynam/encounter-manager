@@ -10,7 +10,7 @@
     border: 1px solid #aaaaaa;
     background-color: #dddddd;
   }
-    .monster-name:hover {
+    .monster-name:hover, .monster-name.selected {
       background-color: #bbbbbb;
       cursor: pointer;
     }
