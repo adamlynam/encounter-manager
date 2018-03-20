@@ -24,6 +24,7 @@ import xge from './data/bestiary/bestiary-xge.json';
 const ENTER_KEY = 13;
 const ARROW_KEY_UP = 38;
 const ARROW_KEY_DOWN = 40;
+const longestNumberRegex = new RegExp('[0-9]+');
 
 class App extends Component {
 
@@ -192,6 +193,7 @@ class App extends Component {
       key: key,
       health: MonsterTools.parseMonsterHealth(monster),
       uniqueDescription: MonsterTools.generateMonsterDescription(monster),
+      editingHealth: false,
     }));
     return newCreatures;
   }
@@ -230,15 +232,56 @@ class App extends Component {
     });
   }
 
-  setCreatureHealth = (key, newHealth) => {
+  toggleCreatureHealthEdit = (key) => {
     this.setState((previousState, currentProps) => {
       var creatures = new Map(previousState.creatures);
       creatures.set(key, Object.assign(creatures.get(key), {
-        health: newHealth,
+        editingHealth: !creatures.get(key).editingHealth,
+        editHealthValue: creatures.get(key).health,
       }));
 			return {
 				creatures: creatures,
 			};
+    });
+  }
+
+  updateCreatureHealthText = (key, text) => {
+    this.setState((previousState, currentProps) => {
+      var creatures = new Map(previousState.creatures);
+      creatures.set(key, Object.assign(creatures.get(key), {
+        editHealthValue: text,
+      }));
+			return {
+				creatures: creatures,
+			};
+    });
+  }
+
+  setCreatureHealth = (key, newHealth) => {
+    var newProperties = {
+      editingHealth: false,
+    };
+    var longestNumberResults = longestNumberRegex.exec(newHealth);
+    if (longestNumberResults) {
+      var longestNumber = parseInt(longestNumberResults[0]);
+      if (longestNumber) {
+        if (newHealth.includes && newHealth.includes('+')) {
+          newProperties.health = this.state.creatures.get(key).health + longestNumber;
+        }
+        else if (newHealth.includes && newHealth.includes('-')) {
+          newProperties.health = this.state.creatures.get(key).health - longestNumber;
+        }
+        else {
+          newProperties.health = longestNumber;
+        }
+      }
+    }
+    this.setState((previousState, currentProps) => {
+      var creatures = new Map(previousState.creatures);
+      creatures.set(key, Object.assign(creatures.get(key), newProperties));
+      return {
+        creatures: creatures,
+      };
     });
   }
 
@@ -290,6 +333,8 @@ class App extends Component {
             toggleActionsShown={this.toggleActionsShown}
             addCreature={this.addCreature}
             removeCreature={this.removeCreature}
+            toggleCreatureHealthEdit={this.toggleCreatureHealthEdit}
+            updateCreatureHealthText={this.updateCreatureHealthText}
             setCreatureHealth={this.setCreatureHealth}
             roller={this.roller}>
               {monster}

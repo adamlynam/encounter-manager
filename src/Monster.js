@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import MonsterTools from './MonsterTools';
 import SmartEntryText from './SmartEntryText';
 
+const ENTER_KEY = 13;
+
 class Monster extends Component {
   render() {
     var monsterSpeeds = MonsterTools.parseMonsterSpeeds(this.props.children);
@@ -29,18 +31,7 @@ class Monster extends Component {
         {this.props.children.action && <h5 className="toggle" onClick={() => this.props.toggleActionsShown(this.props.children)}>Attacks {this.props.children.actionsShown ? '▲' : '▼'}</h5>}
         {this.props.children.action && this.props.children.actionsShown && this.renderAbilities(this.props.children.action)}
         {this.props.children.instances.map(key => {
-          return <div key={key} className="creature-details">
-            <span className="identifier">{this.props.creatures.get(key).uniqueDescription}</span>
-            <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health - 10)}>-10</span>
-            <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health - 1)}>-1</span>
-            <span className="health">
-              <span className="health-remaining" style={this.healthRemainingCss(this.props.children, this.props.creatures.get(key))} />
-              {this.props.creatures.get(key).health}
-            </span>
-            <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health + 1)}>+1</span>
-            <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, this.props.creatures.get(key).health + 10)}>+10</span>
-            <span className="remove-creature remove-button" onClick={() => this.props.removeCreature(this.props.children, key)}>-</span>
-          </div>
+          return this.renderCreature(key, this.props.creatures.get(key));
         })}
         <div className="add-creature" onClick={() => this.props.addCreature(this.props.children)}>+</div>
       </div>
@@ -148,10 +139,41 @@ class Monster extends Component {
     </div>;
   }
 
+  renderCreature = (key, creature) => {
+    return <div key={key} className="creature-details">
+      <span className="identifier">{this.props.creatures.get(key).uniqueDescription}</span>
+      <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, '-10')}>-10</span>
+      <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, '-1')}>-1</span>
+      <span className="health">
+        <span className="health-remaining" style={this.healthRemainingCss(this.props.children, creature)} />
+        {!creature.editingHealth && <span onClick={() => this.props.toggleCreatureHealthEdit(key)}>{creature.health}</span>}
+        {creature.editingHealth && <input
+          className="health-edit"
+          type="text"
+          value={creature.editHealthValue}
+          autoFocus={true}
+          onFocus={this.selectAll}
+          onChange={(event) => this.props.updateCreatureHealthText(key, event.target.value)}
+          onKeyDown={(event) => {
+            if (event.keyCode === ENTER_KEY) {
+              this.props.setCreatureHealth(key, creature.editHealthValue);
+            }}}
+          onBlur={() => this.props.toggleCreatureHealthEdit(key)} />}
+      </span>
+      <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, '+1')}>+1</span>
+      <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, '+10')}>+10</span>
+      <span className="remove-creature remove-button" onClick={() => this.props.removeCreature(this.props.children, key)}>-</span>
+    </div>;
+  }
+
   healthRemainingCss = (monster, creature) => {
     return {
       height: Math.min(100, Math.max(0, creature.health / MonsterTools.parseMonsterHealth(monster) * 100)) + '%',
     }
+  }
+
+  selectAll = (event) => {
+    event.target.select();
   }
 }
 
