@@ -36,10 +36,11 @@
     }
 
 .roll {
+  color: #0000dd;
   cursor: pointer;
 }
 .roll:hover {
-  background-color: #dddddd;
+  background-color: #8888dd;
 }
 
 .monster {
