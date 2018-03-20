@@ -51,6 +51,9 @@
   .monster h4 {
     margin: 0 0 1em 0;
   }
+  .monster h5 {
+    margin: 0.5em 0;
+  }
   .remove-monster {
     position: absolute;
     top: 0;
@@ -109,6 +112,9 @@
   .toggle {
     cursor: pointer;
   }
+  .stats {
+    font-size: 0.8em;
+  }
   .stats::after {
     content: '';
     display: block;
@@ -116,8 +122,8 @@
   }
     .stat {
       float: left;
-      width: 40%;
-      padding: 0.2em 5%;
+      width: 45%;
+      padding: 0.2em;
     }
       .stat .stat-proficient {
         display: block;
@@ -129,19 +135,19 @@
       .stat .stat-name {
         display: block;
         float: left;
-        width: 30%;
+        width: 50%;
         font-weight: bold;
       }
       .stat .stat-value {
         display: block;
         float: left;
-        width: 30%;
+        width: 25%;
         text-align: right;
       }
       .stat .stat-modifier {
         display: block;
         float: left;
-        width: 30%;
+        width: 25%;
         text-align: right;
       }
   .ability {
