@@ -46,8 +46,11 @@
 .monster {
   position: relative;
   float: left;
-  width: 20em;
+  width: 10em;
 }
+  .monster h4 {
+    margin: 0 0 1em 0;
+  }
   .remove-monster {
     position: absolute;
     top: 0;
@@ -64,17 +67,15 @@
     background-repeat: no-repeat;
     line-height: 3.3em;
     text-align: center;
-    font-size: 1.5em;
   }
   .monster-speed {
     position: absolute;
-    top: 7em;
+    top: 5em;
     right: 0;
     height: 1.2em;
     width: 3em;
     line-height: 1.2em;
     text-align: right;
-    font-size: 1.2em;
   }
     .monster-speed .ground-speed {
       background-image: url('/img/ground.png');
@@ -104,7 +105,6 @@
   .monster-image {
     display: block;
     width: 50%;
-    margin: auto;
   }
   .toggle {
     cursor: pointer;
@@ -169,6 +169,7 @@
       }
     .health {
       position: relative;
+      margin-left: 2em;
       padding: 1em;
       background-image: url('/img/heart-empty.png');
       background-size: 100% 100%;

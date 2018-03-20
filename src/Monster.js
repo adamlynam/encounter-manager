@@ -142,8 +142,6 @@ class Monster extends Component {
   renderCreature = (key, creature) => {
     return <div key={key} className="creature-details">
       <span className="identifier">{this.props.creatures.get(key).uniqueDescription}</span>
-      <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, '-10')}>-10</span>
-      <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, '-1')}>-1</span>
       <span className="health">
         <span className="health-remaining" style={this.healthRemainingCss(this.props.children, creature)} />
         {!creature.editingHealth && <span onClick={() => this.props.toggleCreatureHealthEdit(key)}>{creature.health}</span>}
@@ -160,8 +158,6 @@ class Monster extends Component {
             }}}
           onBlur={() => this.props.toggleCreatureHealthEdit(key)} />}
       </span>
-      <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, '+1')}>+1</span>
-      <span className="health-modifier-button" onClick={() => this.props.setCreatureHealth(key, '+10')}>+10</span>
       <span className="remove-creature remove-button" onClick={() => this.props.removeCreature(this.props.children, key)}>-</span>
     </div>;
   }
