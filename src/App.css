@@ -46,12 +46,17 @@
 .monster {
   position: relative;
   float: left;
-  width: 10em;
+  width: 15em;
+  margin: 0.1em;
+  padding: 0.5em;
+  background-color: #fdf1dc;
+  border: solid 2px #e69a28;
+  z-index: -2;
 }
-  .monster h4 {
+  .monster h3 {
     margin: 0 0 1em 0;
   }
-  .monster h5 {
+  .monster h4 {
     margin: 0.5em 0;
   }
   .remove-monster {
@@ -61,8 +66,8 @@
   }
   .monster-ac {
     position: absolute;
-    top: 2em;
-    right: 0;
+    top: 2.1em;
+    right: 0.5em;
     height: 3.3em;
     width: 3em;
     background-image: url('/img/ac.png');
@@ -73,8 +78,8 @@
   }
   .monster-speed {
     position: absolute;
-    top: 5em;
-    right: 0;
+    top: 5.1em;
+    right: 0.5em;
     height: 1.2em;
     width: 3em;
     line-height: 1.2em;
@@ -105,6 +110,11 @@
       background-size: contain;
       background-repeat: no-repeat;
     }
+  .stat-block-arrow {
+    position: absolute;
+    top: 8em;
+    left: 0.5em;
+  }
   .monster-image {
     display: block;
     width: 50%;
@@ -152,6 +162,7 @@
       }
   .ability {
     padding: 0.5em 1em;
+    font-size: 0.9em;
   }
     .ability .ability-name {
       font-weight: bold;
@@ -213,6 +224,7 @@
   right: 0;
   padding: 0.5em;
   z-index: 1;
+  background-color: #ffffff;
 }
   .dice-rolls .dice-roll {
     width: 10em;

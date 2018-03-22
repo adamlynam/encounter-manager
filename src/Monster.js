@@ -9,7 +9,7 @@ class Monster extends Component {
     var monsterSpeeds = MonsterTools.parseMonsterSpeeds(this.props.children);
     return (
       <div className="monster">
-        <h4>{this.props.children.name}</h4>
+        <h3>{this.props.children.name}</h3>
         <div className="remove-monster remove-button" onClick={() => this.props.removeMonster(this.props.children)}>-</div>
         <div className="monster-ac">{MonsterTools.parseMonsterAc(this.props.children)}</div>
         <div className="monster-speed">
@@ -19,17 +19,18 @@ class Monster extends Component {
           {monsterSpeeds.flySpeed && <div className="fly-speed">{monsterSpeeds.flySpeed}</div>}
           {monsterSpeeds.swimSpeed && <div className="swim-speed">{monsterSpeeds.swimSpeed}</div>}
         </div>
-        <img className="monster-image" src={'/img/monsters/' + this.props.children.name + '.png'} alt={this.props.children.name + ' image'} />
-        <h5 className="toggle" onClick={() => this.props.toggleStatsShown(this.props.children)}>Stats {this.props.children.statsShown ? '▲' : '▼'}</h5>
-        {this.props.children.statsShown && this.renderStats(this.props.children)}
-        <h5 className="toggle" onClick={() => this.props.toggleSavesShown(this.props.children)}>Saving Throws {this.props.children.savesShown ? '▲' : '▼'}</h5>
+        <h3 className="toggle stat-block-arrow" onClick={() => this.props.toggleStatBlockShown(this.props.children)}>{this.props.children.statBlockShown ? '▲' : '▼'}</h3>
+        <img className="toggle monster-image" src={'/img/monsters/' + this.props.children.name + '.png'} alt={this.props.children.name + ' image'} onClick={() => this.props.toggleStatBlockShown(this.props.children)} />
+        {this.props.children.statBlockShown && <h4 className="toggle" onClick={() => this.props.toggleStatsShown(this.props.children)}>Stats {this.props.children.statsShown ? '▲' : '▼'}</h4>}
+        {this.props.children.statBlockShown && this.props.children.statsShown && this.renderStats(this.props.children)}
+        {this.props.children.statBlockShown && <h4 className="toggle" onClick={() => this.props.toggleSavesShown(this.props.children)}>Saving Throws {this.props.children.savesShown ? '▲' : '▼'}</h4>}
         {this.props.children.savesShown && this.renderSaves(this.props.children)}
-        {(this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && <h5 className="toggle" onClick={() => this.props.toggleResistancesShown(this.props.children)}>Resistances {this.props.children.resistancesShown ? '▲' : '▼'}</h5>}
-        {(this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && this.props.children.resistancesShown && this.renderResistances(this.props.children)}
-        {this.props.children.trait && <h5 className="toggle" onClick={() => this.props.toggleTraitsShown(this.props.children)}>Traits {this.props.children.traitsShown ? '▲' : '▼'}</h5>}
-        {this.props.children.trait && this.props.children.traitsShown && this.renderAbilities(this.props.children.trait)}
-        {this.props.children.action && <h5 className="toggle" onClick={() => this.props.toggleActionsShown(this.props.children)}>Attacks {this.props.children.actionsShown ? '▲' : '▼'}</h5>}
-        {this.props.children.action && this.props.children.actionsShown && this.renderAbilities(this.props.children.action)}
+        {this.props.children.statBlockShown && (this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && <h4 className="toggle" onClick={() => this.props.toggleResistancesShown(this.props.children)}>Resistances {this.props.children.resistancesShown ? '▲' : '▼'}</h4>}
+        {this.props.children.statBlockShown && (this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && this.props.children.resistancesShown && this.renderResistances(this.props.children)}
+        {this.props.children.statBlockShown && this.props.children.trait && <h4 className="toggle" onClick={() => this.props.toggleTraitsShown(this.props.children)}>Traits {this.props.children.traitsShown ? '▲' : '▼'}</h4>}
+        {this.props.children.statBlockShown && this.props.children.trait && this.props.children.traitsShown && this.renderAbilities(this.props.children.trait)}
+        {this.props.children.statBlockShown && this.props.children.action && <h4 className="toggle" onClick={() => this.props.toggleActionsShown(this.props.children)}>Attacks {this.props.children.actionsShown ? '▲' : '▼'}</h4>}
+        {this.props.children.statBlockShown && this.props.children.action && this.props.children.actionsShown && this.renderAbilities(this.props.children.action)}
         {this.props.children.instances.map(key => {
           return this.renderCreature(key, this.props.creatures.get(key));
         })}

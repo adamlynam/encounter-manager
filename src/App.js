@@ -91,7 +91,9 @@ class App extends Component {
     		});
         break;
       case ENTER_KEY:
-        this.addMonster(Array.from(this.state.searchResults)[this.state.searchSelected][0])
+        if (this.state.searchSelected !== undefined) {
+          this.addMonster(Array.from(this.state.searchResults)[this.state.searchSelected][0])
+        }
         break;
     }
   }
@@ -104,10 +106,11 @@ class App extends Component {
         Object.assign(
           previousState.monsters[index],
           {
+            statBlockShown: false,
             statsShown: false,
             resistancesShown: false,
             traitsShown: false,
-            actionsShown: false,
+            actionsShown: true,
             instances: [previousState.nextCreatureKey],
           }
         )
@@ -154,6 +157,12 @@ class App extends Component {
 			return {
         monstersAdded: monstersAdded,
 			};
+    });
+  }
+
+  toggleStatBlockShown = (monster) => {
+    this.toggleMonsterSection(monster, {
+      statBlockShown: !monster.statBlockShown,
     });
   }
 
@@ -326,6 +335,7 @@ class App extends Component {
             key={key}
             creatures={this.state.creatures}
             removeMonster={this.removeMonster}
+            toggleStatBlockShown={this.toggleStatBlockShown}
             toggleStatsShown={this.toggleStatsShown}
             toggleSavesShown={this.toggleSavesShown}
             toggleResistancesShown={this.toggleResistancesShown}
