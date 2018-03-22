@@ -330,6 +330,14 @@ class App extends Component {
           updateSearchText={this.updateSearchText}
           captureKeyDownSearch={this.captureKeyDownSearch}
           addMonster={this.addMonster} />
+        <div className="single-dice">
+          <img className="dice" src="/img/d4.png" alt="d4 dice" onClick={() => this.roller('Straight d4', 1, 4, 0)} />
+          <img className="dice" src="/img/d6.png" alt="d6 dice" onClick={() => this.roller('Straight d6', 1, 6, 0)} />
+          <img className="dice" src="/img/d8.png" alt="d8 dice" onClick={() => this.roller('Straight d8', 1, 8, 0)} />
+          <img className="dice" src="/img/d10.png" alt="d10 dice" onClick={() => this.roller('Straight d10', 1, 10, 0)} />
+          <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
+          <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
+        </div>
         {Array.from(this.state.monstersAdded).reverse().map(([key, monster]) => {
           return <Monster
             key={key}

@@ -43,6 +43,18 @@
   background-color: #8888dd;
 }
 
+.monster-search {
+  float: left;
+}
+
+.single-dice {
+  float: left;
+}
+  .dice {
+    width: 5em;
+    cursor: pointer;
+  }
+
 .monster {
   position: relative;
   float: left;
@@ -51,6 +63,7 @@
   padding: 0.5em;
   background-color: #fdf1dc;
   border: solid 2px #e69a28;
+  clear: both;
   z-index: -2;
 }
   .monster h3 {
