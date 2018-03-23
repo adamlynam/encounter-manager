@@ -113,6 +113,7 @@ class App extends Component {
             traitsShown: true,
             actionsShown: true,
             reactionsShown: true,
+            legendaryActionsShown: false,
             instances: [previousState.nextCreatureKey],
           }
         )
@@ -207,6 +208,12 @@ class App extends Component {
   toggleReactionsShown = (monster) => {
     this.toggleMonsterSection(monster, {
       reactionsShown: !monster.reactionsShown,
+    });
+  }
+
+  toggleLegendaryActionsShown = (monster) => {
+    this.toggleMonsterSection(monster, {
+      legendaryActionsShown: !monster.legendaryActionsShown,
     });
   }
 
@@ -366,6 +373,7 @@ class App extends Component {
               toggleTraitsShown={this.toggleTraitsShown}
               toggleActionsShown={this.toggleActionsShown}
               toggleReactionsShown={this.toggleReactionsShown}
+              toggleLegendaryActionsShown={this.toggleLegendaryActionsShown}
               addCreature={this.addCreature}
               removeCreature={this.removeCreature}
               toggleCreatureHealthEdit={this.toggleCreatureHealthEdit}

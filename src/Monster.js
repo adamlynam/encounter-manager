@@ -36,6 +36,8 @@ class Monster extends Component {
         {this.props.children.statBlockShown && this.props.children.action && this.props.children.actionsShown && this.renderAbilities(this.props.children.action)}
         {this.props.children.statBlockShown && this.props.children.reaction && <h4 className="toggle" onClick={() => this.props.toggleReactionsShown(this.props.children)}>Reactions {this.props.children.reactionsShown ? '▲' : '▼'}</h4>}
         {this.props.children.statBlockShown && this.props.children.reaction && this.props.children.reactionsShown && this.renderAbilities(this.props.children.reaction)}
+        {this.props.children.statBlockShown && this.props.children.legendary && <h4 className="toggle" onClick={() => this.props.toggleLegendaryActionsShown(this.props.children)}>Legendary Actions {this.props.children.legendaryActionsShown ? '▲' : '▼'}</h4>}
+        {this.props.children.statBlockShown && this.props.children.legendary && this.props.children.legendaryActionsShown && this.renderAbilities(this.props.children.legendary)}
         {this.props.children.instances.map(key => {
           return this.renderCreature(key, this.props.creatures.get(key));
         })}
