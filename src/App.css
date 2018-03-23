@@ -55,6 +55,9 @@
     cursor: pointer;
   }
 
+.monsters {
+  clear: both;
+}
 .monster {
   position: relative;
   float: left;
@@ -63,7 +66,6 @@
   padding: 0.5em;
   background-color: #fdf1dc;
   border: solid 2px #e69a28;
-  clear: both;
   z-index: -2;
 }
   .monster h3 {
@@ -123,6 +125,29 @@
       background-size: contain;
       background-repeat: no-repeat;
     }
+  .monster-size {
+    position: absolute;
+    top: 3.5em;
+    left: 0.5em;
+  }
+  .monster-size.tiny {
+    width: 0.5em;
+  }
+  .monster-size.small {
+    width: 1em;
+  }
+  .monster-size.medium {
+    width: 1em;
+  }
+  .monster-size.large {
+    width: 2em;
+  }
+  .monster-size.huge {
+    width: 3em;
+  }
+  .monster-size.gargantuan {
+    width: 4em;
+  }
   .stat-block-arrow {
     position: absolute;
     top: 8em;
@@ -131,6 +156,7 @@
   .monster-image {
     display: block;
     width: 50%;
+    margin: auto;
   }
   .toggle {
     cursor: pointer;

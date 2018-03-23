@@ -29,6 +29,31 @@ export function parseMonsterAc(monster) {
   return parseInt(monster.ac.match(longestNumberRegex));
 }
 
+export function parseMonsterSize(monster) {
+  switch (monster.size) {
+    case 'T':
+      return 'tiny';
+      break;
+    case 'S':
+      return 'small';
+      break;
+    case 'M':
+      return 'medium';
+      break;
+    case 'L':
+      return 'large';
+      break;
+    case 'H':
+      return 'huge';
+      break;
+    case 'G':
+      return 'gargantuan';
+      break;
+    default:
+      return 'meduim';
+  }
+}
+
 export function parseMonsterHealth(monster) {
   var exp = new RegExp('([0-9]*).*');
   return parseInt(monster.hp.match(exp)[1]);
@@ -62,6 +87,7 @@ export function generateMonsterDescription(monster) {
 export default {
   calculateModifier,
   parseMonsterAc,
+  parseMonsterSize,
   parseMonsterHealth,
   parseMonsterSaves,
   parseMonsterSpeeds,

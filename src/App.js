@@ -338,26 +338,28 @@ class App extends Component {
           <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
           <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
         </div>
-        {Array.from(this.state.monstersAdded).reverse().map(([key, monster]) => {
-          return <Monster
-            key={key}
-            creatures={this.state.creatures}
-            removeMonster={this.removeMonster}
-            toggleStatBlockShown={this.toggleStatBlockShown}
-            toggleStatsShown={this.toggleStatsShown}
-            toggleSavesShown={this.toggleSavesShown}
-            toggleResistancesShown={this.toggleResistancesShown}
-            toggleTraitsShown={this.toggleTraitsShown}
-            toggleActionsShown={this.toggleActionsShown}
-            addCreature={this.addCreature}
-            removeCreature={this.removeCreature}
-            toggleCreatureHealthEdit={this.toggleCreatureHealthEdit}
-            updateCreatureHealthText={this.updateCreatureHealthText}
-            setCreatureHealth={this.setCreatureHealth}
-            roller={this.roller}>
-              {monster}
-          </Monster>
-        })}
+        <div className="monsters">
+          {Array.from(this.state.monstersAdded).reverse().map(([key, monster]) => {
+            return <Monster
+              key={key}
+              creatures={this.state.creatures}
+              removeMonster={this.removeMonster}
+              toggleStatBlockShown={this.toggleStatBlockShown}
+              toggleStatsShown={this.toggleStatsShown}
+              toggleSavesShown={this.toggleSavesShown}
+              toggleResistancesShown={this.toggleResistancesShown}
+              toggleTraitsShown={this.toggleTraitsShown}
+              toggleActionsShown={this.toggleActionsShown}
+              addCreature={this.addCreature}
+              removeCreature={this.removeCreature}
+              toggleCreatureHealthEdit={this.toggleCreatureHealthEdit}
+              updateCreatureHealthText={this.updateCreatureHealthText}
+              setCreatureHealth={this.setCreatureHealth}
+              roller={this.roller}>
+                {monster}
+            </Monster>
+          })}
+        </div>
         <Rolls>{this.state.rolls}</Rolls>
       </div>
     );

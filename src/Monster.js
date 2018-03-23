@@ -19,6 +19,7 @@ class Monster extends Component {
           {monsterSpeeds.flySpeed && <div className="fly-speed">{monsterSpeeds.flySpeed}</div>}
           {monsterSpeeds.swimSpeed && <div className="swim-speed">{monsterSpeeds.swimSpeed}</div>}
         </div>
+        <img className={'monster-size ' + MonsterTools.parseMonsterSize(this.props.children)} src={'/img/' + MonsterTools.parseMonsterSize(this.props.children) + '.png'} alt={'Monster Size'} />
         <h3 className="toggle stat-block-arrow" onClick={() => this.props.toggleStatBlockShown(this.props.children)}>{this.props.children.statBlockShown ? '▲' : '▼'}</h3>
         <img className="toggle monster-image" src={'/img/monsters/' + this.props.children.name + '.png'} alt={this.props.children.name + ' image'} onClick={() => this.props.toggleStatBlockShown(this.props.children)} />
         {this.props.children.statBlockShown && <h4 className="toggle" onClick={() => this.props.toggleStatsShown(this.props.children)}>Stats {this.props.children.statsShown ? '▲' : '▼'}</h4>}
