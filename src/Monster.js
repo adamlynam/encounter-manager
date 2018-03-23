@@ -26,6 +26,8 @@ class Monster extends Component {
         {this.props.children.statBlockShown && this.props.children.statsShown && this.renderStats(this.props.children)}
         {this.props.children.statBlockShown && <h4 className="toggle" onClick={() => this.props.toggleSavesShown(this.props.children)}>Saving Throws {this.props.children.savesShown ? '▲' : '▼'}</h4>}
         {this.props.children.savesShown && this.renderSaves(this.props.children)}
+        {this.props.children.statBlockShown && <h4 className="toggle" onClick={() => this.props.toggleLanguagesShown(this.props.children)}>Languages {this.props.children.languagesShown ? '▲' : '▼'}</h4>}
+        {this.props.children.languagesShown && this.renderLanguages(this.props.children)}
         {this.props.children.statBlockShown && (this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && <h4 className="toggle" onClick={() => this.props.toggleResistancesShown(this.props.children)}>Resistances {this.props.children.resistancesShown ? '▲' : '▼'}</h4>}
         {this.props.children.statBlockShown && (this.props.children.resist || this.props.children.immune || this.props.children.conditionImmune) && this.props.children.resistancesShown && this.renderResistances(this.props.children)}
         {this.props.children.statBlockShown && this.props.children.trait && <h4 className="toggle" onClick={() => this.props.toggleTraitsShown(this.props.children)}>Traits {this.props.children.traitsShown ? '▲' : '▼'}</h4>}
@@ -96,6 +98,10 @@ class Monster extends Component {
         saves.cha ? saves.cha : MonsterTools.calculateModifier(monster.cha),
         saves.cha ? true : false)}
     </div>
+  }
+
+  renderLanguages = (monster) => {
+    return <div className="languages ability">{monster.languages}</div>
   }
 
   renderResistances = (monster) => {

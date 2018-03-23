@@ -108,6 +108,7 @@ class App extends Component {
           {
             statBlockShown: false,
             statsShown: false,
+            languagesShown: false,
             resistancesShown: false,
             traitsShown: false,
             actionsShown: true,
@@ -175,6 +176,12 @@ class App extends Component {
   toggleSavesShown = (monster) => {
     this.toggleMonsterSection(monster, {
       savesShown: !monster.savesShown,
+    });
+  }
+
+  toggleLanguagesShown = (monster) => {
+    this.toggleMonsterSection(monster, {
+      languagesShown: !monster.languagesShown,
     });
   }
 
@@ -347,6 +354,7 @@ class App extends Component {
               toggleStatBlockShown={this.toggleStatBlockShown}
               toggleStatsShown={this.toggleStatsShown}
               toggleSavesShown={this.toggleSavesShown}
+              toggleLanguagesShown={this.toggleLanguagesShown}
               toggleResistancesShown={this.toggleResistancesShown}
               toggleTraitsShown={this.toggleTraitsShown}
               toggleActionsShown={this.toggleActionsShown}
