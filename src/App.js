@@ -294,7 +294,7 @@ class App extends Component {
     var longestNumberResults = longestNumberRegex.exec(newHealth);
     if (longestNumberResults) {
       var longestNumber = parseInt(longestNumberResults[0]);
-      if (longestNumber) {
+      if (!isNaN(longestNumber)) {
         if (newHealth.includes && newHealth.includes('+')) {
           newProperties.health = this.state.creatures.get(key).health + longestNumber;
         }
