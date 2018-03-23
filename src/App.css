@@ -61,15 +61,19 @@
 .monster {
   position: relative;
   float: left;
-  width: 14em;
+  width: 12em;
   margin: 0.1em;
   padding: 0.5em;
   background-color: #fdf1dc;
   border: solid 2px #e69a28;
   z-index: -2;
 }
+  .monster hr {
+    border: solid 1px #e69a28;
+  }
   .monster h3 {
     margin: 0 0 1em 0;
+    font-size: 0.95em;
   }
   .monster h4 {
     margin: 0.5em 0;
@@ -150,7 +154,7 @@
   }
   .stat-block-arrow {
     position: absolute;
-    top: 8em;
+    top: 7em;
     left: 0.5em;
   }
   .monster-image {
