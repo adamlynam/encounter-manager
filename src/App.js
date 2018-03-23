@@ -110,8 +110,9 @@ class App extends Component {
             statsShown: false,
             languagesShown: false,
             resistancesShown: false,
-            traitsShown: false,
+            traitsShown: true,
             actionsShown: true,
+            reactionsShown: true,
             instances: [previousState.nextCreatureKey],
           }
         )
@@ -200,6 +201,12 @@ class App extends Component {
   toggleActionsShown = (monster) => {
     this.toggleMonsterSection(monster, {
       actionsShown: !monster.actionsShown,
+    });
+  }
+
+  toggleReactionsShown = (monster) => {
+    this.toggleMonsterSection(monster, {
+      reactionsShown: !monster.reactionsShown,
     });
   }
 
@@ -358,6 +365,7 @@ class App extends Component {
               toggleResistancesShown={this.toggleResistancesShown}
               toggleTraitsShown={this.toggleTraitsShown}
               toggleActionsShown={this.toggleActionsShown}
+              toggleReactionsShown={this.toggleReactionsShown}
               addCreature={this.addCreature}
               removeCreature={this.removeCreature}
               toggleCreatureHealthEdit={this.toggleCreatureHealthEdit}
