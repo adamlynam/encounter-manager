@@ -43,6 +43,15 @@
   background-color: #8888dd;
 }
 
+.critical-success {
+  color: #00ff00;
+  font-weight: bold;
+}
+.critical-fail {
+  color: #ff0000;
+  font-weight: bold;
+}
+
 .monster-search {
   float: left;
 }
