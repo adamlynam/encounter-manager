@@ -1,20 +1,3 @@
-.monster-name-results {
-  position: fixed;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  z-index: 1;
-}
-  .monster-name {
-    padding: 0.5em;
-    border: 1px solid #aaaaaa;
-    background-color: #dddddd;
-  }
-    .monster-name:hover, .monster-name.selected {
-      background-color: #bbbbbb;
-      cursor: pointer;
-    }
-
 .remove-button {
   padding: 0.5em;
   border: 1px solid #aa0000;
@@ -43,6 +26,14 @@
   background-color: #8888dd;
 }
 
+.single-dice {
+  float: left;
+}
+.dice {
+  width: 5em;
+  cursor: pointer;
+}
+
 .critical-success {
   color: #00ff00;
   font-weight: bold;
@@ -55,17 +46,87 @@
 .monster-search {
   float: left;
 }
-
-.single-dice {
-  float: left;
-}
-  .dice {
-    width: 5em;
-    cursor: pointer;
+  .monster-search .monster-name-results {
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 1;
   }
+    .monster-search .monster-name {
+      padding: 0.5em;
+      border: 1px solid #aaaaaa;
+      background-color: #dddddd;
+    }
+    .monster-search .monster-name:nth-child(2n) {
+      background-color: #eeeeee;
+    }
+      .monster-search .monster-name:hover, .monster-search .monster-name.selected {
+        background-color: #bbbbbb;
+        cursor: pointer;
+      }
+
+.initative-tracker {
+  float: right;
+  width: 12em;
+  margin-right: 12em;
+  padding: 1em;
+  font-size: 1em;
+}
+  .initative-tracker h3 {
+    margin: 0 0 1em 0;
+  }
+  .initative-tracker .initative-row {
+    padding: 0.5em;
+    background-color: #dddddd;
+  }
+  .initative-tracker .initative-row:nth-child(2n) {
+    background-color: #eeeeee;
+  }
+  .initative-tracker .initative-row::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+    .initative-tracker .monster-name {
+      float: left;
+      width: 8em;
+    }
+    .initative-tracker .monster-initative {
+      float: right;
+      width: 3em;
+      text-align: right;
+      font-weight: bold;
+    }
+
+.dice-rolls {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 0.5em;
+  z-index: 1;
+  background-color: #ffffff;
+}
+  .dice-rolls .dice-roll {
+    width: 10em;
+    padding: 0.5em;
+    background-color: #dddddd;
+    border: 1px solid;
+    overflow-wrap: break-word;
+  }
+  .dice-rolls .dice-roll:nth-child(2n) {
+    background-color: #eeeeee;
+  }
+    .dice-rolls .dice-roll .roll-name {
+      display: block;
+    }
+    .dice-rolls .dice-roll .roll-total {
+      font-weight: bold;
+      font-size: 1.5em;
+    }
 
 .monsters {
-  clear: both;
+  clear: left;
 }
 .monster {
   position: relative;
@@ -268,26 +329,4 @@
     .add-creature:hover {
       background-color: #bbeebb;
       cursor: pointer;
-    }
-
-.dice-rolls {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: 0.5em;
-  z-index: 1;
-  background-color: #ffffff;
-}
-  .dice-rolls .dice-roll {
-    width: 10em;
-    padding: 0.5em;
-    border: 1px solid;
-    overflow-wrap: break-word;
-  }
-    .dice-rolls .dice-roll .roll-name {
-      display: block;
-    }
-    .dice-rolls .dice-roll .roll-total {
-      font-weight: bold;
-      font-size: 1.5em;
     }

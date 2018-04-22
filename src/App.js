@@ -3,6 +3,7 @@ import './App.css';
 import MonsterTools from './MonsterTools';
 import Monster from './Monster';
 import MonsterSearch from './MonsterSearch';
+import InitativeTracker from './InitativeTracker';
 import Rolls from './Rolls';
 
 import cos from './data/bestiary/bestiary-cos.json';
@@ -106,6 +107,7 @@ class App extends Component {
         Object.assign(
           previousState.monsters[index],
           {
+            initative: this.rollInitative(previousState.monsters[index]),
             statBlockShown: false,
             statsShown: false,
             languagesShown: false,
@@ -338,6 +340,15 @@ class App extends Component {
     }
     var total = rolls.reduce((a, b) => a + b, 0) + (modifier ? modifier : 0);
     this.saveRoll(name, total, rolls, (modifier ? modifier : 0));
+    return total;
+  }
+
+  rollInitative = (monster) => {
+    return this.roller(
+      monster.name + ' Initative',
+      1,
+      20,
+      MonsterTools.calculateModifier(monster.dex));
   }
 
   render = () => {
@@ -359,6 +370,7 @@ class App extends Component {
           <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
           <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
         </div>
+        <InitativeTracker monsters={this.state.monstersAdded} />
         <div className="monsters">
           {Array.from(this.state.monstersAdded).reverse().map(([key, monster]) => {
             return <Monster
