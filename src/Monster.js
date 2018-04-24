@@ -10,7 +10,7 @@ class Monster extends Component {
     return (
       <div className="monster">
         <h3>{this.props.children.name}</h3>
-        <div className="remove-monster remove-button" onClick={() => this.props.removeMonster(this.props.children)}>-</div>
+        <button type="button" class="remove-monster btn btn-danger btn-sm" onClick={() => this.props.removeMonster(this.props.children)}>-</button>
         <div className="monster-ac">{MonsterTools.parseMonsterAc(this.props.children)}</div>
         <div className="monster-speed">
           {monsterSpeeds.groundSpeed && <div className="ground-speed">{monsterSpeeds.groundSpeed}</div>}
@@ -44,7 +44,7 @@ class Monster extends Component {
         {this.props.children.instances.map(key => {
           return this.renderCreature(key, this.props.creatures.get(key));
         })}
-        <div className="add-creature" onClick={() => this.props.addCreature(this.props.children)}>+</div>
+        <button type="button" class="btn btn-primary btn-sm btn-block" onClick={() => this.props.addCreature(this.props.children)}>Add Creature</button>
       </div>
     );
   }
@@ -156,7 +156,7 @@ class Monster extends Component {
 
   renderCreature = (key, creature) => {
     return <div key={key} className="creature-details">
-      <span className="identifier">{this.props.creatures.get(key).uniqueDescription}</span>
+      <div className="identifier alert alert-info">{this.props.creatures.get(key).uniqueDescription}</div>
       <span className="health">
         <span className="health-remaining" style={this.healthRemainingCss(this.props.children, creature)} />
         {!creature.editingHealth && <span onClick={() => this.props.toggleCreatureHealthEdit(key)}>{creature.health}</span>}
@@ -173,7 +173,7 @@ class Monster extends Component {
             }}}
           onBlur={() => this.props.toggleCreatureHealthEdit(key)} />}
       </span>
-      <span className="remove-creature remove-button" onClick={() => this.props.removeCreature(this.props.children, key)}>-</span>
+      <button type="button" class="remove-creature btn btn-danger btn-sm" onClick={() => this.props.removeCreature(this.props.children, key)}>-</button>
     </div>;
   }
 
