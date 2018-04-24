@@ -122,6 +122,7 @@
 .dice-rolls {
   float: right;
   height: 100vh;
+  background-color: #eeeeee;
   overflow-y: scroll;
 }
   .dice-rolls .dice-roll {

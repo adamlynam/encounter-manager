@@ -364,6 +364,11 @@ class App extends Component {
   render = () => {
     return (
       <div>
+        {this.state.showRolls ? <Rolls>{this.state.rolls}</Rolls> : <div className="dice-rolls"></div>}
+        <div className="dice-roll-toggle" onClick={() => this.toggleRollsShown()}>
+          <div className="arrow">{this.state.showRolls ? '▶' : '◀'}</div>
+        </div>
+        <InitativeTracker monsters={this.state.monstersAdded} />
         <MonsterSearch
           monsters={this.state.monsters}
           searchText={this.state.searchText}
@@ -380,11 +385,6 @@ class App extends Component {
           <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
           <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
         </div>
-        {this.state.showRolls ? <Rolls>{this.state.rolls}</Rolls> : <div className="dice-rolls"></div>}
-        <div className="dice-roll-toggle" onClick={() => this.toggleRollsShown()}>
-          <div className="arrow">{this.state.showRolls ? '▶' : '◀'}</div>
-        </div>
-        <InitativeTracker monsters={this.state.monstersAdded} />
         <div className="monsters">
           {Array.from(this.state.monstersAdded).reverse().map(([key, monster]) => {
             return <Monster
