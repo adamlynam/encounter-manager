@@ -69,12 +69,8 @@
 .initative-tracker {
   float: right;
   width: 12em;
-  padding: 1em;
-  font-size: 1em;
+  padding: 0.5em;
 }
-  .initative-tracker h3 {
-    margin: 0 0 1em 0;
-  }
   .initative-tracker .initative-row {
     padding: 0.5em;
     background-color: #dddddd;
@@ -89,7 +85,7 @@
   }
     .initative-tracker .monster-name {
       float: left;
-      width: 8em;
+      width: 7em;
     }
     .initative-tracker .monster-initative {
       float: right;
@@ -164,6 +160,7 @@
   }
   .monster h4 {
     margin: 0.5em 0;
+    font-size: 0.95em;
   }
   .remove-monster {
     position: absolute;
@@ -246,7 +243,7 @@
   }
   .monster-image {
     display: block;
-    width: 50%;
+    width: 45%;
     margin: auto;
   }
   .toggle {
@@ -291,7 +288,7 @@
         text-align: right;
       }
   .ability {
-    padding: 0.5em 1em;
+    padding: 0.5em;
     font-size: 0.9em;
   }
     .ability .ability-name {
@@ -338,7 +335,7 @@
     margin-left: 0.5em;
   }
   .add-creature {
-    width: 1em;
+    width: 2em;
     padding: 0.5em;
     border: 1px solid #00aa00;
     background-color: #99ee99;
