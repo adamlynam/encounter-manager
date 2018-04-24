@@ -69,7 +69,6 @@
 .initative-tracker {
   float: right;
   width: 12em;
-  margin-right: 12em;
   padding: 1em;
   font-size: 1em;
 }
@@ -99,19 +98,36 @@
       font-weight: bold;
     }
 
+.dice-roll-toggle {
+  position: relative;
+  float: right;
+  height: 100vh;
+  width: 1em;
+  padding: 0 0.2em;
+  background-color: #eeeeee;
+}
+.dice-roll-toggle:hover {
+  background-color: #bbbbbb;
+  cursor: pointer;
+}
+  .dice-roll-toggle .arrow {
+    position: absolute;
+    top: 50%;
+  }
+  .dice-roll-toggle .arrow::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
 .dice-rolls {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: 0.5em;
-  z-index: 1;
-  background-color: #ffffff;
+  float: right;
+  height: 100vh;
+  overflow-y: scroll;
 }
   .dice-rolls .dice-roll {
-    width: 10em;
+    width: 12em;
     padding: 0.5em;
     background-color: #dddddd;
-    border: 1px solid;
     overflow-wrap: break-word;
   }
   .dice-rolls .dice-roll:nth-child(2n) {

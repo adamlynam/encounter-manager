@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 class Rolls extends Component {
+
+  componentDidUpdate() {
+    var elem = ReactDOM.findDOMNode(this);
+    elem.scrollTop = elem.scrollHeight;
+  }
 
   render() {
     return <div className="dice-rolls">

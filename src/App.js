@@ -55,6 +55,7 @@ class App extends Component {
   		monstersAdded: new Map(),
       creatures: new Map(),
       nextCreatureKey: 1,
+      showRolls: false,
       rolls: [],
   	};
   }
@@ -97,6 +98,14 @@ class App extends Component {
         }
         break;
     }
+  }
+
+  toggleRollsShown = () => {
+    this.setState((previousState, currentProps) => {
+			return {
+        showRolls: !previousState.showRolls,
+			};
+    });
   }
 
   addMonster = (index) => {
@@ -320,6 +329,7 @@ class App extends Component {
   saveRoll = (name, total, rolls, modifier) => {
     this.setState((previousState, currentProps) => {
 			return {
+        showRolls: true,
 				rolls: [
           ...previousState.rolls,
           {
@@ -370,6 +380,10 @@ class App extends Component {
           <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
           <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
         </div>
+        {this.state.showRolls ? <Rolls>{this.state.rolls}</Rolls> : <div className="dice-rolls"></div>}
+        <div className="dice-roll-toggle" onClick={() => this.toggleRollsShown()}>
+          <div className="arrow">{this.state.showRolls ? '▶' : '◀'}</div>
+        </div>
         <InitativeTracker monsters={this.state.monstersAdded} />
         <div className="monsters">
           {Array.from(this.state.monstersAdded).reverse().map(([key, monster]) => {
@@ -396,7 +410,6 @@ class App extends Component {
             </Monster>
           })}
         </div>
-        <Rolls>{this.state.rolls}</Rolls>
       </div>
     );
   }
