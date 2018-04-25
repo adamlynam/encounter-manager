@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import MonsterTools from './MonsterTools';
-import Monster from './Monster';
+import Monsters from './Monsters';
 import MonsterSearch from './MonsterSearch';
 import InitativeTracker from './InitativeTracker';
 import Rolls from './Rolls';
@@ -53,10 +53,12 @@ class App extends Component {
       searchSelected: undefined,
       searchResults: new Map(),
   		monstersAdded: new Map(),
+      nextMonsterKey: 1,
       creatures: new Map(),
       nextCreatureKey: 1,
       showRolls: false,
       rolls: [],
+      currentInitative: undefined,
   	};
   }
 
@@ -112,10 +114,10 @@ class App extends Component {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
       monstersAdded.set(
-        previousState.monsters[index].name,
-        Object.assign(
-          previousState.monsters[index],
+        previousState.nextMonsterKey,
+        Object.assign({}, Object.assign(previousState.monsters[index],
           {
+            key: previousState.nextMonsterKey,
             initative: this.rollInitative(previousState.monsters[index]),
             statBlockShown: false,
             statsShown: false,
@@ -127,13 +129,14 @@ class App extends Component {
             legendaryActionsShown: false,
             instances: [previousState.nextCreatureKey],
           }
-        )
+        ))
       );
 			return {
         searchText: '',
         searchSelected: undefined,
         searchResults: [],
         monstersAdded: monstersAdded,
+        nextMonsterKey: previousState.nextMonsterKey + 1,
 				creatures: this.addToCreatureList(
           previousState.creatures,
           previousState.monsters[index],
@@ -143,12 +146,12 @@ class App extends Component {
     });
   }
 
-  removeMonster = (monster) => {
+  removeMonster = (monsterKey) => {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.delete(monster.name);
+      monstersAdded.delete(monsterKey);
       var creatures = new Map(previousState.creatures);
-      monster.instances.forEach(instance => {
+      previousState.monstersAdded.get(monsterKey).instances.forEach(instance => {
         creatures.delete(instance);
       });
 			return {
@@ -162,15 +165,41 @@ class App extends Component {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
       monstersAdded.set(
-        monster.name,
-        Object.assign(
+        monster.key,
+        Object.assign({}, Object.assign(
           monster,
           newProperties
-        )
+        ))
       );
 			return {
         monstersAdded: monstersAdded,
 			};
+    });
+  }
+
+  closeAllStatBlocks = () => {
+    this.setState((previousState, currentProps) => {
+      var monstersAdded = new Map();
+      previousState.monstersAdded.forEach((value, key, map) => {
+        monstersAdded.set(
+          key,
+          Object.assign({}, Object.assign(
+            value,
+            {
+              statBlockShown: false,
+            }
+          ))
+        );
+      });
+			return {
+        monstersAdded: monstersAdded,
+			};
+    });
+  }
+
+  showStatBlock = (monster) => {
+    this.toggleMonsterSection(monster, {
+      statBlockShown: true,
     });
   }
 
@@ -210,6 +239,12 @@ class App extends Component {
     });
   }
 
+  showActions = (monster) => {
+    this.toggleMonsterSection(monster, {
+      actionsShown: true,
+    });
+  }
+
   toggleActionsShown = (monster) => {
     this.toggleMonsterSection(monster, {
       actionsShown: !monster.actionsShown,
@@ -242,9 +277,9 @@ class App extends Component {
   addCreature = (monster) => {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(monster.name, Object.assign(previousState.monstersAdded.get(monster.name), {
+      monstersAdded.set(monster.key, Object.assign(previousState.monstersAdded.get(monster.key), {
         instances: [
-          ...previousState.monstersAdded.get(monster.name).instances,
+          ...previousState.monstersAdded.get(monster.key).instances,
           previousState.nextCreatureKey],
       }));
 			return {
@@ -261,9 +296,12 @@ class App extends Component {
   removeCreature = (monster, key) => {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
-      monstersAdded.set(monster.name, Object.assign(previousState.monstersAdded.get(monster.name), {
-        instances: previousState.monstersAdded.get(monster.name).instances.filter(item => item !== key),
-      }));
+      monstersAdded.set(monster.key, Object.assign({},
+        Object.assign(previousState.monstersAdded.get(monster.key),
+        {
+          instances: previousState.monstersAdded.get(monster.key).instances.filter(item => item !== key),
+        }
+      )));
       var creatures = new Map(previousState.creatures);
       creatures.delete(key);
 			return {
@@ -276,10 +314,13 @@ class App extends Component {
   toggleCreatureHealthEdit = (key) => {
     this.setState((previousState, currentProps) => {
       var creatures = new Map(previousState.creatures);
-      creatures.set(key, Object.assign(creatures.get(key), {
-        editingHealth: !creatures.get(key).editingHealth,
-        editHealthValue: creatures.get(key).health,
-      }));
+      creatures.set(key, Object.assign({},
+        Object.assign(creatures.get(key),
+        {
+          editingHealth: !creatures.get(key).editingHealth,
+          editHealthValue: creatures.get(key).health,
+        }
+      )));
 			return {
 				creatures: creatures,
 			};
@@ -289,9 +330,12 @@ class App extends Component {
   updateCreatureHealthText = (key, text) => {
     this.setState((previousState, currentProps) => {
       var creatures = new Map(previousState.creatures);
-      creatures.set(key, Object.assign(creatures.get(key), {
-        editHealthValue: text,
-      }));
+      creatures.set(key, Object.assign({},
+        Object.assign(creatures.get(key),
+        {
+          editHealthValue: text,
+        }
+      )));
 			return {
 				creatures: creatures,
 			};
@@ -319,7 +363,10 @@ class App extends Component {
     }
     this.setState((previousState, currentProps) => {
       var creatures = new Map(previousState.creatures);
-      creatures.set(key, Object.assign(creatures.get(key), newProperties));
+      creatures.set(key, Object.assign({},
+        Object.assign(creatures.get(key),
+        newProperties
+      )));
       return {
         creatures: creatures,
       };
@@ -339,6 +386,39 @@ class App extends Component {
             modifier: modifier,
           }
         ],
+			};
+    });
+  }
+
+  getNextKeyInInitative = () => {
+    var initativeOrder = Array.from(this.state.monstersAdded)
+      .sort((a,b) => {
+        return b[1].initative - a[1].initative;
+      })
+      .map(([key, monster]) => {
+        return key;
+      });
+    if (initativeOrder.length > 0) {
+      if (this.state.currentInitative && initativeOrder.indexOf(this.state.currentInitative) + 1 < initativeOrder.length) {
+        return initativeOrder[initativeOrder.indexOf(this.state.currentInitative) + 1];
+      }
+      return initativeOrder[0];
+    }
+    else {
+      return undefined;
+    }
+  }
+
+  advanceInitative = () => {
+    this.closeAllStatBlocks();
+    var nextKey = this.getNextKeyInInitative();
+    if (nextKey !== undefined) {
+      this.showStatBlock(this.state.monstersAdded.get(nextKey));
+      this.showActions(this.state.monstersAdded.get(nextKey));
+    }
+    this.setState((previousState, currentProps) => {
+			return {
+        currentInitative: nextKey,
 			};
     });
   }
@@ -368,7 +448,10 @@ class App extends Component {
         <div className="dice-roll-toggle" onClick={() => this.toggleRollsShown()}>
           <div className="arrow">{this.state.showRolls ? '▶' : '◀'}</div>
         </div>
-        <InitativeTracker monsters={this.state.monstersAdded} />
+        <InitativeTracker
+          monsters={this.state.monstersAdded}
+          currentInitative={this.state.currentInitative}
+          advanceInitative={this.advanceInitative} />
         <MonsterSearch
           monsters={this.state.monsters}
           searchText={this.state.searchText}
@@ -385,31 +468,26 @@ class App extends Component {
           <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
           <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
         </div>
-        <div className="monsters">
-          {Array.from(this.state.monstersAdded).reverse().map(([key, monster]) => {
-            return <Monster
-              key={key}
-              creatures={this.state.creatures}
-              removeMonster={this.removeMonster}
-              toggleStatBlockShown={this.toggleStatBlockShown}
-              toggleStatsShown={this.toggleStatsShown}
-              toggleSavesShown={this.toggleSavesShown}
-              toggleLanguagesShown={this.toggleLanguagesShown}
-              toggleResistancesShown={this.toggleResistancesShown}
-              toggleTraitsShown={this.toggleTraitsShown}
-              toggleActionsShown={this.toggleActionsShown}
-              toggleReactionsShown={this.toggleReactionsShown}
-              toggleLegendaryActionsShown={this.toggleLegendaryActionsShown}
-              addCreature={this.addCreature}
-              removeCreature={this.removeCreature}
-              toggleCreatureHealthEdit={this.toggleCreatureHealthEdit}
-              updateCreatureHealthText={this.updateCreatureHealthText}
-              setCreatureHealth={this.setCreatureHealth}
-              roller={this.roller}>
-                {monster}
-            </Monster>
-          })}
-        </div>
+        <Monsters
+          monstersAdded={this.state.monstersAdded}
+          creatures={this.state.creatures}
+          removeMonster={this.removeMonster}
+          toggleStatBlockShown={this.toggleStatBlockShown}
+          toggleStatsShown={this.toggleStatsShown}
+          toggleSavesShown={this.toggleSavesShown}
+          toggleLanguagesShown={this.toggleLanguagesShown}
+          toggleResistancesShown={this.toggleResistancesShown}
+          toggleTraitsShown={this.toggleTraitsShown}
+          toggleActionsShown={this.toggleActionsShown}
+          toggleReactionsShown={this.toggleReactionsShown}
+          toggleLegendaryActionsShown={this.toggleLegendaryActionsShown}
+          addCreature={this.addCreature}
+          removeCreature={this.removeCreature}
+          toggleCreatureHealthEdit={this.toggleCreatureHealthEdit}
+          updateCreatureHealthText={this.updateCreatureHealthText}
+          setCreatureHealth={this.setCreatureHealth}
+          roller={this.roller}
+          currentInitative={this.state.currentInitative} />
       </div>
     );
   }

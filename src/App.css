@@ -135,6 +135,9 @@
   .initative-tracker .initative-row:nth-child(2n) {
     background-color: #eeeeee;
   }
+  .initative-tracker .initative-row.current {
+    background-color: #ddffdd;
+  }
   .initative-tracker .initative-row::after {
     content: '';
     display: block;
@@ -208,6 +211,9 @@
   .monster .card-header {
     position: relative;
     padding: 0.5rem;
+  }
+  .monster.current .card-header {
+    background-color: #ddffdd;
   }
   .monster hr {
     border: solid 1px #e69a28;

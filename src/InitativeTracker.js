@@ -10,8 +10,9 @@ class InitativeTracker extends Component {
         return b[1].initative - a[1].initative;
       })
       .map(([key, monster]) => {
-        return <div key={key} className="initative-row"><span className="monster-name">{monster.name}</span><span className="monster-initative">{monster.initative}</span></div>
+        return <div key={key} className={'initative-row' + (key === this.props.currentInitative ? ' current' : '')}><span className="monster-name">{monster.name}</span><span className="monster-initative">{monster.initative}</span></div>
       })}
+      <button type="button" className="btn btn-primary" onClick={() => this.props.advanceInitative()}>Next</button>
     </div>;
   }
 }
