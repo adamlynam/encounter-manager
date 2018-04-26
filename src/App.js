@@ -50,7 +50,7 @@ class App extends Component {
         ...xge.monster,
       ],
       searchText: '',
-      searchSelected: undefined,
+      searchSelected: null,
       searchResults: new Map(),
   		monstersAdded: new Map(),
       nextMonsterKey: 1,
@@ -58,8 +58,38 @@ class App extends Component {
       nextCreatureKey: 1,
       showRolls: false,
       rolls: [],
-      currentInitative: undefined,
+      currentInitative: null,
   	};
+  }
+
+  mapToJson(map) {
+    return JSON.stringify([...map]);
+  }
+
+  jsonToMap(jsonStr) {
+      return new Map(JSON.parse(jsonStr));
+  }
+
+  componentDidMount() {
+    this.setState({
+      monstersAdded: this.jsonToMap(localStorage.getItem('monstersAdded')),
+      nextMonsterKey: JSON.parse(localStorage.getItem('nextMonsterKey')),
+      creatures: this.jsonToMap(localStorage.getItem('creatures')),
+      nextCreatureKey: JSON.parse(localStorage.getItem('nextCreatureKey')),
+      showRolls: JSON.parse(localStorage.getItem('showRolls')),
+      rolls: JSON.parse(localStorage.getItem('rolls')),
+      currentInitative: JSON.parse(localStorage.getItem('currentInitative')),
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    localStorage.monstersAdded = this.mapToJson(this.state.monstersAdded);
+    localStorage.nextMonsterKey = JSON.stringify(this.state.nextMonsterKey);
+    localStorage.creatures = this.mapToJson(this.state.creatures);
+    localStorage.nextCreatureKey = JSON.stringify(this.state.nextCreatureKey);
+    localStorage.showRolls = JSON.stringify(this.state.showRolls);
+    localStorage.rolls = JSON.stringify(this.state.rolls);
+    localStorage.currentInitative = JSON.stringify(this.state.currentInitative);
   }
 
   updateSearchText = (event) => {
@@ -73,7 +103,7 @@ class App extends Component {
     }
     this.setState({
       searchText: event.target.value,
-      searchSelected: undefined,
+      searchSelected: null,
       searchResults: searchResults,
 		});
   }
@@ -83,19 +113,19 @@ class App extends Component {
       case ARROW_KEY_UP:
         this.setState((previousState, currentProps) => {
           return {
-            searchSelected: previousState.searchSelected !== undefined ? Math.max(previousState.searchSelected - 1, 0) : previousState.searchResults.size - 1,
+            searchSelected: previousState.searchSelected !== null ? Math.max(previousState.searchSelected - 1, 0) : previousState.searchResults.size - 1,
           }
     		});
         break;
       case ARROW_KEY_DOWN:
         this.setState((previousState, currentProps) => {
           return {
-            searchSelected: previousState.searchSelected !== undefined ? Math.min(previousState.searchSelected + 1, previousState.searchResults.size - 1) : 0,
+            searchSelected: previousState.searchSelected !== null ? Math.min(previousState.searchSelected + 1, previousState.searchResults.size - 1) : 0,
           }
     		});
         break;
       case ENTER_KEY:
-        if (this.state.searchSelected !== undefined) {
+        if (this.state.searchSelected !== null) {
           this.addMonster(Array.from(this.state.searchResults)[this.state.searchSelected][0])
         }
         break;
@@ -133,7 +163,7 @@ class App extends Component {
       );
 			return {
         searchText: '',
-        searchSelected: undefined,
+        searchSelected: null,
         searchResults: [],
         monstersAdded: monstersAdded,
         nextMonsterKey: previousState.nextMonsterKey + 1,
@@ -405,14 +435,14 @@ class App extends Component {
       return initativeOrder[0];
     }
     else {
-      return undefined;
+      return null;
     }
   }
 
   advanceInitative = () => {
     this.closeAllStatBlocks();
     var nextKey = this.getNextKeyInInitative();
-    if (nextKey !== undefined) {
+    if (nextKey !== null) {
       this.showStatBlock(this.state.monstersAdded.get(nextKey));
       this.showActions(this.state.monstersAdded.get(nextKey));
     }
