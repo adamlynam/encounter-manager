@@ -30,6 +30,7 @@
   float: left;
 }
 .dice {
+  float: left;
   width: 5em;
   cursor: pointer;
 }
@@ -144,6 +145,11 @@
         width: 6em;
         text-align: right;
       }
+
+.encounter-info {
+  float: left;
+  width: 20em;
+}
 
 .initative-tracker {
   float: right;

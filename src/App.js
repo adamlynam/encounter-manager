@@ -3,6 +3,7 @@ import './App.css';
 import MonsterTools from './MonsterTools';
 import Monsters from './Monsters';
 import MonsterSearch from './MonsterSearch';
+import EncounterInfo from './EncounterInfo';
 import InitativeTracker from './InitativeTracker';
 import Rolls from './Rolls';
 
@@ -511,6 +512,8 @@ class App extends Component {
           <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
           <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
         </div>
+        <EncounterInfo
+          monsters={this.state.monstersAdded} />
         <Monsters
           monstersAdded={this.state.monstersAdded}
           creatures={this.state.creatures}
