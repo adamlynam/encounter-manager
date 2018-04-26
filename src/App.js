@@ -71,15 +71,29 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      monstersAdded: this.jsonToMap(localStorage.getItem('monstersAdded')),
-      nextMonsterKey: JSON.parse(localStorage.getItem('nextMonsterKey')),
-      creatures: this.jsonToMap(localStorage.getItem('creatures')),
-      nextCreatureKey: JSON.parse(localStorage.getItem('nextCreatureKey')),
-      showRolls: JSON.parse(localStorage.getItem('showRolls')),
-      rolls: JSON.parse(localStorage.getItem('rolls')),
-      currentInitative: JSON.parse(localStorage.getItem('currentInitative')),
-    });
+    var newState = {};
+    if (localStorage.getItem('monstersAdded')) {
+      newState.monstersAdded = this.jsonToMap(localStorage.getItem('monstersAdded'));
+    }
+    if (localStorage.getItem('nextMonsterKey')) {
+      newState.nextMonsterKey = JSON.parse(localStorage.getItem('nextMonsterKey'));
+    }
+    if (localStorage.getItem('creatures')) {
+      newState.creatures = this.jsonToMap(localStorage.getItem('creatures'));
+    }
+    if (localStorage.getItem('nextCreatureKey')) {
+      newState.nextCreatureKey = JSON.parse(localStorage.getItem('nextCreatureKey'));
+    }
+    if (localStorage.getItem('showRolls')) {
+      newState.showRolls = JSON.parse(localStorage.getItem('showRolls'));
+    }
+    if (localStorage.getItem('rolls')) {
+      newState.rolls = JSON.parse(localStorage.getItem('rolls'));
+    }
+    if (localStorage.getItem('currentInitative')) {
+      newState.currentInitative = JSON.parse(localStorage.getItem('currentInitative'));
+    }
+    this.setState(newState);
   }
 
   componentDidUpdate(prevProps, prevState) {
