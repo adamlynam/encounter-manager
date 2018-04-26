@@ -440,7 +440,6 @@ class App extends Component {
   }
 
   advanceInitative = () => {
-    this.closeAllStatBlocks();
     var nextKey = this.getNextKeyInInitative();
     if (nextKey !== null) {
       this.showStatBlock(this.state.monstersAdded.get(nextKey));
