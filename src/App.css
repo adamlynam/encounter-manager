@@ -1,3 +1,7 @@
+.toggle {
+  cursor: pointer;
+}
+
 .remove-button {
   padding: 0.5em;
   border: 1px solid #aa0000;
@@ -100,6 +104,9 @@
 .bs-callout-info h4 {
     color: #5bc0de;
 }
+.card-body {
+  padding: 0.5rem;
+}
 
 .monster-search {
   float: left;
@@ -109,7 +116,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    z-index: 1;
+    z-index: 10;
   }
     .monster-search li {
       padding: 0.5em;
@@ -152,9 +159,6 @@
 }
 
 .initative-tracker {
-  float: right;
-  width: 12em;
-  padding: 0.5em;
 }
   .initative-tracker .initative-row {
     padding: 0.5em;
@@ -172,12 +176,9 @@
     clear: both;
   }
     .initative-tracker .monster-name {
-      float: left;
-      width: 7em;
     }
     .initative-tracker .monster-initative {
       float: right;
-      width: 3em;
       text-align: right;
       font-weight: bold;
     }
@@ -186,7 +187,7 @@
   position: relative;
   float: right;
   height: 100vh;
-  width: 1em;
+  width: 3em;
   padding: 0 0.2em;
   background-color: #eeeeee;
 }
@@ -197,6 +198,7 @@
   .dice-roll-toggle .arrow {
     position: absolute;
     top: 50%;
+    left: 40%;
   }
   .dice-roll-toggle .arrow::after {
     content: '';
@@ -210,7 +212,7 @@
   overflow-y: scroll;
 }
   .dice-rolls .dice-roll {
-    width: 12em;
+    width: 15em;
     padding: 0.5em;
     background-color: #dddddd;
     overflow-wrap: break-word;
@@ -226,43 +228,36 @@
       font-size: 1.5em;
     }
 
-.monsters {
+.monster-area {
   clear: left;
 }
-.monster {
-  float: left;
-  margin: 0.2em;
-  width: 12em;
-  background-color: #fdf1dc;
-  z-index: -2;
-}
-  .monster .card-header {
-    position: relative;
-    padding: 0.5rem;
-  }
-  .monster.current .card-header {
+  .monster-area .monster.current .card-header {
     background-color: #ddffdd;
   }
-  .monster hr {
-    border: solid 1px #e69a28;
+  .monster-area .monster.selected .card-header {
+    background-color: #ffdddd;
   }
-  .monster h3 {
-    margin: 0 0 1em 0;
-    font-size: 0.95em;
+  .monster-area .monster.current.selected .card-header {
+    background-color: #ffffaa;
   }
-  .monster h4 {
-    margin: 0.5em 0;
-    font-size: 0.95em;
+
+.monsters-info {
+}
+  .monsters-info .monster {
+    margin-bottom: 0.5em;
+    background-color: #fdf1dc;
+    z-index: 1;
   }
-  .remove-monster {
+  .monsters-info .remove-monster {
     position: absolute;
     top: 0.1em;
     right: 0.1em;
   }
-  .monster-ac {
-    position: absolute;
-    top: 2.1em;
-    right: 0.5em;
+  .monsters-info .monster-image {
+    float: left;
+    width: 10%;
+  }
+  .monsters-info .monster-ac {
     height: 3.3em;
     width: 3em;
     background-image: url('/img/ac.png');
@@ -271,143 +266,50 @@
     line-height: 3.3em;
     text-align: center;
   }
-  .monster-speed {
-    position: absolute;
-    top: 5.1em;
-    right: 0.5em;
-    height: 1.2em;
-    width: 3em;
-    line-height: 1.2em;
-    text-align: right;
-  }
-    .monster-speed .ground-speed {
-      background-image: url('/img/ground.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-    .monster-speed .fly-speed {
-      background-image: url('/img/fly.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-    .monster-speed .swim-speed {
-      background-image: url('/img/swim.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-    .monster-speed .climb-speed {
-      background-image: url('/img/climb.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-    .monster-speed .burrow-speed {
-      background-image: url('/img/burrow.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-  .monster-size {
-    position: absolute;
-    top: 3.5em;
-    left: 0.5em;
-  }
-  .monster-size.tiny {
-    width: 0.5em;
-  }
-  .monster-size.small {
-    width: 1em;
-  }
-  .monster-size.medium {
-    width: 1em;
-  }
-  .monster-size.large {
-    width: 2em;
-  }
-  .monster-size.huge {
-    width: 3em;
-  }
-  .monster-size.gargantuan {
-    width: 4em;
-  }
-  .stat-block-arrow {
-    position: absolute;
-    bottom: 0em;
-    left: 0.5em;
-  }
-  .monster-image {
-    display: block;
-    width: 45%;
-    margin: auto;
-  }
-  .toggle {
-    cursor: pointer;
-  }
-  .stats {
+  .monsters-info .stats {
     font-size: 0.8em;
   }
-  .stats::after {
+  .monsters-info .stats::after {
     content: '';
     display: block;
     clear: both;
   }
-    .stat {
-      float: left;
-      width: 45%;
-      padding: 0.2em;
-    }
-      .stat .stat-proficient {
-        display: block;
-        float: left;
-        width: 10%;
-        text-align: right;
-        font-weight: bold;
-      }
-      .stat .stat-name {
-        display: block;
-        float: left;
-        width: 50%;
-        font-weight: bold;
-      }
-      .stat .stat-value {
-        display: block;
-        float: left;
-        width: 25%;
-        text-align: right;
-      }
-      .stat .stat-modifier {
-        display: block;
-        float: left;
-        width: 25%;
-        text-align: right;
-      }
-  .ability {
-    padding: 0.5em;
-    font-size: 0.9em;
-  }
-    .ability .ability-name {
-      font-weight: bold;
-    }
-  .card-body {
-    padding: 0.5rem;
-  }
-  .creature-details {
+        .monsters-info .stat .stat-proficient {
+          display: block;
+          float: left;
+          width: 10%;
+          text-align: right;
+          font-weight: bold;
+        }
+        .monsters-info .stat .stat-name {
+          display: block;
+          float: left;
+          width: 50%;
+          font-weight: bold;
+        }
+        .monsters-info .stat .stat-modifier {
+          display: block;
+          text-align: right;
+        }
+  .monsters-info .creature-details {
     position: relative;
     margin: 0.5em 0em;
   }
-    .identifier {
+    .monsters-info .identifier {
       margin: 0em;
       padding: 0.5em;
       font-size: 0.8em;
     }
-    .health-modifier-button {
+    .monsters-info .health-modifier-button {
       padding: 0.5em;
       border: 1px solid #aaaaaa;
       background-color: #dddddd;
     }
-      .health-modifier-button:hover {
+      .monsters-info .health-modifier-button:hover {
         background-color: #bbbbbb;
         cursor: pointer;
       }
-    .health {
+    .monsters-info .health {
       position: relative;
       margin-left: 2em;
       padding: 1em;
@@ -417,7 +319,7 @@
       background-repeat: no-repeat;
       text-align: center;
     }
-      .health .health-remaining {
+      .monsters-info .health .health-remaining {
         position: absolute;
         bottom: 0;
         left: 0;
@@ -426,21 +328,142 @@
         background-color: #ee5555;
         z-index: -1;
       }
-      .health .health-edit {
+      .monsters-info .health .health-edit {
         width: 3em;
       }
-  .remove-creature {
+  .monsters-info .remove-creature {
     position: absolute;
     bottom: 1em;
     right: 0.1em;
   }
-  .add-creature {
+  .monsters-info .add-creature {
     width: 2em;
     padding: 0.5em;
     border: 1px solid #00aa00;
     background-color: #99ee99;
   }
-    .add-creature:hover {
+    .monsters-info .add-creature:hover {
       background-color: #bbeebb;
       cursor: pointer;
     }
+
+.monster-info {
+}
+  .monster-info hr {
+    border: solid 1px #e69a28;
+  }
+  .monster-info .monster-ac {
+    float: right;
+    height: 3.3em;
+    width: 3em;
+    margin: auto;
+    background-image: url('/img/ac.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    line-height: 3.3em;
+    text-align: center;
+    font-size: 1.5em;
+  }
+  .monster-info .monster-image {
+    float: left;
+    width: 25%;
+  }
+  .monster-info .monster-speed {
+    clear: right;
+    float: right;
+    height: 1.2em;
+    width: 4em;
+    line-height: 1.2em;
+    font-size: 1.5em;
+    text-align: right;
+  }
+    .monster-info .monster-speed .ground-speed {
+      background-image: url('/img/ground.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .monster-info .monster-speed .fly-speed {
+      background-image: url('/img/fly.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .monster-info .monster-speed .swim-speed {
+      background-image: url('/img/swim.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .monster-info .monster-speed .climb-speed {
+      background-image: url('/img/climb.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .monster-info .monster-speed .burrow-speed {
+      background-image: url('/img/burrow.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+  .monster-info .monster-size {
+    float: left;
+  }
+  .monster-info .monster-size.tiny {
+    width: 1.5em;
+  }
+  .monster-info .monster-size.small {
+    width: 2.5em;
+  }
+  .monster-info .monster-size.medium {
+    width: 2.5em;
+  }
+  .monster-info .monster-size.large {
+    width: 5em;
+  }
+  .monster-info .monster-size.huge {
+    width: 7.5em;
+  }
+  .monster-info .monster-size.gargantuan {
+    width: 10em;
+  }
+  .monster-info .stats {
+  }
+  .monster-info .stats::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+    .monster-info .stat {
+      float: left;
+      width: 50%;
+      padding: 0.5em 1em;
+    }
+      .monster-info .stat .stat-proficient {
+        display: block;
+        float: left;
+        width: 10%;
+        text-align: right;
+        font-weight: bold;
+      }
+      .monster-info .stat .stat-name {
+        display: block;
+        float: left;
+        width: 50%;
+        font-weight: bold;
+      }
+      .monster-info .stat .stat-value {
+        display: block;
+        float: left;
+        width: 25%;
+        text-align: right;
+      }
+      .monster-info .stat .stat-modifier {
+        display: block;
+        float: left;
+        width: 25%;
+        text-align: right;
+      }
+
+.ability {
+  padding: 0.5em;
+}
+  .ability .ability-name {
+    font-weight: bold;
+  }

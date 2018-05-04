@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import MonsterTools from './MonsterTools';
-import Monsters from './Monsters';
 import MonsterSearch from './MonsterSearch';
 import EncounterInfo from './EncounterInfo';
+import MonstersInfo from './MonstersInfo';
+import Monster from './Monster';
 import InitativeTracker from './InitativeTracker';
 import Rolls from './Rolls';
 
@@ -60,6 +61,7 @@ class App extends Component {
       showRolls: false,
       rolls: [],
       currentInitative: null,
+      selectedMonster: null,
   	};
   }
 
@@ -94,6 +96,9 @@ class App extends Component {
     if (localStorage.getItem('currentInitative')) {
       newState.currentInitative = JSON.parse(localStorage.getItem('currentInitative'));
     }
+    if (localStorage.getItem('selectedMonster')) {
+      newState.selectedMonster = JSON.parse(localStorage.getItem('selectedMonster'));
+    }
     this.setState(newState);
   }
 
@@ -105,6 +110,7 @@ class App extends Component {
     localStorage.showRolls = JSON.stringify(this.state.showRolls);
     localStorage.rolls = JSON.stringify(this.state.rolls);
     localStorage.currentInitative = JSON.stringify(this.state.currentInitative);
+    localStorage.selectedMonster = JSON.stringify(this.state.selectedMonster);
   }
 
   updateSearchText = (event) => {
@@ -463,7 +469,16 @@ class App extends Component {
     this.setState((previousState, currentProps) => {
 			return {
         currentInitative: nextKey,
+        selectedMonster: nextKey,
 			};
+    });
+  }
+
+  setSelectedMonster = (monster) => {
+    this.setState((previousState, currentProps) => {
+      return {
+        selectedMonster: monster.key,
+      };
     });
   }
 
@@ -486,56 +501,65 @@ class App extends Component {
   }
 
   render = () => {
-    return (
-      <div>
-        {this.state.showRolls ? <Rolls>{this.state.rolls}</Rolls> : <div className="dice-rolls"></div>}
-        <div className="dice-roll-toggle" onClick={() => this.toggleRollsShown()}>
-          <div className="arrow">{this.state.showRolls ? '▶' : '◀'}</div>
-        </div>
-        <InitativeTracker
-          monsters={this.state.monstersAdded}
-          currentInitative={this.state.currentInitative}
-          advanceInitative={this.advanceInitative} />
-        <MonsterSearch
-          monsters={this.state.monsters}
-          searchText={this.state.searchText}
-          searchSelected={this.state.searchSelected}
-          searchResults={this.state.searchResults}
-          updateSearchText={this.updateSearchText}
-          captureKeyDownSearch={this.captureKeyDownSearch}
-          addMonster={this.addMonster} />
-        <div className="single-dice">
-          <img className="dice" src="/img/d4.png" alt="d4 dice" onClick={() => this.roller('Straight d4', 1, 4, 0)} />
-          <img className="dice" src="/img/d6.png" alt="d6 dice" onClick={() => this.roller('Straight d6', 1, 6, 0)} />
-          <img className="dice" src="/img/d8.png" alt="d8 dice" onClick={() => this.roller('Straight d8', 1, 8, 0)} />
-          <img className="dice" src="/img/d10.png" alt="d10 dice" onClick={() => this.roller('Straight d10', 1, 10, 0)} />
-          <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
-          <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
-        </div>
-        <EncounterInfo
-          monsters={this.state.monstersAdded} />
-        <Monsters
-          monstersAdded={this.state.monstersAdded}
-          creatures={this.state.creatures}
-          removeMonster={this.removeMonster}
-          toggleStatBlockShown={this.toggleStatBlockShown}
-          toggleStatsShown={this.toggleStatsShown}
-          toggleSavesShown={this.toggleSavesShown}
-          toggleLanguagesShown={this.toggleLanguagesShown}
-          toggleResistancesShown={this.toggleResistancesShown}
-          toggleTraitsShown={this.toggleTraitsShown}
-          toggleActionsShown={this.toggleActionsShown}
-          toggleReactionsShown={this.toggleReactionsShown}
-          toggleLegendaryActionsShown={this.toggleLegendaryActionsShown}
-          addCreature={this.addCreature}
-          removeCreature={this.removeCreature}
-          toggleCreatureHealthEdit={this.toggleCreatureHealthEdit}
-          updateCreatureHealthText={this.updateCreatureHealthText}
-          setCreatureHealth={this.setCreatureHealth}
-          roller={this.roller}
-          currentInitative={this.state.currentInitative} />
+    return <div>
+      {this.state.showRolls ? <Rolls>{this.state.rolls}</Rolls> : <div className="dice-rolls"></div>}
+      <div className="dice-roll-toggle" onClick={() => this.toggleRollsShown()}>
+        <div className="arrow">{this.state.showRolls ? '▶' : '◀'}</div>
       </div>
-    );
+      <div className="container-fluid">
+        <div className="row">
+          <MonsterSearch
+            monsters={this.state.monsters}
+            searchText={this.state.searchText}
+            searchSelected={this.state.searchSelected}
+            searchResults={this.state.searchResults}
+            updateSearchText={this.updateSearchText}
+            captureKeyDownSearch={this.captureKeyDownSearch}
+            addMonster={this.addMonster} />
+          <div className="single-dice">
+            <img className="dice" src="/img/d4.png" alt="d4 dice" onClick={() => this.roller('Straight d4', 1, 4, 0)} />
+            <img className="dice" src="/img/d6.png" alt="d6 dice" onClick={() => this.roller('Straight d6', 1, 6, 0)} />
+            <img className="dice" src="/img/d8.png" alt="d8 dice" onClick={() => this.roller('Straight d8', 1, 8, 0)} />
+            <img className="dice" src="/img/d10.png" alt="d10 dice" onClick={() => this.roller('Straight d10', 1, 10, 0)} />
+            <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
+            <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
+          </div>
+          <EncounterInfo
+            monsters={this.state.monstersAdded} />
+        </div>
+        <div className="row monster-area">
+          <div className="col-lg-4">
+            <MonstersInfo
+              monstersAdded={this.state.monstersAdded}
+              creatures={this.state.creatures}
+              removeMonster={this.removeMonster}
+              addCreature={this.addCreature}
+              removeCreature={this.removeCreature}
+              toggleCreatureHealthEdit={this.toggleCreatureHealthEdit}
+              updateCreatureHealthText={this.updateCreatureHealthText}
+              setCreatureHealth={this.setCreatureHealth}
+              roller={this.roller}
+              currentInitative={this.state.currentInitative}
+              selectedMonster={this.state.selectedMonster}
+              setSelectedMonster={this.setSelectedMonster} />
+          </div>
+          <div className="col-lg-6">
+            {this.state.selectedMonster && this.state.monstersAdded.get(this.state.selectedMonster) && <Monster
+              roller={this.roller}
+              currentInitative={this.state.currentInitative}
+              selectedMonster={this.state.selectedMonster} >
+              {this.state.monstersAdded.get(this.state.selectedMonster)}
+            </Monster>}
+          </div>
+          <div className="col-lg-2">
+            <InitativeTracker
+              monsters={this.state.monstersAdded}
+              currentInitative={this.state.currentInitative}
+              advanceInitative={this.advanceInitative} />
+          </div>
+        </div>
+      </div>
+    </div>;
   }
 }
 
