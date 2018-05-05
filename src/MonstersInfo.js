@@ -53,6 +53,7 @@ class MonstersInfo extends Component {
   renderSaves = (monster) => {
     var saves = MonsterTools.parseMonsterSaves(monster);
     return <div className="stats">
+      <h6>Saving Throws</h6>
       {this.renderSave(
         'Str',
         saves.str ? saves.str : MonsterTools.calculateModifier(monster.str),

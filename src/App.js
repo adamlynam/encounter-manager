@@ -508,24 +508,26 @@ class App extends Component {
       </div>
       <div className="container-fluid">
         <div className="row">
-          <MonsterSearch
-            monsters={this.state.monsters}
-            searchText={this.state.searchText}
-            searchSelected={this.state.searchSelected}
-            searchResults={this.state.searchResults}
-            updateSearchText={this.updateSearchText}
-            captureKeyDownSearch={this.captureKeyDownSearch}
-            addMonster={this.addMonster} />
-          <div className="single-dice">
-            <img className="dice" src="/img/d4.png" alt="d4 dice" onClick={() => this.roller('Straight d4', 1, 4, 0)} />
-            <img className="dice" src="/img/d6.png" alt="d6 dice" onClick={() => this.roller('Straight d6', 1, 6, 0)} />
-            <img className="dice" src="/img/d8.png" alt="d8 dice" onClick={() => this.roller('Straight d8', 1, 8, 0)} />
-            <img className="dice" src="/img/d10.png" alt="d10 dice" onClick={() => this.roller('Straight d10', 1, 10, 0)} />
-            <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
-            <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
+          <div className="col-lg">
+            <MonsterSearch
+              monsters={this.state.monsters}
+              searchText={this.state.searchText}
+              searchSelected={this.state.searchSelected}
+              searchResults={this.state.searchResults}
+              updateSearchText={this.updateSearchText}
+              captureKeyDownSearch={this.captureKeyDownSearch}
+              addMonster={this.addMonster} />
           </div>
-          <EncounterInfo
-            monsters={this.state.monstersAdded} />
+          <div className="col-lg">
+            <div className="single-dice">
+              <img className="dice" src="/img/d4.png" alt="d4 dice" onClick={() => this.roller('Straight d4', 1, 4, 0)} />
+              <img className="dice" src="/img/d6.png" alt="d6 dice" onClick={() => this.roller('Straight d6', 1, 6, 0)} />
+              <img className="dice" src="/img/d8.png" alt="d8 dice" onClick={() => this.roller('Straight d8', 1, 8, 0)} />
+              <img className="dice" src="/img/d10.png" alt="d10 dice" onClick={() => this.roller('Straight d10', 1, 10, 0)} />
+              <img className="dice" src="/img/d12.png" alt="d12 dice" onClick={() => this.roller('Straight d12', 1, 12, 0)} />
+              <img className="dice" src="/img/d20.png" alt="d20 dice" onClick={() => this.roller('Straight d20', 1, 20, 0)} />
+            </div>
+          </div>
         </div>
         <div className="row monster-area">
           <div className="col-lg-4">
@@ -542,6 +544,8 @@ class App extends Component {
               currentInitative={this.state.currentInitative}
               selectedMonster={this.state.selectedMonster}
               setSelectedMonster={this.setSelectedMonster} />
+            <EncounterInfo
+              monsters={this.state.monstersAdded} />
           </div>
           <div className="col-lg-6">
             {this.state.selectedMonster && this.state.monstersAdded.get(this.state.selectedMonster) && <Monster

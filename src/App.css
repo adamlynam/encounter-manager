@@ -30,12 +30,9 @@
   background-color: #8888dd;
 }
 
-.single-dice {
-  float: left;
-}
 .dice {
   float: left;
-  width: 5em;
+  width: 16%;
   cursor: pointer;
 }
 
@@ -109,54 +106,20 @@
 }
 
 .monster-search {
-  float: left;
 }
   .monster-search .monster-results {
-    position: fixed;
+    position: absolute;
+    width: 100%;
     margin: 0;
     padding: 0;
+    background-color: #ffffff;
     list-style: none;
     z-index: 10;
   }
-    .monster-search li {
-      padding: 0.5em;
-      border: 1px solid #aaaaaa;
-      background-color: #dddddd;
-    }
-    .monster-search .heading {
-      font-weight: bold;
-    }
-    .monster-search li:nth-child(2n) {
-      background-color: #eeeeee;
-    }
     .monster-search .monster-result:hover, .monster-search .monster-result.selected {
       background-color: #bbbbbb;
       cursor: pointer;
     }
-    .monster-search .heading::after, .monster-search .monster-result::after {
-      content: '';
-      display: block;
-      clear: both;
-    }
-      .monster-search .monster-name {
-        float: left;
-        width: 13em;
-      }
-      .monster-search .monster-cr {
-        float: right;
-        width: 2em;
-        text-align: right;
-      }
-      .monster-search .monster-xp {
-        float: right;
-        width: 6em;
-        text-align: right;
-      }
-
-.encounter-info {
-  float: left;
-  width: 20em;
-}
 
 .initative-tracker {
 }
@@ -242,6 +205,7 @@
   }
 
 .monsters-info {
+  clear: both;
 }
   .monsters-info .monster {
     margin-bottom: 0.5em;

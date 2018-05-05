@@ -5,30 +5,29 @@ class MonsterSearch extends Component {
   render() {
     return (
       <div className="monster-search">
-        <p>Search to add Monster</p>
-        <input type="text" value={this.props.searchText} onChange={this.props.updateSearchText} onKeyDown={this.props.captureKeyDownSearch} />
-        {this.props.searchResults && this.renderSearchResults()}
+        <div className="form-group">
+          <label className="col-form-label-lg" for="monster-search">Add Monster</label>
+          <input id="monster-search" className="form-control form-control-lg" type="text" placeholder="Monster Name" value={this.props.searchText} onChange={this.props.updateSearchText} onKeyDown={this.props.captureKeyDownSearch} />
+          {this.props.searchResults && this.renderSearchResults()}
+        </div>
       </div>
     );
   }
 
   renderSearchResults = () => {
     var resultIndex = -1;
-    return <ul className="monster-results">
-      {this.props.searchResults.size > 0 && <li className="heading">
-        <span className="monster-name">Monster</span>
-        <span className="monster-xp">XP</span>
-        <span className="monster-cr">CR</span>
-      </li>}
-      {Array.from(this.props.searchResults).map(([key, monster]) => {
-        resultIndex++;
-        return <li className={'monster-result' + ((resultIndex == this.props.searchSelected) ? ' selected' : '')} key={key} onClick={() => this.props.addMonster(key)} >
-          <span className="monster-name">{monster.name}</span>
-          <span className="monster-xp">{MonsterTools.parseMonsterXp(monster)}</span>
-          <span className="monster-cr">{MonsterTools.parseMonsterCr(monster)}</span>
-        </li>
-      })}
-      </ul>
+    return <table className="monster-results table table-striped table-bordered">
+      <tbody>
+        {Array.from(this.props.searchResults).map(([key, monster]) => {
+          resultIndex++;
+          return <tr className={'monster-result' + ((resultIndex == this.props.searchSelected) ? ' selected' : '')} key={key} onClick={() => this.props.addMonster(key)} >
+            <td className="monster-name">{monster.name}</td>
+            <td className="monster-xp">{MonsterTools.parseMonsterXp(monster)} XP</td>
+            <td className="monster-cr">CR {MonsterTools.parseMonsterCr(monster)}</td>
+          </tr>
+        })}
+      </tbody>
+      </table>
   }
 }
 
