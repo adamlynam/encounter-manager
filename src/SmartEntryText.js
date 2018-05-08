@@ -25,7 +25,7 @@ class SmartEntryText extends Component {
       }
 
       // match poly dice rolls
-      var polyRolls = word.match(new RegExp('^\\(([0-9]+)d([0-9]+)\\+?([0-9]+)?\\)'));
+      var polyRolls = word.match(new RegExp('^\\(?([0-9]+)d([0-9]+)\\+?([0-9]+)?\\)?'));
       if (polyRolls != null) {
         return this.renderPolyRoll(parseInt(polyRolls[1], 10), parseInt(polyRolls[2], 10), parseInt(polyRolls[3], 10));
       }
