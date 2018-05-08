@@ -13,6 +13,7 @@ class InitativeTracker extends Component {
       .map(([key, monster]) => {
         return <li key={key} className={'list-group-item initative-row' + (key === this.props.currentInitative ? ' current' : '')}>
           <span className="monster-name">{monster.name}</span>
+          <button type="button" className="remove-initative btn btn-danger btn-sm" onClick={() => this.props.removeFromInitative(key)}>-</button>
           <span className="monster-initative">{monster.initative}</span>
         </li>
       })}
@@ -27,7 +28,7 @@ class InitativeTracker extends Component {
           <input className="form-control" type="text" id="initative-value" placeholder="Initative" value={this.props.addInitativeValue} onChange={this.props.updateInitativeValue} onKeyDown={this.props.captureKeyDownInitative} />
         </div>
       </div>
-      <button type="button" className="btn btn-primary" onClick={() => this.props.addToInitative()}>Add to Initative</button>
+      <button type="button" className="btn btn-primary" onClick={() => this.props.addExtraToInitative()}>Add to Initative</button>
     </div>;
   }
 }

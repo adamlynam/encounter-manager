@@ -145,6 +145,10 @@
       text-align: right;
       font-weight: bold;
     }
+    .initative-tracker .remove-initative {
+      float: right;
+      margin-left: 1em;
+    }
 
 .dice-roll-toggle {
   position: relative;

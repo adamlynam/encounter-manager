@@ -494,14 +494,14 @@ class App extends Component {
   captureKeyDownInitative = (event) => {
     switch (event.keyCode) {
       case ENTER_KEY:
-        this.addToInitative();
+        this.addExtraToInitative();
         break;
       default:
         break;
     }
   }
 
-  addToInitative = () => {
+  addExtraToInitative = () => {
     var initative = parseInt(this.state.addInitativeValue, 10);
     if (!isNaN(initative)) {
       this.setState((previousState, currentProps) => {
@@ -521,6 +521,25 @@ class App extends Component {
           nextMonsterKey: previousState.nextMonsterKey + 1,
         };
       });
+    }
+  }
+
+  removeExtraFromInitative = (extraKey) => {
+    this.setState((previousState, currentProps) => {
+      var initativeAdded = new Map(previousState.initativeAdded);
+      initativeAdded.delete(extraKey);
+			return {
+        initativeAdded: initativeAdded
+			};
+    });
+  }
+
+  removeFromInitative = (monsterKey) => {
+    if (this.state.initativeAdded.has(monsterKey)) {
+      this.removeExtraFromInitative(monsterKey);
+    }
+    else if (this.state.monstersAdded.has(monsterKey)) {
+      this.removeMonster(monsterKey);
     }
   }
 
@@ -616,7 +635,8 @@ class App extends Component {
               addInitativeValue={this.state.addInitativeValue}
               updateInitativeValue={this.updateInitativeValue}
               captureKeyDownInitative={this.captureKeyDownInitative}
-              addToInitative={this.addToInitative} />
+              addExtraToInitative={this.addExtraToInitative}
+              removeFromInitative={this.removeFromInitative} />
           </div>
         </div>
       </div>
