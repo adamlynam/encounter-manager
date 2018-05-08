@@ -7,7 +7,6 @@ class MonstersInfo extends Component {
   render() {
     return <div className="monsters-info">
       {Array.from(this.props.monstersAdded).reverse().map(([key, monster]) => {
-        var monsterSpeeds = MonsterTools.parseMonsterSpeeds(monster);
         return (
           <div key={key} className={'monster card' + (key === this.props.currentInitative ? ' current' : '') + (key === this.props.selectedMonster ? ' selected' : '')}>
             <div className="card-header toggle" onClick={() => this.props.setSelectedMonster(monster)}>

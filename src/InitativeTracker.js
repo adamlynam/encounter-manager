@@ -6,7 +6,7 @@ class InitativeTracker extends Component {
     return <div className="initative-tracker">
       <h3>Initative</h3>
       <ul className="list-group">
-      {Array.from(this.props.monsters)
+      {[...Array.from(this.props.monsters), ...Array.from(this.props.extras)]
       .sort((a,b) => {
         return b[1].initative - a[1].initative;
       })
@@ -17,7 +17,17 @@ class InitativeTracker extends Component {
         </li>
       })}
       </ul>
-      <button type="button" className="btn btn-primary" onClick={() => this.props.advanceInitative()}>Next</button>
+      <button type="button" className="btn btn-primary" onClick={() => this.props.advanceInitative()}>Next in Initative</button>
+      <hr />
+      <div className="form-row">
+        <div className="col">
+          <input className="form-control" type="text" id="initative-name" placeholder="Name" value={this.props.addInitativeName} onChange={this.props.updateInitativeName} onKeyDown={this.props.captureKeyDownInitative} />
+        </div>
+        <div className="col">
+          <input className="form-control" type="text" id="initative-value" placeholder="Initative" value={this.props.addInitativeValue} onChange={this.props.updateInitativeValue} onKeyDown={this.props.captureKeyDownInitative} />
+        </div>
+      </div>
+      <button type="button" className="btn btn-primary" onClick={() => this.props.addToInitative()}>Add to Initative</button>
     </div>;
   }
 }

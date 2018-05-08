@@ -124,9 +124,9 @@ class Monster extends Component {
 
   renderEntries = (entryName, entries) => {
     return <div className="entries">
-      {entries.map(entry => {
+      {entries.map((entry, index) => {
         if (typeof entry === 'string' || entry instanceof String) {
-          return <SmartEntryText entryName={entryName} roller={this.props.roller}>{entry}</SmartEntryText>;
+          return <SmartEntryText key={index} entryName={entryName} roller={this.props.roller}>{entry}</SmartEntryText>;
         }
         else {
           return this.renderList(entry.items);

@@ -45,15 +45,13 @@ function parseNumberFromListWithMatchingText(list, text) {
     .find(item => {
       return item.includes(text);
     });
-  return match === undefined ? undefined : parseInt(
-    longestNumberRegex.exec(match)[0]);
+  return match === undefined ? undefined : parseInt(longestNumberRegex.exec(match)[0], 10);
 }
 
 function parseGroundSpeed(monster) {
   var speeds = monster.speed.split(',');
   var groundSpeed = speeds[0];
-  return groundSpeed === undefined ? undefined : parseInt(
-    longestNumberRegex.exec(groundSpeed)[0]);
+  return groundSpeed === undefined ? undefined : parseInt(longestNumberRegex.exec(groundSpeed)[0], 10);
 }
 
 export function calculateModifier(value) {
@@ -81,29 +79,23 @@ export function parseMonsterXp(monster) {
 }
 
 export function parseMonsterAc(monster) {
-  return parseInt(monster.ac.match(longestNumberRegex));
+  return parseInt(monster.ac.match(longestNumberRegex), 10);
 }
 
 export function parseMonsterSize(monster) {
   switch (monster.size) {
     case 'T':
       return 'tiny';
-      break;
     case 'S':
       return 'small';
-      break;
     case 'M':
       return 'medium';
-      break;
     case 'L':
       return 'large';
-      break;
     case 'H':
       return 'huge';
-      break;
     case 'G':
       return 'gargantuan';
-      break;
     default:
       return 'meduim';
   }
@@ -111,7 +103,7 @@ export function parseMonsterSize(monster) {
 
 export function parseMonsterHealth(monster) {
   var exp = new RegExp('([0-9]*).*');
-  return parseInt(monster.hp.match(exp)[1]);
+  return parseInt(monster.hp.match(exp)[1], 10);
 }
 
 export function parseMonsterSaves(monster) {

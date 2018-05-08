@@ -21,13 +21,13 @@ class SmartEntryText extends Component {
       // match d20 rolls
       var d20Rolls = word.match(new RegExp('^\\+([0-9]+)'));
       if (d20Rolls != null) {
-        return this.renderD20Roll(parseInt(d20Rolls[1]));
+        return this.renderD20Roll(parseInt(d20Rolls[1], 10));
       }
 
       // match poly dice rolls
       var polyRolls = word.match(new RegExp('^\\(([0-9]+)d([0-9]+)\\+?([0-9]+)?\\)'));
       if (polyRolls != null) {
-        return this.renderPolyRoll(parseInt(polyRolls[1]), parseInt(polyRolls[2]), parseInt(polyRolls[3]));
+        return this.renderPolyRoll(parseInt(polyRolls[1], 10), parseInt(polyRolls[2], 10), parseInt(polyRolls[3], 10));
       }
 
       return word + ' ';

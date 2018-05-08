@@ -61,6 +61,9 @@ class App extends Component {
       showRolls: false,
       rolls: [],
       currentInitative: null,
+      addInitativeName: '',
+      addInitativeValue: '',
+      initativeAdded: new Map(),
       selectedMonster: null,
   	};
   }
@@ -87,6 +90,9 @@ class App extends Component {
     if (localStorage.getItem('nextCreatureKey')) {
       newState.nextCreatureKey = JSON.parse(localStorage.getItem('nextCreatureKey'));
     }
+    if (localStorage.getItem('initativeAdded')) {
+      newState.initativeAdded = this.jsonToMap(localStorage.getItem('initativeAdded'));
+    }
     if (localStorage.getItem('showRolls')) {
       newState.showRolls = JSON.parse(localStorage.getItem('showRolls'));
     }
@@ -107,6 +113,7 @@ class App extends Component {
     localStorage.nextMonsterKey = JSON.stringify(this.state.nextMonsterKey);
     localStorage.creatures = this.mapToJson(this.state.creatures);
     localStorage.nextCreatureKey = JSON.stringify(this.state.nextCreatureKey);
+    localStorage.initativeAdded = this.mapToJson(this.state.initativeAdded);
     localStorage.showRolls = JSON.stringify(this.state.showRolls);
     localStorage.rolls = JSON.stringify(this.state.rolls);
     localStorage.currentInitative = JSON.stringify(this.state.currentInitative);
@@ -149,6 +156,8 @@ class App extends Component {
         if (this.state.searchSelected !== null) {
           this.addMonster(Array.from(this.state.searchResults)[this.state.searchSelected][0])
         }
+        break;
+      default:
         break;
     }
   }
@@ -399,7 +408,7 @@ class App extends Component {
     };
     var longestNumberResults = longestNumberRegex.exec(newHealth);
     if (longestNumberResults) {
-      var longestNumber = parseInt(longestNumberResults[0]);
+      var longestNumber = parseInt(longestNumberResults[0], 10);
       if (!isNaN(longestNumber)) {
         if (newHealth.includes && newHealth.includes('+')) {
           newProperties.health = this.state.creatures.get(key).health + longestNumber;
@@ -442,7 +451,7 @@ class App extends Component {
   }
 
   getNextKeyInInitative = () => {
-    var initativeOrder = Array.from(this.state.monstersAdded)
+    var initativeOrder = [...Array.from(this.state.monstersAdded), ...Array.from(this.state.initativeAdded)]
       .sort((a,b) => {
         return b[1].initative - a[1].initative;
       })
@@ -462,16 +471,57 @@ class App extends Component {
 
   advanceInitative = () => {
     var nextKey = this.getNextKeyInInitative();
-    if (nextKey !== null) {
-      this.showStatBlock(this.state.monstersAdded.get(nextKey));
-      this.showActions(this.state.monstersAdded.get(nextKey));
-    }
     this.setState((previousState, currentProps) => {
 			return {
         currentInitative: nextKey,
         selectedMonster: nextKey,
 			};
     });
+  }
+
+  updateInitativeName = (event) => {
+    this.setState({
+      addInitativeName: event.target.value,
+		});
+  }
+
+  updateInitativeValue = (event) => {
+    this.setState({
+      addInitativeValue: event.target.value,
+		});
+  }
+
+  captureKeyDownInitative = (event) => {
+    switch (event.keyCode) {
+      case ENTER_KEY:
+        this.addToInitative();
+        break;
+      default:
+        break;
+    }
+  }
+
+  addToInitative = () => {
+    var initative = parseInt(this.state.addInitativeValue, 10);
+    if (!isNaN(initative)) {
+      this.setState((previousState, currentProps) => {
+        var initativeAdded = new Map(previousState.initativeAdded);
+        initativeAdded.set(
+          previousState.nextMonsterKey,
+          {
+            key: previousState.nextMonsterKey,
+            name: previousState.addInitativeName,
+            initative: initative,
+          }
+        );
+        return {
+          addInitativeName: '',
+          addInitativeValue: '',
+          initativeAdded: initativeAdded,
+          nextMonsterKey: previousState.nextMonsterKey + 1,
+        };
+      });
+    }
   }
 
   setSelectedMonster = (monster) => {
@@ -558,8 +608,15 @@ class App extends Component {
           <div className="col-lg-2">
             <InitativeTracker
               monsters={this.state.monstersAdded}
+              extras={this.state.initativeAdded}
               currentInitative={this.state.currentInitative}
-              advanceInitative={this.advanceInitative} />
+              advanceInitative={this.advanceInitative}
+              addInitativeName={this.state.addInitativeName}
+              updateInitativeName={this.updateInitativeName}
+              addInitativeValue={this.state.addInitativeValue}
+              updateInitativeValue={this.updateInitativeValue}
+              captureKeyDownInitative={this.captureKeyDownInitative}
+              addToInitative={this.addToInitative} />
           </div>
         </div>
       </div>
