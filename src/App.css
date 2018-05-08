@@ -392,24 +392,24 @@
   }
   .monster-info .stats {
   }
-  .monster-info .stats::after {
+  .monster-info .stats::after, .monster-info .skills::after {
     content: '';
     display: block;
     clear: both;
   }
-    .monster-info .stat {
+    .monster-info .stat, .monster-info .skill {
       float: left;
       width: 50%;
       padding: 0.5em 1em;
     }
-      .monster-info .stat .stat-proficient {
+      .monster-info .stat .stat-proficient, .monster-info .skill .skill-proficient {
         display: block;
         float: left;
         width: 10%;
         text-align: right;
         font-weight: bold;
       }
-      .monster-info .stat .stat-name {
+      .monster-info .stat .stat-name, .monster-info .skill .skill-name {
         display: block;
         float: left;
         width: 50%;
@@ -421,7 +421,7 @@
         width: 25%;
         text-align: right;
       }
-      .monster-info .stat .stat-modifier {
+      .monster-info .stat .stat-modifier, .monster-info .skill .skill-modifier {
         display: block;
         float: left;
         width: 25%;

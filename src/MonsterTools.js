@@ -117,6 +117,29 @@ export function parseMonsterSaves(monster) {
   }
 }
 
+export function parseMonsterSkills(monster) {
+  return {
+    acrobatics: monster.skill && monster.skill.acrobatics ? parseInt(monster.skill.acrobatics, 10) : undefined,
+    animalHandling: monster.skill && monster.skill['animal handling'] ? parseInt(monster.skill['animal handling'], 10) : undefined,
+    arcana: monster.skill && monster.skill.arcana ? parseInt(monster.skill.arcana, 10) : undefined,
+    athletics: monster.skill && monster.skill.athletics ? parseInt(monster.skill.athletics, 10) : undefined,
+    deception: monster.skill && monster.skill.deception ? parseInt(monster.skill.deception, 10) : undefined,
+    history: monster.skill && monster.skill.history ? parseInt(monster.skill.history, 10) : undefined,
+    insight: monster.skill && monster.skill.insight ? parseInt(monster.skill.insight, 10) : undefined,
+    intimidation: monster.skill && monster.skill.intimidation ? parseInt(monster.skill.intimidation, 10) : undefined,
+    investigation: monster.skill && monster.skill.investigation ? parseInt(monster.skill.investigation, 10) : undefined,
+    medicine: monster.skill && monster.skill.medicine ? parseInt(monster.skill.medicine, 10) : undefined,
+    nature: monster.skill && monster.skill.nature ? parseInt(monster.skill.nature, 10) : undefined,
+    perception: monster.skill && monster.skill.perception ? parseInt(monster.skill.perception, 10) : undefined,
+    performance: monster.skill && monster.skill.performance ? parseInt(monster.skill.performance, 10) : undefined,
+    persuasion: monster.skill && monster.skill.persuasion ? parseInt(monster.skill.persuasion, 10) : undefined,
+    religion: monster.skill && monster.skill.religion ? parseInt(monster.skill.religion, 10) : undefined,
+    sleightOfHand: monster.skill && monster.skill['sleight of hand'] ? parseInt(monster.skill['sleight of hand'], 10) : undefined,
+    stealth: monster.skill && monster.skill.stealth ? parseInt(monster.skill.stealth, 10) : undefined,
+    survival: monster.skill && monster.skill.survival ? parseInt(monster.skill.survival, 10) : undefined,
+  }
+}
+
 export function parseMonsterSpeeds(monster) {
   return {
     groundSpeed: parseGroundSpeed(monster),
@@ -139,6 +162,7 @@ export default {
   parseMonsterSize,
   parseMonsterHealth,
   parseMonsterSaves,
+  parseMonsterSkills,
   parseMonsterSpeeds,
   generateMonsterDescription,
 }
