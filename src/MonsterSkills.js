@@ -4,7 +4,7 @@ import MonsterTools from './MonsterTools';
 class MonsterSkills extends Component {
 
   renderSkill = (statName, statMod, proficient) => {
-    return <div className="skill roll" onClick={() => this.props.roller(statName + ' Saving Throw', 1, 20, statMod)}>
+    return <div className="skill roll" onClick={() => this.props.roller(statName + ' Check', 1, 20, statMod)}>
       <span className="skill-proficient">{proficient ? '*' : '\u00a0'}</span>
       <span className="skill-name">{statName}</span>
       <span className="skill-modifier">({statMod})</span>
