@@ -575,7 +575,7 @@ class App extends Component {
       <div className="dice-roll-toggle" onClick={() => this.toggleRollsShown()}>
         <div className="arrow">{this.state.showRolls ? '▶' : '◀'}</div>
       </div>
-      <div className="container-fluid">
+      <div className="container-fluid main-container">
         <div className="row">
           <div className="col-lg">
             <MonsterSearch
