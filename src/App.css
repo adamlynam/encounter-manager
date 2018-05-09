@@ -390,6 +390,15 @@
   .monster-info .monster-size.gargantuan {
     width: 10em;
   }
+  .monster-info .slots {
+  }
+    .monster-info .slots span {
+      float: right;
+      width: 2em;
+    	font-family: FontAwesome;
+      font-size: 2em;
+      cursor: pointer;
+    }
   .monster-info .stats {
   }
   .monster-info .stats::after, .monster-info .skills::after {

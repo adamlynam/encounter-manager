@@ -17,7 +17,7 @@ class MonsterSpellcasting extends Component {
   }
 
   getDailySpellFrequency = (frequency) => {
-    return parseInt(frequency, 10) + '/day' + (frequency.includes('e') ? ' each' : '');
+    return parseInt(frequency, 10) + ' per day' + (frequency.includes('e') ? ', each' : '');
   }
 
   renderDailySpells = (frequencies) => {
@@ -37,7 +37,17 @@ class MonsterSpellcasting extends Component {
   renderPreparedSpells = (levels) => {
     return <div className="abilities">{Object.keys(levels).map(level => {
       return <div key={level} className="ability">
-        <div className="ability-name">Level {level} Spells{levels[level].slots && ' (' + levels[level].slots + ' slots)'}</div>
+        <div className="ability-name">Level {level} Spells</div>
+        <div className="slots">{levels[level].slots && [...Array(levels[level].slots)].map((item, index) => {
+          return <span onClick={() => this.props.togglePreparedSpellSlots(this.props.children, level, index)}>{(
+            this.props.children.usedPreparedSpellSlots &&
+            this.props.children.usedPreparedSpellSlots[level] &&
+            this.props.children.usedPreparedSpellSlots[level][index]) ?
+            '\uf14a' :
+            '\uf096'}
+          </span>
+        })}
+        </div>
         <div className="list">
           {levels[level].spells.map((spell, index) => {
             return <SmartSpellText key={index}>{spell}</SmartSpellText>

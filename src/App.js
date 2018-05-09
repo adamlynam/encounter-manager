@@ -188,6 +188,7 @@ class App extends Component {
             reactionsShown: true,
             legendaryActionsShown: false,
             instances: [previousState.nextCreatureKey],
+            usedPreparedSpellSlots: [],
           }
         ))
       );
@@ -221,7 +222,7 @@ class App extends Component {
     });
   }
 
-  toggleMonsterSection = (monster, newProperties) => {
+  addMonsterProperties = (monster, newProperties) => {
     this.setState((previousState, currentProps) => {
       var monstersAdded = new Map(previousState.monstersAdded);
       monstersAdded.set(
@@ -258,67 +259,67 @@ class App extends Component {
   }
 
   showStatBlock = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       statBlockShown: true,
     });
   }
 
   toggleStatBlockShown = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       statBlockShown: !monster.statBlockShown,
     });
   }
 
   toggleStatsShown = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       statsShown: !monster.statsShown,
     });
   }
 
   toggleSavesShown = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       savesShown: !monster.savesShown,
     });
   }
 
   toggleLanguagesShown = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       languagesShown: !monster.languagesShown,
     });
   }
 
   toggleResistancesShown = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       resistancesShown: !monster.resistancesShown,
     });
   }
 
   toggleTraitsShown = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       traitsShown: !monster.traitsShown,
     });
   }
 
   showActions = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       actionsShown: true,
     });
   }
 
   toggleActionsShown = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       actionsShown: !monster.actionsShown,
     });
   }
 
   toggleReactionsShown = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       reactionsShown: !monster.reactionsShown,
     });
   }
 
   toggleLegendaryActionsShown = (monster) => {
-    this.toggleMonsterSection(monster, {
+    this.addMonsterProperties(monster, {
       legendaryActionsShown: !monster.legendaryActionsShown,
     });
   }
@@ -430,6 +431,15 @@ class App extends Component {
       return {
         creatures: creatures,
       };
+    });
+  }
+
+  togglePreparedSpellSlots = (monster, level, index) => {
+    var usedPreparedSpellSlots = this.state.monstersAdded.get(monster.key).usedPreparedSpellSlots ? [...this.state.monstersAdded.get(monster.key).usedPreparedSpellSlots] : [];
+    usedPreparedSpellSlots[level] = usedPreparedSpellSlots[level] ? usedPreparedSpellSlots[level] : [];
+    usedPreparedSpellSlots[level][index] = usedPreparedSpellSlots[level][index] ? !usedPreparedSpellSlots[level][index] : true;
+    this.addMonsterProperties(monster, {
+      usedPreparedSpellSlots: usedPreparedSpellSlots,
     });
   }
 
@@ -620,7 +630,8 @@ class App extends Component {
             {this.state.selectedMonster && this.state.monstersAdded.get(this.state.selectedMonster) && <Monster
               roller={this.roller}
               currentInitative={this.state.currentInitative}
-              selectedMonster={this.state.selectedMonster} >
+              selectedMonster={this.state.selectedMonster}
+              togglePreparedSpellSlots={this.togglePreparedSpellSlots} >
               {this.state.monstersAdded.get(this.state.selectedMonster)}
             </Monster>}
           </div>
