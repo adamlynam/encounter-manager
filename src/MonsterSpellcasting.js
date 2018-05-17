@@ -37,7 +37,6 @@ class MonsterSpellcasting extends Component {
   renderPreparedSpells = (levels) => {
     return <div className="abilities">{Object.keys(levels).map(level => {
       return <div key={level} className="ability">
-        <div className="ability-name">Level {level} Spells</div>
         <div className="slots">{levels[level].slots && [...Array(levels[level].slots)].map((item, index) => {
           return <span onClick={() => this.props.togglePreparedSpellSlots(this.props.children, level, index)}>{(
             this.props.children.usedPreparedSpellSlots &&
@@ -48,6 +47,7 @@ class MonsterSpellcasting extends Component {
           </span>
         })}
         </div>
+        <div className="ability-name">Level {level} Spells</div>
         <div className="list">
           {levels[level].spells.map((spell, index) => {
             return <SmartSpellText key={index}>{spell}</SmartSpellText>
