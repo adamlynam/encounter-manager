@@ -19,6 +19,7 @@ class Monster extends Component {
       <div className="card-body">
         <MonsterDetails
           roller={this.props.roller}
+          toggleInnateSpellSlots={this.props.toggleInnateSpellSlots}
           togglePreparedSpellSlots={this.props.togglePreparedSpellSlots} >
           {this.props.children}
         </MonsterDetails>

@@ -188,6 +188,7 @@ class App extends Component {
             reactionsShown: true,
             legendaryActionsShown: false,
             instances: [previousState.nextCreatureKey],
+            usedInnateSpellSlots: [],
             usedPreparedSpellSlots: [],
           }
         ))
@@ -434,6 +435,15 @@ class App extends Component {
     });
   }
 
+  toggleInnateSpellSlots = (monster, frequency, index) => {
+    var usedInnateSpellSlots = this.state.monstersAdded.get(monster.key).usedInnateSpellSlots ? [...this.state.monstersAdded.get(monster.key).usedInnateSpellSlots] : [];
+    usedInnateSpellSlots[frequency] = usedInnateSpellSlots[frequency] ? usedInnateSpellSlots[frequency] : [];
+    usedInnateSpellSlots[frequency][index] = usedInnateSpellSlots[frequency][index] ? !usedInnateSpellSlots[frequency][index] : true;
+    this.addMonsterProperties(monster, {
+      usedInnateSpellSlots: usedInnateSpellSlots,
+    });
+  }
+
   togglePreparedSpellSlots = (monster, level, index) => {
     var usedPreparedSpellSlots = this.state.monstersAdded.get(monster.key).usedPreparedSpellSlots ? [...this.state.monstersAdded.get(monster.key).usedPreparedSpellSlots] : [];
     usedPreparedSpellSlots[level] = usedPreparedSpellSlots[level] ? usedPreparedSpellSlots[level] : [];
@@ -631,6 +641,7 @@ class App extends Component {
               roller={this.roller}
               currentInitative={this.state.currentInitative}
               selectedMonster={this.state.selectedMonster}
+              toggleInnateSpellSlots={this.toggleInnateSpellSlots}
               togglePreparedSpellSlots={this.togglePreparedSpellSlots} >
               {this.state.monstersAdded.get(this.state.selectedMonster)}
             </Monster>}

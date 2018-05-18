@@ -17,7 +17,10 @@ class MonsterDetails extends Component {
       <MonsterActions title="Traits" roller={this.props.roller} >{this.props.children.trait}</MonsterActions>
       <MonsterActions title="Attacks" roller={this.props.roller} >{this.props.children.action}</MonsterActions>
       <MonsterActions title="Reactions" roller={this.props.roller} >{this.props.children.reaction}</MonsterActions>
-      <MonsterSpellcasting roller={this.props.roller} togglePreparedSpellSlots={this.props.togglePreparedSpellSlots} >{this.props.children}</MonsterSpellcasting>
+      <MonsterSpellcasting
+        roller={this.props.roller}
+        toggleInnateSpellSlots={this.props.toggleInnateSpellSlots}
+        togglePreparedSpellSlots={this.props.togglePreparedSpellSlots} >{this.props.children}</MonsterSpellcasting>
       <MonsterActions title="Legendary Actions" roller={this.props.roller} >{this.props.children.legendary}</MonsterActions>
       <MonsterLairActions roller={this.props.roller} >{this.props.children}</MonsterLairActions>
       <hr />
