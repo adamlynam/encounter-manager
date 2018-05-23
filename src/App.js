@@ -13,6 +13,7 @@ import dmg from './data/bestiary/bestiary-dmg.json';
 import hotdq from './data/bestiary/bestiary-hotdq.json';
 import lmop from './data/bestiary/bestiary-lmop.json';
 import mm from './data/bestiary/bestiary-mm.json';
+import mtf from './data/bestiary/bestiary-mtf.json';
 import oota from './data/bestiary/bestiary-oota.json';
 import phb from './data/bestiary/bestiary-phb.json';
 import pota from './data/bestiary/bestiary-pota.json';
@@ -40,6 +41,7 @@ class App extends Component {
         ...hotdq.monster,
         ...lmop.monster,
         ...mm.monster,
+        ...mtf.monster,
         ...oota.monster,
         ...phb.monster,
         ...pota.monster,

@@ -151,6 +151,32 @@
 			]
 		},
 		{
+			"name": "Bear King",
+			"lairActions": [
+				"On initiative count 20 (losing initiative ties), the Bear King takes a lair action to cause one of the following effects; the Bear King can't use the same effect two rounds in a row:",
+				{
+					"type": "list",
+					"items": [
+						"The Bear King magically conjures up a swarm of eight giant bees (use {@creature giant wasp} statistics) to defend his lair. The bees act immediately, and on initiative count 20 in subsequent rounds. The bees remain until they're killed or until the Bear King dismisses them as an action. The Bear King can use this action again, but no more than eight giant bees can be present at a time.",
+						"The Bear King targets a creature within the lair that he can see. The creature must succeed on a DC 15 Constitution saving throw or be magically transformed into a brown bear as if by a {@spell polymorph} spell. At the beginning of its turn, a transformed creature repeats the saving throw. If it fails, the creature must use its action to attack one of the Bear King's foes. If it succeeds, the effect ends and the creature returns to its normal form. The effect lasts until the creature succeeds on the saving throw or until the Bear King uses this lair action again",
+						"The Bear King causes the ground in a 20-foot radius to tremble and shake. Any creatures in the affected area must succeed on a DC 15 Strength saving throw or suffer 7 (2d6) bludgeoning damage and fall prone. The ground continues to tremble until initiative count 20 on the following round, during which time the area is difficult terrain."
+					]
+				}
+			],
+			"regionalEffects": [
+				"The region surrounding Gloaming Crag is warped by the Bear King's magic, which creates one or more of the following effects:",
+				{
+					"type": "list",
+					"items": [
+						"Within 10 miles of the Bear King's lair, creatures have disadvantage on saving throws made to avoid contractinglycanthropy from a werebear.",
+						"Bees within 10 miles of the Bear King's lair are easily agitated and quick to attack. Insect swarms (bees or hornets) are common in the area, but they tend to ignore locals.",
+						"Emotions within 5 miles of the Bear King's lair run high. Arguments quickly descend into physical scuffles and enjoyable get-togethers are likely to become raucous carousing or even brawls."
+					]
+				},
+				"If the Bear King dies, conditions in the area surrounding the lair return to normal over the course of 1d6 days"
+			]
+		},
+		{
 			"name": "Beholder",
 			"lairActions": [
 				"When fighting inside its lair, a beholder can invoke the ambient magic to take lair actions. On initiative count 20 (losing initiative ties), the beholder can take one lair action to cause one of the following effects:",
@@ -872,6 +898,32 @@
 			]
 		},
 		{
+			"name": "Lord of the Hunt",
+			"lairActions": [
+				"On initiative count 20 (losing initiative ties), the Lord of the Hunt takes a lair action to cause one of the following effects; the Lord of the Hunt can't use the same effect two rounds in a row:",
+				{
+					"type": "list",
+					"items": [
+						"The Lord of the Hunt chooses a point he can see within the lair. Plants erupt from the ground in a 20-foot radius surrounding that point, creating difficult terrain. Any creatures in the area at the start of their turn, or who enter the area for the first time on a turn, must make a successful DC 15 Dexterity saving throw or become restrained by the vines and take 13 (3d8) poison damage. A creature can be freed if it or an adjacent ally uses an action to make a successful DC 15 Strength check. This effect lasts until the Lord of the Hunt uses this lair action again, or dies.",
+						"The Lord of the Hunt lets out a war cry. A creature the Lord can see within 120 feet must succeed on a DC 15 Wisdom saving throw or be frightened for 1 minute. A frightened creature repeats the saving throw at the end of its turn, ending the effect on itself on a success",
+						"The Lord of the Hunt magically marks a target he can see within 120 feet. The Lord has advantage on attack rolls against the marked target. The mark lasts until initiative count 20 on the following turn."
+					]
+				}
+			],
+			"regionalEffects": [
+				"The region containing Lord of the Hunt's encampment is warped by his magic, which creates one or more of the following effects:",
+				{
+					"type": "list",
+					"items": [
+						"Game animals become plentiful within 3 miles of the lair. Wisdom (Survival) checks to hunt for food are made with advantage, but patrols from the Wild Hunt don't take kindly to poachers.",
+						"Domesticated animals within 3 miles of the lair become skittish and fearful. They are more difficult to handle and flee the area if left to their own devices",
+						"Areas of natural terrain within 3 miles of the lair subtly rearrange themselves to create game trails through even the densest wilderness."
+					]
+				},
+				"When the Lord of the Hunt breaks camp or dies, the area around the previous campsite returns to normal immediately."
+			]
+		},
+		{
 			"name": "Marlos Urnrayle",
 			"lairActions": [
 				"If Marlos is in the earth node while {@creature Ogrémoch|PotA} isn't, the medusa can take lair actions. On initiative count 20 (losing initiative ties), Marlos uses a lair action to cast {@spell earthquake} without using components. As long as he maintains concentration on {@spell earthquake}, initiative count 20 is the start of Marlos's turn for the purpose of the spell. He can take no other lair actions while concentrating on {@spell earthquake}.",
@@ -903,6 +955,32 @@
 					]
 				},
 				"If the dragon dies, plants regrow naturally over time, and craters remain. The other effects fade over the course of 1d10 days."
+			]
+		},
+		{
+			"name": "Moonlit King",
+			"lairActions": [
+				"On initiative count 20 (losing initiative ties), the Moonlit King takes a lair action to cause one of the following effects; the Moonlit King can't use the same effect two rounds in a row:",
+				{
+					"type": "list",
+					"items": [
+						"The Moonlit King creates four beams of moonlight at four points he can see within 100 feet. The beams each illuminate a 10-foot radius with dim light. These moon beams last until the Moonlit King uses this action again, or until he dies.",
+						"The Moonlit King chooses a point he can see within 100 feet. Disembodied whispers speaking of despair and failure fill a 30-foot radius from that point. All creatures other than fiends in the area must succeed on a DC 15 Wisdom saving throw or become frightened until initiative count 20 on the following round.",
+						"The Moonlit King magically summons four {@creature shadow demon|mm|shadow demons}. The demons appear in unoccupied spaces the Moonlit King can see within 60 feet. The demons act immediately and remain until initiative count 20 on the following round."
+					]
+				}
+			],
+			"regionalEffects": [
+				"The region containing the Moonlit King's lair is warped by the fey lord's magic, which creates one or more of the following effects:",
+				{
+					"type": "list",
+					"items": [
+						"Dreams and fears take on a life of their own. Minor visual and auditory hallucinations plague creatures within 6 miles of the lair.",
+						"The Moonlit King can communicate telepathically with and share the senses of any {@creature stryx|ToB 3pp} within 10 miles of his lair",
+						"Weather conditions don't inhibit moonlight shining within 10 miles of the lair; clouds part, rain seems to channel moonbeams, snow takes on a luminous silver glow."
+					]
+				},
+				"If the Moonlit King dies, conditions in the area surrounding the lair return to normal over the course of 1d10 days."
 			]
 		},
 		{
@@ -992,7 +1070,7 @@
 				{
 					"type": "list",
 					"items": [
-						"Orcus's voice booms throughout the lair. His utterance causes one creature of his choice to be subjected to {@spell power word kill} (save DC 23). Orcus needn't see the creature, but he must be aware that the individual is in the lair.",
+						"Orcus's voice booms throughout the lair. His utterance causes one creature of his choice to be subjected to {@spell power word kill}. Orcus needn't see the creature, but he must be aware that the individual is in the lair.",
 						"Orcus causes up to six corpses within the lair to rise as skeletons, zombies, or ghouls. These undead obey his telepathic commands, which can reach anywhere in the lair.",
 						"Orcus causes skeletal arms to rise from an area on the ground in a 20-foot square that he can see. They last until the next initiative count 20. Each creature in that area when the arms appear must succeed on a DC 23 Strength saving throw or be restrained until the arms disappear or until Orcus releases their grasp (no action required)."
 					]
@@ -1053,6 +1131,58 @@
 			]
 		},
 		{
+			"name": "Queen of Night and Magic",
+			"lairActions": [
+				"On initiative count 20 (losing initiative ties), the Queen of Night and Magic takes a lair action to cause one of the following effects; the Queen of Night and Magic can't use the same effect two rounds in a row:",
+				{
+					"type": "list",
+					"items": [
+						"The Queen wills darkness to overpower the light. All bright light sources in the lair shed only dim light to their normal bright light radius, and dim light sources are extinguished. This lasts until the Queen dismisses the effect or dies.",
+						"An opaque wall of writhing shadows springs up from a solid surface within 120 feet of the Queen. The wall is up to 60 feet long, 10 feet high, and 5 feet thick. Each creature in the area must make a successful DC 15 Dexterity saving throw or take 18 (4d8) necrotic damage. Creatures in the wall's space are pushed 5 feet out of the wall's space, appearing on whichever side of the wall they choose. A creature can move through the wall, but the semimaterial shadow resists intrusion. For every foot a creature travels through the wall, it must spend 4 feet of movement. Furthermore, any creature that, during its own turn, occupies any part of the wall's space takes 18 (4d8) necrotic damage, or half damage with a successful DC 15 Constitution saving throw. Each 10-foot section of wall has AC 5, 15 hit points, vulnerability to radiant damage, resistance to bludgeoning and piercing damage, and immunity to cold, poison, and psychic damage. The wall lasts until the Queen uses this lair action again, or until she dies.",
+						"The Queen targets one creature within 60 feet of her and assails its mind with visions of hopelessness and despair. The creature must succeed on a DC 15 Wisdom saving throw or be stunned until initiative count 20 on the next round."
+					]
+				}
+			],
+			"regionalEffects": [
+				"The region containing the Queen of Night and Magic's lair is warped by her magic, which creates one or more of the following effects:",
+				{
+					"type": "list",
+					"items": [
+						"Shadows come to life within 6 miles of the Queen's lair. Most of the time these living shadows are unnerving and nothing more, but when a creature acts against the interests of the Queen, the shadows can interfere and cause any relevant die roll to be made with disadvantage.",
+						"Magic saturates the area within 6 miles of the lair, causing minor random effects similar to a {@spell prestidigitation} cantrip",
+						"The Queen of Night and Magic can cast her senses to any area containing darkness, dim light, or shadows within 6 miles of her lair, similar to a {@spell clairvoyance} spell."
+					]
+				},
+				"While the Summer Court rules, the regional effects of the Queen's lair extend into the Winter Palace, but they are diminished and weaker than normal. During the Winter Court's reign, the Winter Palace is not subject to the regional effects. If the Queen of Night and Magic dies, conditions in the area surrounding the lair gradually return to normal over the course of 2d10 days."
+			]
+		},
+		{
+			"name": "Queen of Witches",
+			"lairActions": [
+				"On initiative count 20 (losing initiative ties), Nicnevin takes a lair action to cause one of the following effects; Nicnevin can't use the same effect two rounds in a row:",
+				{
+					"type": "list",
+					"items": [
+						"Nicnevin causes a searing flare of moonlight to burst from a point she can see within 100 feet. All creatures Nicnevin chooses within 30 feet of that point take 13 (3d8) radiant damage, or half damage with a successful DC 15 Wisdom saving throw. Creatures not in their natural form have disadvantage on the saving throw, and if they fail, they revert to their natural form immediately (this does not affect any shape-changing effect created by Nicnevin).",
+						"A wall of softly glowing crystal springs up from a solid surface in the lair. The wall is 60 feet long, 10 feet high, 5 feet thick, blocks line of sight, and sheds dim light out to 10 feet. Creatures within the wall's area when it appears must succeed on a DC 15 Dexterity saving throw or take 14 (4d6) radiant damage. The creature is pushed out of the wall's space to whichever side it chooses. Each 5-foot section of the wall has AC 15, 10 hit points, resistance to fire, slashing, and piercing damage, immunity to poison and psychic damage, and vulnerability to thunder. The wall lasts until Nicnevin uses this action again or dies.",
+						"Until initiative count 20 on the following round, any creatures other than fey who attempt to cast a spell must succeed on a DC 15 Constitution saving throw or the spell fails and the spell slot is expended. A creature becomes aware of this effect the moment it begins casting a spell, and it can choose to take a different action instead."
+					]
+				}
+			],
+			"regionalEffects": [
+				"The region containing Nicnevin's lair is warped by the queen's magic, which creates one or more of the following effects:",
+				{
+					"type": "list",
+					"items": [
+						"Calling Nicnevin's name under the light of the moon within 10 miles of her lair draws Nicnevin's attention (as if she cast a {@spell scrying} spell). She may visit the supplicant and hear a request, especially if the request is repeated on multiple nights. For 24 hours after the invocation, Nicenvin has a connection to the area that allows her to target it with teleportation circle",
+						"Despite the weather, the moon is always visible for most of the night within 10 miles of the lair. Cloud cover has many breaks, or the moon's light sharply penetrates the clouds.",
+						"Silvery fog is common within 10 miles of the lair, and strange whispers are heard within the mist."
+					]
+				},
+				"If Nicnevin dies, conditions in the area surrounding the lair return to normal over the course of 1d10 days."
+			]
+		},
+		{
 			"name": "Red Dragon",
 			"lairActions": [
 				"On initiative count 20 (losing initiative ties), the dragon takes a lair action to cause one of the following effects; the dragon can't use the same effect two rounds in a row:",
@@ -1076,6 +1206,32 @@
 					]
 				},
 				"If the dragon dies, these effects fade over the course of 1d10 days."
+			]
+		},
+		{
+			"name": "River King",
+			"lairActions": [
+				"On initiative count 20 (losing initiative ties), the River King takes a lair action to cause one of the following effects; the River King can't use the same effect two rounds in a row:",
+				{
+					"type": "list",
+					"items": [
+						"The fey river swells and rushes over the land, or the walls of the Hall buckle and allow the torrent in. The River King chooses a 10-foot-wide path up to 60 feet long. Each creature in the path of the water must make a DC 15 Strength saving throw. Creatures that fail the save are swept 20 feet down the path of the water and take 9 (2d8) bludgeoning damage.",
+						"The River King targets a creature he can see within 60 feet. That creature's mouth and throat fill with river water. The creature must make a DC 15 Constitution saving throw. On a success, the creature manages to hold its breath, but on a failure, it begins to suffocate. A suffocating but conscious creature repeats the saving throw at the end of its turn, ending the effect on itself on a success. Another creature within 5 feet can use an action to make a DC 15 Wisdom (Medicine) check. On a success, the suffocating creature coughs up the water and the effect ends. Otherwise the effect lasts until the River King uses this action again or dies.",
+						"The River King targets a creature he can see within 120 feet. His commanding presence overwhelms the creature, who must make a DC 15 Charisma saving throw. On a failure, the creature is charmed by the River King until initiative count 20 on the following round."
+					]
+				}
+			],
+			"regionalEffects": [
+				"The region containing the River King's lair is warped by its magic, which creates one or more of the following effects:",
+				{
+					"type": "list",
+					"items": [
+						"The current of rivers and streams within 6 miles of the lair becomes strong and erratic. Creatures without a swim speed who start their turns in running water must succeed on a DC 15 Strength (Athletics) check or be swept 60 feet downriver.",
+						"Lakes, ponds, rivers, and streams within 6 miles of the lair teem with fish and other wildlife",
+						"Rain and thunderstorms are common within 6 miles of the lair, and often build to torrential downpours that create heavy obscurement and cause waterways to overflow their banks"
+					]
+				},
+				"If the River King dies, conditions in the area surrounding the lair return to normal over the course of 1d10 days."
 			]
 		},
 		{
@@ -1152,6 +1308,32 @@
 					]
 				},
 				"If the dragon dies, changed weather reverts to normal, as described in the spell, and the other effects fade in 1d10 days."
+			]
+		},
+		{
+			"name": "Snow Queen",
+			"lairActions": [
+				"On initiative count 20 (losing initiative ties), the Snow Queen takes a lair action to cause one of the following effects; the Snow Queen can't use the same effect two rounds in a row:",
+				{
+					"type": "list",
+					"items": [
+						"A wall of dense snow springs into existence within 120 feet of the Snow Queen. The wall is up to 60 feet long, 10 feet high, and 5 feet thick, and it blocks line of sight. When the wall appears, each creature in the wall's area must make a DC 15 Dexterity saving throw. A creature that fails the saving throw takes 18 (4d8) cold damage and is pushed 5 feet out of the wall's space, on whichever side of the wall it chooses. A creature that touches the wall at any time takes the same damage. Each 10-foot section of the wall has AC 5, 15 hit points, vulnerability to fire damage, resistance to bludgeoning and piercing damage, and immunity to cold, poison, and psychic damage. The wall lasts until the Snow Queen uses this action again, or she dies.",
+						"Icy wind and stinging snow swirls around the Snow Queen. All creatures that aren't immune to cold damage have disadvantage when making saving throws against cold damage or cold-based effects while within 60 feet of the Snow Queen. This effect lasts until initiative count 20 on the following round.",
+						"The snow and ice of the lair shimmer and gleam, catching the light and flashing it into the eyes of the Snow Queen's foes. Attack rolls against the Snow Queen and her allies within the lair have disadvantage until initiative count 20 on the following round."
+					]
+				}
+			],
+			"regionalEffects": [
+				"The region containing the Snow Queen's lair is warped by the fey lady's magic, which creates one or more of the following effects:",
+				{
+					"type": "list",
+					"items": [
+						"Within 10 miles of the lair, snow and ice resist melting. Snow and ice can be melted only with prolonged contact with fire",
+						"The sky is overcast most of the time within 10 miles of the lair, and snowfall is common. The area is difficult terrain for Tiny, Small, and Medium creatures because of deep snow",
+						"Light snowfall or swirling powder blown by the wind lightly obscures the area within 5 miles of the lair."
+					]
+				},
+				"If the Snow Queen dies, conditions in the area surrounding the lair return to normal over the course of 1d10 days."
 			]
 		},
 		{
@@ -1614,6 +1796,134 @@
 				    ]
 				},
 				"If the morkoth dies, these regional effects end immediately."
+			]
+		},
+		{
+		    "name": "Balhannoth",
+		    "lairActions": [
+				"When fighting inside its lair, a balhannoth can use lair actions. On initiative count 20 (losing initiative ties), a balhannoth can take one lair action to cause one of the following effects; the balhannoth can't use the same lair action two rounds in a row:",
+				{
+				    "type": "list",
+				    "items": [
+						"The balhannoth warps reality around it in an area up to 500 feet square. After 10 minutes, the terrain in the area reshapes to assume the appearance of a location sought by one intelligent creature whose mind the balhannoth has read (see Regional Effects below). The transformation affects nonliving material only and can't create anything with moving parts or magical properties. Any object created in this area is, upon close inspection, revealed as a fake. Books are filled with empty pages, golden items are obvious counterfeits, and so on. The transformation lasts until the balhannoth dies or uses this lair action again.",
+						"The balhannoth targets one creature within 500 feet of it. The target must succeed on a DC 16 Wisdom saving throw or the target, along with whatever it is wearing and carrying, teleports to an unoccupied space of the balhannoth's choice within 60 feet of it.",
+						"The balhannoth targets one creature within 500 feet of it. The target must succeed on a DC 16 Wisdom saving throw or the balhannoth becomes invisible to that creature for 1 minute. This effect ends if the balhannoth attacks the target."
+				    ]
+				}
+		    ],
+			"regionalEffects": [
+				"A region containing a balhannoth’s lair becomes warped by the creature’s unnatural presence, which creates one or more of the following effects:",
+				{
+				    "type": "list",
+				    "items": [
+						"Creatures within 1 mile of the balhannoth's lair experience a sensation of being close to whatever they desire most. The sensation grows stronger the closer the creatures come to the balhannoth's lair.",
+						"The balhannoth can sense the strongest desires of any humanoid within 1 mile of it and learns whether those desires involve a place: a safe location to rest, a temple, home, or somewhere else."
+				    ]
+				},
+				"If the balhannoth dies, these effects end immediately."
+			]
+		},
+		{
+		    "name": "Geryon",
+		    "lairActions": [
+				"On initiative count 20 (losing initiative ties), Geryon can take a lair action to cause one of the following effects; he can't use the same effect two rounds in a row:",
+				{
+				    "type": "list",
+				    "items": [
+						"Geryon causes a blast of cold to burst from the ground at a point he can see within 120 feet of him. The cold fills a cube, 10 feet on each side, centered on that point. Each creature in that area must succeed on a DC 21 Constitution saving throw or take 28 (8d6) cold damage.",
+						"Geryon targets one creature he can see within 60 feet of him. The target must succeed on a DC 21 Wisdom saving throw or become restrained for 1 minute. The target can end the effect on itself if it deals any damage to one or more of its allies.",
+						"Geryon casts the {@spell banishment} spell."
+				    ]
+				}
+		    ],
+			"regionalEffects": [
+				"The region containing Geryon's lair is warped by his magic, creating one or more of the following effects:",
+				{
+				    "type": "list",
+				    "items": [
+						"Intelligent creatures within 1 mile of the lair frequently see shimmering portals leading to places they consider safe. Passing through a portal always deposits a traveler somewhere in Stygia.",
+						"Freezing strong winds howl around the area within 1 mile of the lair.",
+						"Howls and screams fill the air within 1 mile of the lair. Any creature that finishes a short or long rest in this area must succeed on a DC 21 Wisdom saving throw or derive no benefit from the rest."
+				    ]
+				},
+				"If Geryon dies, these effects fade over the course of 1d10 days."
+			]
+		},
+		{
+		    "name": "Zariel",
+		    "lairActions": [
+				"On initiative count 20 (losing initiative ties), Zariel can take a lair action to cause one of the following effects; she can't use the same effect two rounds in a row:",
+				{
+				    "type": "entries",
+				    "name": "",
+				    "entries": [
+						"Zariel casts major image four times at its lowest level, targeting different areas with the spell. Zariel prefers to create images of intruders' loved ones being burned alive. Zariel doesn't need to concentrate on the spells, which end on initiative count 20 of the next round. Each creature that can see these illusions must succeed on a DC 26 Wisdom saving throw or become frightened of the illusion for 1 minute. A frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.",
+						"Zariel casts her innate {@spell fireball} spell."
+				    ]
+				}
+		    ],
+			"regionalEffects": [
+				"The region containing Zariel's lair is warped by her magic, which creates one or more of the following effects:",
+				{
+				    "type": "list",
+				    "items": [
+						"The area within 9 miles of the lair is filled with screaming voices and the stench of burning meat.",
+						"Once every 60 feet within 1 mile of the lair, 10-foot-high gouts of flame rise from the ground. Any creature or object that touches the flame takes 7 (2d6) fire damage, though it can take this damage no more than once per round.",
+						"The area within 2 miles, but no closer than 500 feet, of the lair is filled with smoke, which causes the area to be heavily obscured. The smoke can't be cleared away."
+				    ]
+				},
+				"If Zariel dies, these effects fade over the course of 1d10 days."
+			]
+		},
+		{
+		    "name": "Githzerai Anarch",
+		    "lairActions": [
+				"An anarch can use lair actions. On initiative count 20 (losing initiative ties), the anarch can take a lair action to cause one of the following effects; the anarch can't use the same effect two rounds in a row:",
+				{
+				    "type": "list",
+				    "items": [
+						"The anarch casts the {@spell lightning bolt} spell (at 5th level), but the anarch can change the damage type from lightning to cold, fire, psychic, radiant, or thunder. If the spell deals damage other than fire or lightning, it doesn't ignite flammable objects.",
+						"The anarch casts the {@spell creation} spell (as a 9th-level spell) using the unformed substance of Limbo instead of shadow material. If used in Limbo, the object remains until the anarch's concentration is broken, regardless of its composition. If the anarch moves more than 120 feet from the object, its concentration breaks.",
+						"The anarch can magically move an object it can see within 150 feet of it by making a Wisdom check with advantage. The DC depends on the object's size: DC 5 for Tiny, DC 10 for Small, DC 15 for Medium, DC 20 for Large, and DC 25 for Huge or larger."
+				    ]
+				}
+		    ],
+			"regionalEffects": [
+				"The region containing an anarch's lair is warped by its presence, which creates one or more of the following effects:",
+				{
+				    "type": "list",
+				    "items": [
+						"In Limbo, the anarch can spend 10 minutes stabilizing a 5-mile area centered on it, causing the unformed substance to take whatever inanimate form the anarch chooses. During that process, the anarch determines the shape and composition of the forms created.",
+						"The anarch stabilizes any object created in Limbo and brought to the Material Plane for as long as the anarch remains within 1 mile of it (no action required)."
+				    ]
+				},
+				"If the anarch dies, these effects end after 1d6 rounds. All formed substance becomes a chaotic churn of energy and matter, unraveling into unformed substance that dissipates 1d6 rounds later."
+			]
+		},
+		{
+		    "name": "Merrenoloth",
+		    "lairActions": [
+				"Any ship a merrenoloth is contracted to captain becomes the creature's lair. When fighting on the ship, the merrenoloth can invoke its ability to take lair actions. On initiative count 20 (losing initiative ties), the merrenoloth can take one lair action to cause one of the following effects; it can't use the same effect two rounds in a row:",
+				{
+				    "type": "list",
+				    "items": [
+						"The ship regains 22 (4d10) hit points.",
+						"A strong wind propels the ship, increasing its speed by 30 feet until initiative count 20 on the next round.",
+						"The air within 60 feet of the ship is filled with howling wind. Until initiative count 20 on the next round, that area is difficult terrain, and when a Medium or smaller creature flies into that area or starts its turn flying there, it must succeed on a DC 13 Strength saving throw or be knocked prone."
+				    ]
+				}
+		    ],
+			"regionalEffects": [
+				"A merrenoloth imbues its vessel with powerful magic that creates one or more of the following effects:",
+				{
+				    "type": "list",
+				    "items": [
+						"The ship doesn't sink even if its hull is breached.",
+						"The ship always stays on course to the destination the merrenoloth names.",
+						"Creatures the merrenoloth chooses to take on the ship aren't discomfited by wind or weather, though this effect doesn't protect against damage."
+				    ]
+				},
+				"If the merrenoloth dies, these effects fade over the course of 1d6 hours."
 			]
 		}
 	]

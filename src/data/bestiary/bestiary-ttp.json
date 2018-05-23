@@ -5,10 +5,18 @@
 			"name": "Decapus",
 			"size": "L",
 			"type": "monstrosity",
-			"alignment": "unaligned",
+			"alignment": [
+				"U"
+			],
 			"ac": "14 (natural armor)",
-			"hp": "75 (10d10+20)",
-			"speed": "15 ft., climb 30 ft.",
+			"hp": {
+				"average": 75,
+				"formula": "10d10+20"
+			},
+			"speed": {
+				"walk": 15,
+				"climb": 30
+			},
 			"str": 15,
 			"dex": 14,
 			"con": 14,
@@ -33,13 +41,13 @@
 				{
 					"name": "Bite",
 					"entries": [
-						"Melee Weapon Attack: +4 to hit, reach 5 ft., one creature grappled by the decapus. Hit: 7 (2d4+2) piercing damage."
+						"Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one creature grappled by the decapus. Hit: 7 ({@dice 2d4+2}) piercing damage."
 					]
 				},
 				{
 					"name": "Tentacles",
 					"entries": [
-						"Melee Weapon Attack: +4 to hit, reach 10 ft., one target. Hit: 24 (9d4+2) bludgeoning damage or 14 (5d4+2) bludgeoning damage if the decapus is grappling a creature other than the target or if the decapus is on the ground or floor. The target is also grappled (escape DC 14) unless the decapus is already grappling a creature. Until this grapple ends, the target is restrained."
+						"Melee Weapon Attack: {@hit +4} to hit, reach 10 ft., one target. Hit: 24 ({@dice 9d4+2}) bludgeoning damage or 14 ({@dice 5d4+2}) bludgeoning damage if the decapus is grappling a creature other than the target or if the decapus is on the ground or floor. The target is also grappled (escape DC 14) unless the decapus is already grappling a creature. Until this grapple ends, the target is restrained."
 					]
 				}
 			],
@@ -50,10 +58,17 @@
 			"name": "Geonid",
 			"size": "S",
 			"type": "elemental",
-			"alignment": "neutral",
+			"alignment": [
+				"N"
+			],
 			"ac": "17 (natural armor)",
-			"hp": "26 (4d6+12)",
-			"speed": "30 ft.",
+			"hp": {
+				"average": 26,
+				"formula": "4d6+12"
+			},
+			"speed": {
+				"walk": 30
+			},
 			"str": 12,
 			"dex": 10,
 			"con": 16,
@@ -79,7 +94,7 @@
 				{
 					"name": "Club",
 					"entries": [
-						"Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 3 (1d4+1) bludgeoning damage."
+						"Melee Weapon Attack: {@hit +3} to hit, reach 5 ft., one target. Hit: 3 ({@dice 1d4+1}) bludgeoning damage."
 					]
 				},
 				{
@@ -96,19 +111,33 @@
 			"name": "Topi",
 			"size": "S",
 			"type": "undead",
-			"alignment": "chaotic evil",
+			"alignment": [
+				"C",
+				"E"
+			],
 			"ac": "13 (natural armor)",
-			"hp": "13 (3d6+3)",
-			"speed": "30 ft.",
+			"hp": {
+				"average": 13,
+				"formula": "3d6+3"
+			},
+			"speed": {
+				"walk": 30
+			},
 			"str": 7,
 			"dex": 15,
 			"con": 12,
 			"int": 6,
 			"wis": 10,
 			"cha": 5,
-			"resist": "bludgeoning",
-			"immune": "poison",
-			"conditionImmune": "poisoned",
+			"resist": [
+				"bludgeoning"
+			],
+			"immune": [
+				"poison"
+			],
+			"conditionImmune": [
+				"poisoned"
+			],
 			"senses": "darkvision 60 ft.",
 			"languages": "understands the languages it knew in life but can't speak",
 			"passive": 10,
@@ -131,7 +160,7 @@
 				{
 					"name": "Venomous Claws",
 					"entries": [
-						"Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4+2) slashing damage plus 2 (1d4) poison damage, and the target must succeed on a DC 11 Constitution saving throw or be poisoned until the end of the target's next turn."
+						"Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one target. Hit: 4 ({@dice 1d4+2}) slashing damage plus 2 ({@dice 1d4}) poison damage, and the target must succeed on a DC 11 Constitution saving throw or be poisoned until the end of the target's next turn."
 					]
 				}
 			],
@@ -147,10 +176,18 @@
 					"tortle"
 				]
 			},
-			"alignment": "lawful good",
+			"alignment": [
+				"L",
+				"G"
+			],
 			"ac": "17 (natural armor)",
-			"hp": "22 (4d8+4)",
-			"speed": "30 ft.",
+			"hp": {
+				"average": 22,
+				"formula": "4d8+4"
+			},
+			"speed": {
+				"walk": 30
+			},
 			"str": 15,
 			"dex": 10,
 			"con": 12,
@@ -176,19 +213,19 @@
 				{
 					"name": "Claws",
 					"entries": [
-						"Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4+2) slashing damage."
+						"Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one target. Hit: 4 ({@dice 1d4+2}) slashing damage."
 					]
 				},
 				{
 					"name": "Quarterstaff",
 					"entries": [
-						"Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6+2) bludgeoning damage, or 6 (1d8+2) bludgeoning damage when used with two hands."
+						"Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one target. Hit: 5 ({@dice 1d6+2}) bludgeoning damage, or 6 ({@dice 1d8+2}) bludgeoning damage when used with two hands."
 					]
 				},
 				{
 					"name": "Light Crossbow",
 					"entries": [
-						"Ranged Weapon Attack: +2 to hit, range 80/320 ft., one target. Hit: 4 (1d8) piercing piercing damage."
+						"Ranged Weapon Attack: {@hit +2} to hit, range 80/320 ft., one target. Hit: 4 ({@dice 1d8}) piercing piercing damage."
 					]
 				},
 				{
@@ -210,10 +247,18 @@
 					"tortle"
 				]
 			},
-			"alignment": "lawful neutral",
+			"alignment": [
+				"L",
+				"N"
+			],
 			"ac": "17 (natural armor)",
-			"hp": "33 (6d8+6)",
-			"speed": "30 ft.",
+			"hp": {
+				"average": 33,
+				"formula": "6d8+6"
+			},
+			"speed": {
+				"walk": 30
+			},
 			"str": 14,
 			"dex": 10,
 			"con": 12,
@@ -273,13 +318,13 @@
 				{
 					"name": "Claws",
 					"entries": [
-						"Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 4 (1d4+2) slashing damage."
+						"Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one target. Hit: 4 ({@dice 1d4+2}) slashing damage."
 					]
 				},
 				{
 					"name": "Quarterstaff",
 					"entries": [
-						"Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6+2) bludgeoning damage, or 6 (1d8+2) bludgeoning damage when used with two hands."
+						"Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one target. Hit: 5 ({@dice 1d6+2}) bludgeoning damage, or 6 ({@dice 1d8+2}) bludgeoning damage when used with two hands."
 					]
 				},
 				{
@@ -290,6 +335,95 @@
 				}
 			],
 			"page": 23
+		},
+		{
+			"name": "Giant Slug",
+			"size": "L",
+			"type": "monstrosity",
+			"source": "TTP",
+			"alignment": [
+				"U"
+			],
+			"ac": "13 (natural armor)",
+			"hp": {
+				"average": 66,
+				"formula": "6d10+18"
+			},
+			"speed": {
+				"walk": 10,
+				"climb": 10
+			},
+			"str": 14,
+			"dex": 13,
+			"con": 16,
+			"int": 1,
+			"wis": 12,
+			"cha": 5,
+			"skill": {
+				"perception": "+3"
+			},
+			"senses": "darkvision 60 ft.",
+			"languages": "Abyssal, Aquan, Common",
+			"passive": 13,
+			"cr": "3",
+			"trait": [
+				{
+					"name": "Keen Smell",
+					"entries": [
+						"The slug has advantage on Wisdom (Perception) checks that rely on smell."
+					]
+				},
+				{
+					"name": "Spider Climb",
+					"entries": [
+						"The slug can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check."
+					]
+				}
+			],
+			"action": [
+				{
+					"name": "Multiattack",
+					"entries": [
+						"The slug makes two attacks: one with its tentacles and one with its bite."
+					]
+				},
+				{
+					"name": "Tentacles",
+					"entries": [
+						"Melee Weapon Attack: {@hit +8} to hit, reach 10 ft., one creature. Hit: 4 ({@dice 1d4+2}) poison damage, and the target must succeed on a DC 13 Constitution saving throw or be poisoned for 1 minute. Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the poison on itself on a success."
+					]
+				},
+				{
+					"name": "Bite",
+					"entries": [
+						"Melee Weapon Attack: {@hit +4} to hit, reach 5 ft., one target. Hit: 7 ({@dice 2d4+2}) piercing damage."
+					]
+				}
+			],
+			"reaction": [
+				{
+					"name": "Animate Tentacle",
+					"entries": [
+						"When the slug takes damage in this cave (Shrine of Umberlee), it can use its reaction to animate one of the tentacles of the kraken statue and cause it to make a melee weapon attack ({@hit +3} to hit) against one creature within 20 feet of the statue that the slug can see. The tentacle deals 8 ({@dice 1d8+4}) bludgeoning damage on a hit."
+					]
+				}
+			],
+			"spellcasting": [
+				{
+					"name": "Innate Spellcasting",
+					"headerEntries": [
+						"The slug's innate spellcasting ability is Wisdom (spell save DC 11, {@hit 3} to hit with spell attacks). It can innately cast the following spells, requiring no material components:"
+					],
+					"daily": {
+						"1e": [
+							"{@spell guiding bolt}",
+							"{@spell sanctuary}",
+							"{@spell spiritual weapon}"
+						]
+					}
+				}
+			],
+			"page": 18
 		}
 	]
 }
