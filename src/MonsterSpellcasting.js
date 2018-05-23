@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SmartEntryText from './SmartEntryText';
 import SmartSpellText from './SmartSpellText';
 
 const OFFSET = 100;
@@ -103,7 +104,7 @@ class MonsterSpellcasting extends Component {
           <h4>{type.name}</h4>
           <div className="abilities">
             <div className="ability">
-              {type.headerEntries.join(', ')}
+              <SmartEntryText>{type.headerEntries.join(', ')}</SmartEntryText>
             </div>
           </div>
           {type.will && this.renderAtWillSpells(type.will)}

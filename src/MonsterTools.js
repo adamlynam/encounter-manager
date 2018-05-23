@@ -37,23 +37,6 @@ xpCrLookup.set('28', 120000);
 xpCrLookup.set('29', 135000);
 xpCrLookup.set('30', 155000);
 
-function parseNumberFromListWithMatchingText(list, text) {
-  if (list === undefined) {
-    return undefined;
-  }
-  var match = list.split(',')
-    .find(item => {
-      return item.includes(text);
-    });
-  return match === undefined ? undefined : parseInt(longestNumberRegex.exec(match)[0], 10);
-}
-
-function parseGroundSpeed(monster) {
-  var speeds = monster.speed.split(',');
-  var groundSpeed = speeds[0];
-  return groundSpeed === undefined ? undefined : parseInt(longestNumberRegex.exec(groundSpeed)[0], 10);
-}
-
 export function calculateModifier(value) {
   return Math.floor((value - 10) / 2);
 }
@@ -102,18 +85,17 @@ export function parseMonsterSize(monster) {
 }
 
 export function parseMonsterHealth(monster) {
-  var exp = new RegExp('([0-9]*).*');
-  return parseInt(monster.hp.match(exp)[1], 10);
+  return parseInt(monster.hp.average, 10);
 }
 
 export function parseMonsterSaves(monster) {
   return {
-    str: parseNumberFromListWithMatchingText(monster.save, 'Str'),
-    dex: parseNumberFromListWithMatchingText(monster.save, 'Dex'),
-    con: parseNumberFromListWithMatchingText(monster.save, 'Con'),
-    int: parseNumberFromListWithMatchingText(monster.save, 'Int'),
-    wis: parseNumberFromListWithMatchingText(monster.save, 'Wis'),
-    cha: parseNumberFromListWithMatchingText(monster.save, 'Cha'),
+    str: parseInt(monster.save.str, 10),
+    dex: parseInt(monster.save.dex, 10),
+    con: parseInt(monster.save.con, 10),
+    int: parseInt(monster.save.int, 10),
+    wis: parseInt(monster.save.wis, 10),
+    cha: parseInt(monster.save.cha, 10),
   }
 }
 
@@ -142,11 +124,11 @@ export function parseMonsterSkills(monster) {
 
 export function parseMonsterSpeeds(monster) {
   return {
-    groundSpeed: parseGroundSpeed(monster),
-    burrowSpeed: parseNumberFromListWithMatchingText(monster.speed, 'burrow'),
-    climbSpeed: parseNumberFromListWithMatchingText(monster.speed, 'climb'),
-    flySpeed: parseNumberFromListWithMatchingText(monster.speed, 'fly'),
-    swimSpeed: parseNumberFromListWithMatchingText(monster.speed, 'swim'),
+    groundSpeed: monster.speed.walk ? parseInt(monster.speed.walk, 10) : undefined,
+    burrowSpeed: monster.speed.burrow ? parseInt(monster.speed.burrow, 10) : undefined,
+    climbSpeed: monster.speed.climb ? parseInt(monster.speed.climb, 10) : undefined,
+    flySpeed: monster.speed.fly ? parseInt(monster.speed.fly, 10) : undefined,
+    swimSpeed: monster.speed.swim ? parseInt(monster.speed.swim, 10) : undefined,
   };
 }
 
