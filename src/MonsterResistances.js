@@ -3,21 +3,25 @@ import React, { Component } from 'react';
 class MonsterResistances extends Component {
 
   flattenListToString = (list) => {
-    return list.map(item => {
-      if (typeof item === 'string' || item instanceof String) {
-        return item;
-      }
-      else if (item.note && item.resist) {
-        return this.flattenListToString(item.resist) + ' (' + item.note + ')';
-      }
-      else if (item.note && item.immune) {
-        return this.flattenListToString(item.immune) + ' (' + item.note + ')';
-      }
-      else if (item.note && item.conditionImmune) {
-        return this.flattenListToString(item.conditionImmune) + ' (' + item.note + ')';
-      }
+    if (typeof list === 'string' || list instanceof String) {
       return '';
-    }).join(', ');
+    else {
+      return list.map(item => {
+        if (typeof item === 'string' || item instanceof String) {
+          return item;
+        }
+        else if (item.note && item.resist) {
+          return this.flattenListToString(item.resist) + ' (' + item.note + ')';
+        }
+        else if (item.note && item.immune) {
+          return this.flattenListToString(item.immune) + ' (' + item.note + ')';
+        }
+        else if (item.note && item.conditionImmune) {
+          return this.flattenListToString(item.conditionImmune) + ' (' + item.note + ')';
+        }
+        return '';
+      }).join(', ');
+    }
   }
 
   renderResistances = (monster) => {
