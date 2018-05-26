@@ -5,6 +5,7 @@ class MonsterResistances extends Component {
   flattenListToString = (list) => {
     if (typeof list === 'string' || list instanceof String) {
       return '';
+    }
     else {
       return list.map(item => {
         if (typeof item === 'string' || item instanceof String) {
