@@ -90,12 +90,12 @@ export function parseMonsterHealth(monster) {
 
 export function parseMonsterSaves(monster) {
   return {
-    str: parseInt(monster.save.str, 10),
-    dex: parseInt(monster.save.dex, 10),
-    con: parseInt(monster.save.con, 10),
-    int: parseInt(monster.save.int, 10),
-    wis: parseInt(monster.save.wis, 10),
-    cha: parseInt(monster.save.cha, 10),
+    str: monster.save ? parseInt(monster.save.str, 10) : undefined,
+    dex: monster.save ? parseInt(monster.save.dex, 10) : undefined,
+    con: monster.save ? parseInt(monster.save.con, 10) : undefined,
+    int: monster.save ? parseInt(monster.save.int, 10) : undefined,
+    wis: monster.save ? parseInt(monster.save.wis, 10) : undefined,
+    cha: monster.save ? parseInt(monster.save.cha, 10) : undefined,
   }
 }
 
