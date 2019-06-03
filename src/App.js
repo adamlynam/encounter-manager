@@ -455,6 +455,90 @@ class App extends Component {
     });
   }
 
+  decreaseChallengeTotalHP = (monster) => {
+    var newhp = Object.assign({}, Object.assign(
+      monster.hp,
+      {
+        average: (MonsterTools.parseMonsterHealth(monster) - 15).toString(),
+      }
+    ));
+    this.addMonsterProperties(monster, {
+      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) - 0.5).toString(),
+      hp: newhp,
+    });
+  }
+
+  increaseChallengeTotalHP = (monster) => {
+    var newhp = Object.assign({}, Object.assign(
+      monster.hp,
+      {
+        average: (MonsterTools.parseMonsterHealth(monster) + 15).toString(),
+      }
+    ));
+    this.addMonsterProperties(monster, {
+      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) + 0.5).toString(),
+      hp: newhp,
+    });
+  }
+
+  decreaseChallengeAC = (monster) => {
+    this.addMonsterProperties(monster, {
+      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) - 0.5).toString(),
+      ac: (MonsterTools.parseMonsterAc(monster) - 1).toString(),
+    });
+  }
+
+  increaseChallengeAC = (monster) => {
+    this.addMonsterProperties(monster, {
+      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) + 0.5).toString(),
+      ac: (MonsterTools.parseMonsterAc(monster) + 1).toString(),
+    });
+  }
+
+  decreaseChallengeToHit = (monster) => {
+  }
+
+  increaseChallengeToHit = (monster) => {
+  }
+
+  decreaseChallengeDamage = (monster) => {
+  }
+
+  increaseChallengeDamage = (monster) => {
+  }
+
+  decreaseChallengeEverything = (monster) => {
+    this.decreaseChallengeTotalHP(monster);
+    this.decreaseChallengeAC(monster);
+    this.decreaseChallengeToHit(monster);
+    this.decreaseChallengeDamage(monster);
+    this.addMonsterProperties(monster, {
+      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) - 2).toString(),
+      str: monster.str - 1,
+      dex: monster.dex - 1,
+      con: monster.con - 1,
+      int: monster.int - 1,
+      wis: monster.wis - 1,
+      cha: monster.cha - 1,
+    });
+  }
+
+  increaseChallengeEverything = (monster) => {
+    this.increaseChallengeTotalHP(monster);
+    this.increaseChallengeAC(monster);
+    this.increaseChallengeToHit(monster);
+    this.increaseChallengeDamage(monster);
+    this.addMonsterProperties(monster, {
+      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) + 2).toString(),
+      str: monster.str + 1,
+      dex: monster.dex + 1,
+      con: monster.con + 1,
+      int: monster.int + 1,
+      wis: monster.wis + 1,
+      cha: monster.cha + 1,
+    });
+  }
+
   saveRoll = (name, total, rolls, modifier) => {
     this.setState((previousState, currentProps) => {
 			return {
@@ -644,7 +728,17 @@ class App extends Component {
               currentInitative={this.state.currentInitative}
               selectedMonster={this.state.selectedMonster}
               toggleInnateSpellSlots={this.toggleInnateSpellSlots}
-              togglePreparedSpellSlots={this.togglePreparedSpellSlots} >
+              togglePreparedSpellSlots={this.togglePreparedSpellSlots}
+              decreaseChallengeTotalHP={this.decreaseChallengeTotalHP}
+              increaseChallengeTotalHP={this.increaseChallengeTotalHP}
+              decreaseChallengeAC={this.decreaseChallengeAC}
+              increaseChallengeAC={this.increaseChallengeAC}
+              decreaseChallengeToHit={this.decreaseChallengeToHit}
+              increaseChallengeToHit={this.increaseChallengeToHit}
+              decreaseChallengeDamage={this.decreaseChallengeToHit}
+              increaseChallengeDamage={this.increaseChallengeToHit}
+              decreaseChallengeEverything={this.decreaseChallengeEverything}
+              increaseChallengeEverything={this.increaseChallengeEverything} >
               {this.state.monstersAdded.get(this.state.selectedMonster)}
             </Monster>}
           </div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MonsterChallenge from './MonsterChallenge';
 import MonsterResistances from './MonsterResistances';
 import MonsterSenses from './MonsterSenses';
 import MonsterActions from './MonsterActions';
@@ -12,6 +13,17 @@ import MonsterSkills from './MonsterSkills';
 class MonsterDetails extends Component {
   render() {
     return <div className="monster-details">
+      <MonsterChallenge
+        decreaseChallengeTotalHP={this.props.decreaseChallengeTotalHP}
+        increaseChallengeTotalHP={this.props.increaseChallengeTotalHP}
+        decreaseChallengeAC={this.props.decreaseChallengeAC}
+        increaseChallengeAC={this.props.increaseChallengeAC}
+        decreaseChallengeToHit={this.props.decreaseChallengeToHit}
+        increaseChallengeToHit={this.props.increaseChallengeToHit}
+        decreaseChallengeDamage={this.props.decreaseChallengeToHit}
+        increaseChallengeDamage={this.props.increaseChallengeToHit}
+        decreaseChallengeEverything={this.props.decreaseChallengeEverything}
+        increaseChallengeEverything={this.props.increaseChallengeEverything} >{this.props.children}</MonsterChallenge>
       <MonsterSenses>{this.props.children}</MonsterSenses>
       <MonsterResistances>{this.props.children}</MonsterResistances>
       <MonsterActions title="Traits" roller={this.props.roller} >{this.props.children.trait}</MonsterActions>

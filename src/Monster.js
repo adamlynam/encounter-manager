@@ -20,7 +20,17 @@ class Monster extends Component {
         <MonsterDetails
           roller={this.props.roller}
           toggleInnateSpellSlots={this.props.toggleInnateSpellSlots}
-          togglePreparedSpellSlots={this.props.togglePreparedSpellSlots} >
+          togglePreparedSpellSlots={this.props.togglePreparedSpellSlots}
+          decreaseChallengeTotalHP={this.props.decreaseChallengeTotalHP}
+          increaseChallengeTotalHP={this.props.increaseChallengeTotalHP}
+          decreaseChallengeAC={this.props.decreaseChallengeAC}
+          increaseChallengeAC={this.props.increaseChallengeAC}
+          decreaseChallengeToHit={this.props.decreaseChallengeToHit}
+          increaseChallengeToHit={this.props.increaseChallengeToHit}
+          decreaseChallengeDamage={this.props.decreaseChallengeToHit}
+          increaseChallengeDamage={this.props.increaseChallengeToHit}
+          decreaseChallengeEverything={this.props.decreaseChallengeEverything}
+          increaseChallengeEverything={this.props.increaseChallengeEverything} >
           {this.props.children}
         </MonsterDetails>
       </div>
