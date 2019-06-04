@@ -27,8 +27,8 @@ class Monster extends Component {
           increaseChallengeAC={this.props.increaseChallengeAC}
           decreaseChallengeToHit={this.props.decreaseChallengeToHit}
           increaseChallengeToHit={this.props.increaseChallengeToHit}
-          decreaseChallengeDamage={this.props.decreaseChallengeToHit}
-          increaseChallengeDamage={this.props.increaseChallengeToHit}
+          decreaseChallengeDamage={this.props.decreaseChallengeDamage}
+          increaseChallengeDamage={this.props.increaseChallengeDamage}
           decreaseChallengeEverything={this.props.decreaseChallengeEverything}
           increaseChallengeEverything={this.props.increaseChallengeEverything} >
           {this.props.children}

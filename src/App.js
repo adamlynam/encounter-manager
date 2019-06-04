@@ -30,6 +30,12 @@ const ARROW_KEY_UP = 38;
 const ARROW_KEY_DOWN = 40;
 const longestNumberRegex = new RegExp('[0-9]+');
 
+const CHALLENGE_ADJUST_TOTAL_HP = 0.25;
+const CHALLENGE_ADJUST_AC = 0.1;
+const CHALLENGE_ADJUST_TO_HIT = 0.1;
+const CHALLENGE_ADJUST_DAMAGE = 0.25;
+const CHALLENGE_ADJUST_EVERYTHING = 1;
+
 class App extends Component {
 
   constructor(props) {
@@ -456,55 +462,69 @@ class App extends Component {
   }
 
   decreaseChallengeTotalHP = (monster) => {
-    var newhp = Object.assign({}, Object.assign(
-      monster.hp,
-      {
-        average: (MonsterTools.parseMonsterHealth(monster) - 15).toString(),
-      }
-    ));
     this.addMonsterProperties(monster, {
-      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) - 0.5).toString(),
-      hp: newhp,
+      challengeAdjusted: monster.challengeAdjusted ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) - CHALLENGE_ADJUST_TOTAL_HP : monster.challengeAdjusted - CHALLENGE_ADJUST_TOTAL_HP,
+      hp: Object.assign(
+        Object.assign({}, monster.hp),
+        {
+          average: (MonsterTools.parseMonsterHealth(monster) - 15).toString(),
+        }
+      ),
     });
   }
 
   increaseChallengeTotalHP = (monster) => {
-    var newhp = Object.assign({}, Object.assign(
-      monster.hp,
-      {
-        average: (MonsterTools.parseMonsterHealth(monster) + 15).toString(),
-      }
-    ));
     this.addMonsterProperties(monster, {
-      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) + 0.5).toString(),
-      hp: newhp,
+      challengeAdjusted: monster.challengeAdjusted === undefined ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) + CHALLENGE_ADJUST_TOTAL_HP : monster.challengeAdjusted + CHALLENGE_ADJUST_TOTAL_HP,
+      hp: Object.assign(
+        Object.assign({}, monster.hp),
+        {
+          average: (MonsterTools.parseMonsterHealth(monster) + 15).toString(),
+        }
+      ),
     });
   }
 
   decreaseChallengeAC = (monster) => {
     this.addMonsterProperties(monster, {
-      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) - 0.5).toString(),
+      challengeAdjusted: monster.challengeAdjusted === undefined ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) - CHALLENGE_ADJUST_AC : monster.challengeAdjusted - CHALLENGE_ADJUST_AC,
       ac: (MonsterTools.parseMonsterAc(monster) - 1).toString(),
     });
   }
 
   increaseChallengeAC = (monster) => {
     this.addMonsterProperties(monster, {
-      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) + 0.5).toString(),
+      challengeAdjusted: monster.challengeAdjusted === undefined ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) + CHALLENGE_ADJUST_AC : monster.challengeAdjusted + CHALLENGE_ADJUST_AC,
       ac: (MonsterTools.parseMonsterAc(monster) + 1).toString(),
     });
   }
 
   decreaseChallengeToHit = (monster) => {
+    this.addMonsterProperties(monster, {
+      challengeAdjusted: monster.challengeAdjusted === undefined ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) - CHALLENGE_ADJUST_TO_HIT : monster.challengeAdjusted - CHALLENGE_ADJUST_TO_HIT,
+      challengeToHitBonus: monster.challengeToHitBonus ? monster.challengeToHitBonus - 1 : -1,
+    });
   }
 
   increaseChallengeToHit = (monster) => {
+    this.addMonsterProperties(monster, {
+      challengeAdjusted: monster.challengeAdjusted === undefined ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) + CHALLENGE_ADJUST_TO_HIT : monster.challengeAdjusted + CHALLENGE_ADJUST_TO_HIT,
+      challengeToHitBonus: monster.challengeToHitBonus ? monster.challengeToHitBonus + 1 : 1,
+    });
   }
 
   decreaseChallengeDamage = (monster) => {
+    this.addMonsterProperties(monster, {
+      challengeAdjusted: monster.challengeAdjusted === undefined ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) - CHALLENGE_ADJUST_DAMAGE : monster.challengeAdjusted - CHALLENGE_ADJUST_DAMAGE,
+      challengeDamageBonus: monster.challengeDamageBonus ? monster.challengeDamageBonus - 6 : 6,
+    });
   }
 
   increaseChallengeDamage = (monster) => {
+    this.addMonsterProperties(monster, {
+      challengeAdjusted: monster.challengeAdjusted === undefined ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) + CHALLENGE_ADJUST_DAMAGE : monster.challengeAdjusted + CHALLENGE_ADJUST_DAMAGE,
+      challengeDamageBonus: monster.challengeDamageBonus ? monster.challengeDamageBonus + 6 : 6,
+    });
   }
 
   decreaseChallengeEverything = (monster) => {
@@ -513,7 +533,7 @@ class App extends Component {
     this.decreaseChallengeToHit(monster);
     this.decreaseChallengeDamage(monster);
     this.addMonsterProperties(monster, {
-      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) - 2).toString(),
+      challengeAdjusted: monster.challengeAdjusted === undefined ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) - CHALLENGE_ADJUST_EVERYTHING : monster.challengeAdjusted - CHALLENGE_ADJUST_EVERYTHING,
       str: monster.str - 1,
       dex: monster.dex - 1,
       con: monster.con - 1,
@@ -529,7 +549,7 @@ class App extends Component {
     this.increaseChallengeToHit(monster);
     this.increaseChallengeDamage(monster);
     this.addMonsterProperties(monster, {
-      cr: (parseFloat(MonsterTools.parseMonsterCr(monster), 10) + 2).toString(),
+      challengeAdjusted: monster.challengeAdjusted === undefined ? parseFloat(MonsterTools.parseMonsterCr(monster), 10) + CHALLENGE_ADJUST_EVERYTHING : monster.challengeAdjusted + CHALLENGE_ADJUST_EVERYTHING,
       str: monster.str + 1,
       dex: monster.dex + 1,
       con: monster.con + 1,
@@ -735,8 +755,8 @@ class App extends Component {
               increaseChallengeAC={this.increaseChallengeAC}
               decreaseChallengeToHit={this.decreaseChallengeToHit}
               increaseChallengeToHit={this.increaseChallengeToHit}
-              decreaseChallengeDamage={this.decreaseChallengeToHit}
-              increaseChallengeDamage={this.increaseChallengeToHit}
+              decreaseChallengeDamage={this.decreaseChallengeDamage}
+              increaseChallengeDamage={this.increaseChallengeDamage}
               decreaseChallengeEverything={this.decreaseChallengeEverything}
               increaseChallengeEverything={this.increaseChallengeEverything} >
               {this.state.monstersAdded.get(this.state.selectedMonster)}

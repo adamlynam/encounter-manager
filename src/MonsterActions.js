@@ -8,7 +8,11 @@ class MonsterActions extends Component {
       {items.map(item => {
         return <div key={item.name} className="list-item">
           <div className="item-name">{item.name}</div>
-          <SmartEntryText entryName={item.name} roller={this.props.roller}>{item.entry}</SmartEntryText>
+          <SmartEntryText
+            entryName={item.name}
+            roller={this.props.roller}
+            d20Bonus={this.props.monster.challengeToHitBonus}
+            polyBonus={this.props.monster.challengeDamageBonus} >{item.entry}</SmartEntryText>
         </div>;
       })}
     </div>;
@@ -18,7 +22,12 @@ class MonsterActions extends Component {
     return <div className="entries">
       {entries.map((entry, index) => {
         if (typeof entry === 'string' || entry instanceof String) {
-          return <SmartEntryText key={index} entryName={entryName} roller={this.props.roller}>{entry}</SmartEntryText>;
+          return <SmartEntryText
+            key={index}
+            entryName={entryName}
+            roller={this.props.roller}
+            d20Bonus={this.props.monster.challengeToHitBonus}
+            polyBonus={this.props.monster.challengeDamageBonus} >{entry}</SmartEntryText>;
         }
         else {
           return this.renderList(entry.items);

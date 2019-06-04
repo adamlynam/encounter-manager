@@ -20,13 +20,13 @@ class SmartEntryText extends Component {
     // match d20 rolls
     var d20Rolls = roll.match(new RegExp('{@hit ([^}]+)}'));
     if (d20Rolls != null) {
-      return this.renderD20Roll(parseInt(d20Rolls[1], 10));
+      return this.renderD20Roll(parseInt(d20Rolls[1], 10) + (this.props.d20Bonus ? this.props.d20Bonus : 0));
     }
 
     // match poly dice rolls
     var polyRolls = roll.match(new RegExp('{@dice ([0-9]+)d([0-9]+)\\+?([0-9]+)?}'));
     if (polyRolls != null) {
-      return this.renderPolyRoll(parseInt(polyRolls[1], 10), parseInt(polyRolls[2], 10), parseInt(polyRolls[3], 10));
+      return this.renderPolyRoll(parseInt(polyRolls[1], 10), parseInt(polyRolls[2], 10), parseInt(polyRolls[3], 10)  + (this.props.polyBonus ? this.props.polyBonus : 0));
     }
 
     return roll;

@@ -58,7 +58,7 @@ function calculateXPFromCR(cr) {
 }
 
 export function parseMonsterXp(monster) {
-  return calculateXPFromCR(parseMonsterCr(monster));
+  return calculateXPFromCR(monster.challengeAdjusted === undefined ? parseMonsterCr(monster) : Math.ceil(monster.challengeAdjusted).toString());
 }
 
 export function parseMonsterAc(monster) {
