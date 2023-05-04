@@ -7,7 +7,7 @@ class SmartEntryText extends Component {
   render() {
     var annotatedText = [];
     var remainingString = this.props.children;
-    for (var result; result = rollRegex.exec(remainingString); ) {
+    for (var result; (result = rollRegex.exec(remainingString)); ) {
       annotatedText.push(result.input.slice(0, result.index));
       annotatedText.push(this.renderRoll(result[0]));
       remainingString = result.input.slice(result.index + result[0].length);
